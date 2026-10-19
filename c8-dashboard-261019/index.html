@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>크리에이터클럽 주간 성과판</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+:root {
+  --font-anthropic-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-anthropic-serif: "Noto Serif KR", "Apple SD Gothic Neo", Georgia, serif;
+  --color-fg: #1f1e1c; --color-fg-muted: #6b6862; --color-bg: #faf9f7; --color-panel: #ffffff;
+  --color-border-line: #e4e1dc; --color-ok: #2f7d4f; --color-warn: #b5651d; --color-bad: #c0392b;
+  --cds-font-size-caption: 0.8125rem; --cds-font-size-body: 0.9375rem; --cds-font-size-heading: 1.125rem; --cds-font-size-title: 1.625rem;
+  --cds-font-weight-medium: 600;
+  --cds-gap-sm: 0.5rem; --cds-gap-md: 1rem; --cds-gap-xl: 2rem;
+  --cds-pad-xs: 0.375rem; --cds-pad-sm: 0.625rem; --cds-pad-md: 1rem; --cds-pad-lg: 1.25rem;
+  --cds-radius: 10px; --cds-dur-slow: 400ms; --cds-ease-out: cubic-bezier(.2,.8,.2,1);
+  --cds-chart-axis: #8a867f; --cds-chart-grid: #ece9e4; --cds-chart-muted: #c9c5be; --cds-chart-status-critical: #d0453a;
+  --cds-surface-popover: #ffffff; --cds-border: #e4e1dc; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.12); --cds-text-secondary: #6b6862;
+  --s1: #2f6fde; --s2: #e08a2c; --s3: #2e9e6a; --s4: #c2477d; --s5: #7b5cd6; --s6: #2aa1b3; --s7: #a3762e; --s8: #6b7a8f;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --color-fg: #ecebe8; --color-fg-muted: #a4a09a; --color-bg: #1b1a19; --color-panel: #252422;
+  --color-border-line: #3a3835; --color-ok: #5cc28a; --color-warn: #e3a05a; --color-bad: #ef6f62;
+  --cds-chart-axis: #8f8b85; --cds-chart-grid: #34322f; --cds-chart-muted: #5a5752; --cds-chart-status-critical: #ef6f62;
+  --cds-surface-popover: #2c2b29; --cds-border: #3a3835; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.5); --cds-text-secondary: #a4a09a;
+  --s1: #6ea0f5; --s2: #f0a656; --s3: #5cc28a; --s4: #e07aa6; --s5: #a28cf0; --s6: #5cc4d4; --s7: #cfa25c; --s8: #9aa7b8;
+} }
+:root[data-theme="dark"] {
+  --color-fg: #ecebe8; --color-fg-muted: #a4a09a; --color-bg: #1b1a19; --color-panel: #252422;
+  --color-border-line: #3a3835; --color-ok: #5cc28a; --color-warn: #e3a05a; --color-bad: #ef6f62;
+  --cds-chart-axis: #8f8b85; --cds-chart-grid: #34322f; --cds-chart-muted: #5a5752; --cds-chart-status-critical: #ef6f62;
+  --cds-surface-popover: #2c2b29; --cds-border: #3a3835; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.5); --cds-text-secondary: #a4a09a;
+  --s1: #6ea0f5; --s2: #f0a656; --s3: #5cc28a; --s4: #e07aa6; --s5: #a28cf0; --s6: #5cc4d4; --s7: #cfa25c; --s8: #9aa7b8;
+}
+html { background: var(--color-bg); }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); -webkit-text-size-adjust: 100%; }
+#dash-root { padding: 24px 16px 48px; }
+#dash-root svg text { fill: var(--color-fg-muted); }
+</style>
+<script>
+(() => {
+  const RAW = {"ai": [{"key": "q1", "label": "조건을 다 채우고도 추천사를 안 받은 사람", "count": 10, "base": 18}, {"key": "q3", "label": "추천사를 받으려고 조건을 채운 것으로 보이는 사람", "count": 5, "base": 8}, {"key": "q4", "label": "받은 뒤 항목을 더 채우고 다시 만든 사람", "count": 3, "base": 8}, {"key": "b1", "label": "경력이 비어 있음", "count": 31, "base": 0}, {"key": "b2", "label": "새 포트폴리오가 없음", "count": 24, "base": 0}, {"key": "b3", "label": "시그니처 키워드가 없음", "count": 12, "base": 0}, {"key": "b4", "label": "직업이 비어 있음", "count": 3, "base": 0}], "annotations": [{"id": "m1", "kind": "마케팅", "title": "SNS 2주 편성 (예시)", "start": "2026-09-29", "end": "2026-10-11", "note": "인스타 공식 계정"}, {"id": "e1", "kind": "이벤트", "title": "출석 이벤트 (예시)", "start": "2026-08-24", "end": "2026-09-06", "note": "전체 대상"}, {"id": "m2", "kind": "마케팅", "title": "커뮤니티 바이럴 (예시)", "start": "2026-09-14", "end": "2026-09-20", "note": "음악 커뮤니티"}], "detail": [{"id": "post-0", "grp": "post", "label": "포트폴리오 · 리스펙트", "value": 3, "base": 21}, {"id": "post-1", "grp": "post", "label": "영감 · 공감", "value": 1, "base": 9}, {"id": "post-2", "grp": "post", "label": "프로젝트 카드 · 지원", "value": 1, "base": 4}, {"id": "approach-3", "grp": "approach", "label": "작성자 프로필을 봄", "value": 14, "base": 27}, {"id": "approach-4", "grp": "approach", "label": "작성자를 팔로우함", "value": 6, "base": 27}, {"id": "approach-5", "grp": "approach", "label": "작성자에게 일촌 신청", "value": 2, "base": 27}, {"id": "approach-6", "grp": "approach", "label": "작성자에게 노크", "value": 3, "base": 27}, {"id": "conn-7", "grp": "conn", "label": "수락", "value": 7, "base": 13}, {"id": "conn-8", "grp": "conn", "label": "거절", "value": 2, "base": 13}, {"id": "conn-9", "grp": "conn", "label": "대기", "value": 4, "base": 13}, {"id": "block-10", "grp": "block", "label": "채팅했던 상대를 차단", "value": 2, "base": 1}, {"id": "block-11", "grp": "block", "label": "채팅 안 한 상대를 차단", "value": 1, "base": 1}], "event_funnel": [{"campaign": "weeklybest", "channel": "poster", "medium": "offline", "content": "2610", "clicks": 184, "web_opens": 152, "cta_clicks": 49, "installs_aos": 9, "installs_ios": 12, "signups_airbridge": 9}, {"campaign": "weeklybest", "channel": "share", "medium": "-", "content": "-", "clicks": 63, "web_opens": 57, "cta_clicks": 21, "installs_aos": 4, "installs_ios": 5, "signups_airbridge": 4}, {"campaign": "weeklybest", "channel": "filmmakers", "medium": "posting", "content": "-", "clicks": 41, "web_opens": 36, "cta_clicks": 10, "installs_aos": 2, "installs_ios": 2, "signups_airbridge": 2}, {"campaign": "weeklybest", "channel": "instagram", "medium": "profile", "content": "-", "clicks": 27, "web_opens": 24, "cta_clicks": 6, "installs_aos": 1, "installs_ios": 2, "signups_airbridge": 1}], "event_signups": [{"campaign": "weeklybest", "channel": "poster", "medium": "offline", "content": "2610", "signups": 17, "by_header": 14, "by_ip": 3}, {"campaign": "weeklybest", "channel": "share", "medium": "-", "content": "-", "signups": 7, "by_header": 6, "by_ip": 1}, {"campaign": "weeklybest", "channel": "filmmakers", "medium": "posting", "content": "-", "signups": 3, "by_header": 3, "by_ip": 0}, {"campaign": "weeklybest", "channel": "instagram", "medium": "profile", "content": "-", "signups": 2, "by_header": 1, "by_ip": 1}], "features": [{"feature": "셔플", "tried": 0.24, "repeat": 0.21}, {"feature": "북마크", "tried": 0.11, "repeat": 0.55}, {"feature": "인맥 관리", "tried": 0.19, "repeat": 0.4}, {"feature": "다이얼", "tried": 0.06, "repeat": 0.33}, {"feature": "위클리 베스트", "tried": 0.35, "repeat": 0.48}, {"feature": "던져보기", "tried": 0.08, "repeat": 0.1}, {"feature": "라운지", "tried": 0.38, "repeat": 0.22}], "funnel": [{"step": "앱 설치", "order": 1, "recent": 22, "before": 19}, {"step": "가입 완료", "order": 2, "recent": 13, "before": 12}, {"step": "커버 등록", "order": 3, "recent": 8, "before": 8}, {"step": "커버·자기소개 등록", "order": 4, "recent": 6, "before": 5}, {"step": "포트폴리오 등록 (프로필 완성)", "order": 5, "recent": 4, "before": 3}, {"step": "첫 반응 받음", "order": 6, "recent": 3, "before": 3}, {"step": "첫 노크·지원 수락", "order": 7, "recent": 1, "before": 1}], "knock_relation": [{"relation": "일촌", "order": 1, "sent": 4, "answered": 4, "accepted": 3}, {"relation": "서로 팔로우", "order": 2, "sent": 6, "answered": 5, "accepted": 3}, {"relation": "한쪽만 팔로우", "order": 3, "sent": 7, "answered": 5, "accepted": 2}, {"relation": "반응을 주고받음", "order": 4, "sent": 9, "answered": 6, "accepted": 3}, {"relation": "보기만 함", "order": 5, "sent": 8, "answered": 4, "accepted": 1}, {"relation": "접점 없음", "order": 6, "sent": 10, "answered": 3, "accepted": 1}], "validation": [{"outcome": "게시물 반응을 받음", "experienced": 58, "experienced_return": 0.74, "not_experienced": 104, "not_return": 0.52}, {"outcome": "관계를 맺음 (팔로우·일촌)", "experienced": 41, "experienced_return": 0.8, "not_experienced": 121, "not_return": 0.53}, {"outcome": "교류함 (메시지를 보냄)", "experienced": 33, "experienced_return": 0.85, "not_experienced": 129, "not_return": 0.54}], "weekly": [{"week": "2026-07-20", "deploy": "", "members_current": 304, "new_signups": 4, "active_members": 47, "returned_from_prev_week": 30, "reacted_creators": 12, "reacted_respect": 9, "reacted_follow": 4, "reacted_like": 3, "reacted_comment": 2, "reacted_apply": 1, "knocks_sent": 14, "knock_senders": 8, "knock_accepted": 6, "knock_declined": 1, "knock_blocked": 1, "knock_no_reply": 6, "knock_waiting": 0, "applies_sent": 5, "apply_accepted": 2, "apply_declined": 1, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 3, "ai_rec_regen": 2}, {"week": "2026-07-27", "deploy": "3.0.6", "members_current": 304, "new_signups": 2, "active_members": 39, "returned_from_prev_week": 23, "reacted_creators": 15, "reacted_respect": 11, "reacted_follow": 6, "reacted_like": 3, "reacted_comment": 3, "reacted_apply": 3, "knocks_sent": 11, "knock_senders": 6, "knock_accepted": 4, "knock_declined": 2, "knock_blocked": 0, "knock_no_reply": 5, "knock_waiting": 0, "applies_sent": 4, "apply_accepted": 2, "apply_declined": 0, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 1, "ai_rec_regen": 0}, {"week": "2026-08-03", "deploy": "", "members_current": 306, "new_signups": 2, "active_members": 39, "returned_from_prev_week": 27, "reacted_creators": 14, "reacted_respect": 10, "reacted_follow": 5, "reacted_like": 3, "reacted_comment": 2, "reacted_apply": 1, "knocks_sent": 14, "knock_senders": 8, "knock_accepted": 5, "knock_declined": 2, "knock_blocked": 0, "knock_no_reply": 7, "knock_waiting": 0, "applies_sent": 3, "apply_accepted": 1, "apply_declined": 0, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 3, "ai_rec_regen": 1}, {"week": "2026-08-10", "deploy": "3.0.7", "members_current": 307, "new_signups": 2, "active_members": 42, "returned_from_prev_week": 26, "reacted_creators": 14, "reacted_respect": 10, "reacted_follow": 5, "reacted_like": 3, "reacted_comment": 2, "reacted_apply": 0, "knocks_sent": 10, "knock_senders": 6, "knock_accepted": 3, "knock_declined": 1, "knock_blocked": 0, "knock_no_reply": 6, "knock_waiting": 0, "applies_sent": 2, "apply_accepted": 1, "apply_declined": 0, "apply_no_reply": 1, "apply_waiting": 0, "ai_rec_first": 2, "ai_rec_regen": 1}, {"week": "2026-08-17", "deploy": "", "members_current": 309, "new_signups": 3, "active_members": 47, "returned_from_prev_week": 29, "reacted_creators": 19, "reacted_respect": 14, "reacted_follow": 7, "reacted_like": 4, "reacted_comment": 3, "reacted_apply": 0, "knocks_sent": 11, "knock_senders": 6, "knock_accepted": 3, "knock_declined": 2, "knock_blocked": 1, "knock_no_reply": 5, "knock_waiting": 0, "applies_sent": 3, "apply_accepted": 1, "apply_declined": 1, "apply_no_reply": 1, "apply_waiting": 0, "ai_rec_first": 3, "ai_rec_regen": 1}, {"week": "2026-08-24", "deploy": "3.1.0", "members_current": 311, "new_signups": 4, "active_members": 36, "returned_from_prev_week": 23, "reacted_creators": 14, "reacted_respect": 10, "reacted_follow": 5, "reacted_like": 3, "reacted_comment": 2, "reacted_apply": 2, "knocks_sent": 12, "knock_senders": 7, "knock_accepted": 4, "knock_declined": 1, "knock_blocked": 0, "knock_no_reply": 7, "knock_waiting": 0, "applies_sent": 3, "apply_accepted": 1, "apply_declined": 0, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 3, "ai_rec_regen": 0}, {"week": "2026-08-31", "deploy": "", "members_current": 314, "new_signups": 4, "active_members": 40, "returned_from_prev_week": 24, "reacted_creators": 13, "reacted_respect": 9, "reacted_follow": 5, "reacted_like": 3, "reacted_comment": 2, "reacted_apply": 0, "knocks_sent": 9, "knock_senders": 5, "knock_accepted": 3, "knock_declined": 1, "knock_blocked": 1, "knock_no_reply": 4, "knock_waiting": 0, "applies_sent": 4, "apply_accepted": 1, "apply_declined": 1, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 2, "ai_rec_regen": 2}, {"week": "2026-09-07", "deploy": "3.1.1", "members_current": 316, "new_signups": 3, "active_members": 38, "returned_from_prev_week": 26, "reacted_creators": 14, "reacted_respect": 10, "reacted_follow": 5, "reacted_like": 3, "reacted_comment": 2, "reacted_apply": 3, "knocks_sent": 13, "knock_senders": 7, "knock_accepted": 5, "knock_declined": 1, "knock_blocked": 1, "knock_no_reply": 6, "knock_waiting": 0, "applies_sent": 4, "apply_accepted": 2, "apply_declined": 1, "apply_no_reply": 1, "apply_waiting": 0, "ai_rec_first": 0, "ai_rec_regen": 0}, {"week": "2026-09-14", "deploy": "", "members_current": 319, "new_signups": 5, "active_members": 41, "returned_from_prev_week": 28, "reacted_creators": 19, "reacted_respect": 14, "reacted_follow": 7, "reacted_like": 4, "reacted_comment": 3, "reacted_apply": 1, "knocks_sent": 13, "knock_senders": 7, "knock_accepted": 4, "knock_declined": 2, "knock_blocked": 0, "knock_no_reply": 7, "knock_waiting": 0, "applies_sent": 5, "apply_accepted": 2, "apply_declined": 1, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 1, "ai_rec_regen": 2}, {"week": "2026-09-21", "deploy": "3.1.2", "members_current": 323, "new_signups": 4, "active_members": 46, "returned_from_prev_week": 32, "reacted_creators": 18, "reacted_respect": 13, "reacted_follow": 7, "reacted_like": 4, "reacted_comment": 3, "reacted_apply": 1, "knocks_sent": 8, "knock_senders": 4, "knock_accepted": 3, "knock_declined": 1, "knock_blocked": 0, "knock_no_reply": 4, "knock_waiting": 0, "applies_sent": 3, "apply_accepted": 1, "apply_declined": 0, "apply_no_reply": 2, "apply_waiting": 0, "ai_rec_first": 3, "ai_rec_regen": 1}, {"week": "2026-09-28", "deploy": "", "members_current": 327, "new_signups": 5, "active_members": 43, "returned_from_prev_week": 27, "reacted_creators": 19, "reacted_respect": 14, "reacted_follow": 7, "reacted_like": 4, "reacted_comment": 3, "reacted_apply": 1, "knocks_sent": 11, "knock_senders": 6, "knock_accepted": 2, "knock_declined": 1, "knock_blocked": 1, "knock_no_reply": 2, "knock_waiting": 5, "applies_sent": 3, "apply_accepted": 1, "apply_declined": 0, "apply_no_reply": 1, "apply_waiting": 1, "ai_rec_first": 3, "ai_rec_regen": 1}, {"week": "2026-10-05", "deploy": "3.1.3", "members_current": 323, "new_signups": 3, "active_members": 43, "returned_from_prev_week": 27, "reacted_creators": 17, "reacted_respect": 12, "reacted_follow": 6, "reacted_like": 4, "reacted_comment": 3, "reacted_apply": 0, "knocks_sent": 8, "knock_senders": 4, "knock_accepted": 0, "knock_declined": 0, "knock_blocked": 0, "knock_no_reply": 0, "knock_waiting": 8, "applies_sent": 4, "apply_accepted": 0, "apply_declined": 0, "apply_no_reply": 0, "apply_waiting": 4, "ai_rec_first": 2, "ai_rec_regen": 1}]};
+  const calcs = {}, cache = {};
+  const fns = [];
+  const read = (id) => {
+    if (id in cache) return cache[id];
+    if (id in RAW) return (cache[id] = RAW[id]);
+    const c = calcs[id];
+    if (!c) return undefined;
+    return (cache[id] = c.fn(...c.inputs.map(read)));
+  };
+  const cols = (rows) => (Array.isArray(rows) && rows[0] && typeof rows[0] === 'object' ? Object.keys(rows[0]) : []);
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const run = () => fns.forEach((f) => f());
+  window.dash = {
+    data(id) {
+      let d;
+      try { d = read(id); } catch (e) { console.error(e); return { status: 'error', data: [], rows: [], columns: [], message: String(e), meta: [] }; }
+      if (d === undefined) return { status: 'missing', data: [], rows: [], columns: [], meta: [] };
+      return { status: 'ok', data: d, rows: d, columns: cols(d), refreshing: false, meta: [] };
+    },
+    calc(id, spec) { calcs[id] = spec; },
+    loader() {},
+    onData(fn) { fns.push(fn); fn(); },
+    refresh() {},
+    params: () => ({}), setParams() {}, resetParams() {},
+    setLink(name) { try { history.replaceState(null, '', '#' + name); } catch (e) {} },
+    get colors() { return [1, 2, 3, 4, 5, 6, 7, 8].map((i) => css('--s' + i)); }
+  };
+  let t;
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 120); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', run);
+})();
+</script>
+</head>
+<body>
+<div id="dash-root">
+<style>
+.cc { display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); max-width: 72rem; margin-inline: auto; }
+.cc-head { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.cc-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.cc-sample { align-self: flex-start; font-size: var(--cds-font-size-caption); color: var(--color-warn); border: 1px solid var(--color-border-line); border-radius: 999px; padding: 2px var(--cds-pad-sm); }
+.cc-take { margin: 0; font-size: var(--cds-font-size-body); color: var(--color-fg); max-width: 60ch; line-height: 1.6; }
+.cc-sec { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+.cc-sec > h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.cc-sec > p.cc-why { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); max-width: 70ch; }
+.cc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md); }
+.cc-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-sm); min-width: 0; position: relative; }
+.cc-card h3 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+.cc-note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.5; }
+.cc-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: calc(var(--cds-font-size-title) * 1.5); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.cc-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cds-gap-sm); }
+.cc-delta { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.cc-delta.good { color: var(--color-ok); } .cc-delta.bad { color: var(--color-bad); } .cc-delta.flat { color: var(--color-fg-muted); }
+.cc-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.cc-spark { width: 100%; min-height: 44px; }
+.cc-chart { width: 100%; min-height: 240px; }
+.cc-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.cc-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.cc-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+.cc-tip .t { color: var(--cds-text-secondary); }
+.cc-tablewrap { overflow-x: auto; }
+.cc-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.cc-table th { text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.cc-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: middle; }
+.cc-table td.num, .cc-table th.num { text-align: right; }
+.cc-bar { position: relative; height: 8px; border-radius: 4px; background: var(--cds-chart-grid); min-width: 4rem; }
+.cc-bar > span { position: absolute; inset: 0 auto 0 0; border-radius: 4px; }
+.cc-chip { display: inline-block; border-radius: 999px; padding: 1px var(--cds-pad-sm); border: 1px solid var(--color-border-line); white-space: nowrap; }
+.cc-chip.s-good { color: var(--color-ok); } .cc-chip.s-bad { color: var(--color-bad); } .cc-chip.s-warn { color: var(--color-warn); } .cc-chip.s-hidden { color: var(--color-fg); }
+.cc-base { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); border-block: 1px solid var(--color-border-line); padding-block: var(--cds-pad-md); }
+.cc-base > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cc-lab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.cc-mid { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.cc-need td:first-child { white-space: nowrap; font-weight: var(--cds-font-weight-medium); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+.cc-fail { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.cc-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+.cc-tabs { display: flex; flex-wrap: wrap; gap: 2px; border-bottom: 1px solid var(--color-border-line); }
+.cc-tabs button { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); background: transparent; border: 1px solid transparent; border-bottom: none; border-radius: var(--cds-radius) var(--cds-radius) 0 0; padding: var(--cds-pad-xs) var(--cds-pad-md); cursor: pointer; margin-bottom: -1px; }
+.cc-tabs button[aria-selected="true"] { color: var(--color-fg); background: var(--color-panel); border-color: var(--color-border-line); font-weight: var(--cds-font-weight-medium); }
+.cc-tabs button:focus-visible, .cc-link:focus-visible { outline: 2px solid var(--cds-chart-axis); outline-offset: 2px; }
+.cc-page { display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+.cc-link { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: none; border: none; padding: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; align-self: flex-start; }
+.cc-watch { display: flex; flex-direction: column; gap: var(--cds-gap-sm); margin: 0; padding: 0; list-style: none; }
+.cc-watch li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cds-gap-sm); padding-block: var(--cds-pad-xs); border-bottom: 1px solid var(--color-border-line); }
+.cc-watch li:last-child { border-bottom: none; }
+.cc-watch .w-name { font-weight: var(--cds-font-weight-medium); }
+.cc-when { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg); border-left: 2px solid var(--cds-chart-axis); padding-left: var(--cds-pad-sm); }
+.cc-flash { animation: none; }
+@media (prefers-reduced-motion: no-preference) { .cc-flash { animation: ccflash 1.6s var(--cds-ease-out); } @keyframes ccflash { 0% { box-shadow: 0 0 0 3px var(--cds-chart-axis); } 100% { box-shadow: 0 0 0 0 transparent; } } }
+</style>
+
+<div class="cc">
+  <header class="cc-head">
+    <h1 class="cc-title">크리에이터클럽 주간 성과판</h1>
+    <span class="cc-sample">실제 데이터가 아닌 예시입니다</span>
+    <p class="cc-note">카드 숫자는 어제까지 최근 7일을 직전 7일, 지난 4주 평균과 비교합니다. 그래프는 달력 주(월~일) 단위이고 마지막 주는 진행 중입니다. 모든 지표에서 탈퇴·직원·테스트 계정을 제외합니다. 사람 수는 여러 번 이용해도 1명으로 셉니다. 그래프의 파란 점선은 앱 배포, 주황 띠는 마케팅, 초록 띠는 이벤트 기간입니다.</p>
+  </header>
+
+  <nav class="cc-tabs" role="tablist" aria-label="성과판 탭">
+    <button role="tab" id="t-week" data-tab="week" aria-selected="true">최근 7일</button>
+    <button role="tab" id="t-connect" data-tab="connect" aria-selected="false">연결</button>
+    <button role="tab" id="t-new" data-tab="new" aria-selected="false">새로 온 사람</button>
+    <button role="tab" id="t-retain" data-tab="retain" aria-selected="false">재방문</button>
+    <button role="tab" id="t-feature" data-tab="feature" aria-selected="false">기능·AI 추천사</button>
+    <button role="tab" id="t-detail" data-tab="detail" aria-selected="false">원인 찾기</button>
+    <button role="tab" id="t-event" data-tab="event" aria-selected="false">이벤트 성과</button>
+  </nav>
+
+  <!-- 최근 7일 -->
+  <div class="cc-page" id="week" role="tabpanel" aria-labelledby="t-week">
+    <p class="cc-take" id="takeaway"><span class="dash-skeleton">—</span></p>
+
+    <section class="cc-sec" id="watch-sec">
+      <h2>지금 확인할 지표</h2>
+      <p class="cc-why">지난 4주 평균보다 크게 하락한 지표만 보여 줍니다. 각 지표에서 원인을 살펴볼 화면으로 이동할 수 있습니다.</p>
+      <div class="cc-card">
+        <ul class="cc-watch" id="watch" data-source="watch"></ul>
+      </div>
+    </section>
+
+    <section class="cc-sec" id="core">
+      <h2>핵심 지표 3개</h2>
+      <div class="cc-grid">
+        <div class="cc-card" id="card-reacted">
+          <h3>반응을 받은 크리에이터</h3>
+          <p class="cc-note">최근 7일 동안 다른 사람에게 리스펙트·공감·댓글·팔로우·지원 중 하나라도 받은 사람</p>
+          <div class="cc-row"><span class="cc-big dash-skeleton" data-source="summary" data-field="reacted_now" data-row="0">—</span><span class="cc-delta" id="d-reacted"></span></div>
+          <span class="cc-sub">최근 7일 앱을 연 사람 중 <span data-source="summary" data-field="reacted_share" data-row="0">—</span></span>
+          <div class="cc-spark" id="sp-reacted" data-source="weekly"></div>
+          <button class="cc-link" data-go="connect" data-target="reaction-card">반응 종류별로 보기</button>
+        </div>
+        <div class="cc-card" id="card-knocks">
+          <h3>보낸 노크</h3>
+          <p class="cc-note">최근 7일 동안 다른 크리에이터에게 노크(1:1 대화 요청)를 보낸 횟수</p>
+          <div class="cc-row"><span class="cc-big dash-skeleton" data-source="summary" data-field="knocks_now" data-row="0">—</span><span class="cc-delta" id="d-knocks"></span></div>
+          <span class="cc-sub">보낸 사람 <span data-source="summary" data-field="senders_now" data-row="0">—</span>명</span>
+          <div class="cc-spark" id="sp-knocks" data-source="weekly"></div>
+          <button class="cc-link" data-go="connect" data-target="relation-card">누구에게 보냈는지 보기</button>
+        </div>
+        <div class="cc-card" id="card-accept">
+          <h3>노크 수락·거절</h3>
+          <p class="cc-note">보낸 지 2주가 지나 결과가 확정된 노크의 최근 4주 수치입니다. 주당 노크가 열 건 안팎이라 4주를 합산합니다</p>
+          <div class="cc-row"><span class="cc-big dash-skeleton" data-source="summary" data-field="k_accept" data-row="0">—</span><span class="cc-delta" id="d-accept"></span></div>
+          <span class="cc-sub"><span data-source="summary" data-field="k_decided" data-row="0">—</span>건 중 수락 <span data-source="summary" data-field="k_accepted" data-row="0">—</span> · 거절 <span data-source="summary" data-field="k_declined" data-row="0">—</span> · 무응답 <span data-source="summary" data-field="k_noreply" data-row="0">—</span></span>
+          <span class="cc-sub">아직 2주가 안 된 노크 <span data-source="summary" data-field="k_waiting" data-row="0">—</span>건은 결과를 기다리는 중입니다</span>
+          <button class="cc-link" data-go="connect" data-target="knock-card">주별 결과 보기</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="cc-sec" id="base">
+      <h2>기본 지표</h2>
+      <div class="cc-base">
+        <div><span class="cc-lab">현재 회원</span><span class="cc-mid dash-skeleton" data-source="summary" data-field="members_now" data-row="0">—</span><span class="cc-delta" id="d-members"></span></div>
+        <div><span class="cc-lab">최근 7일 앱을 연 사람</span><span class="cc-mid dash-skeleton" data-source="summary" data-field="active_now" data-row="0">—</span><span class="cc-delta" id="d-active"></span></div>
+        <div><span class="cc-lab">신규 가입</span><span class="cc-mid dash-skeleton" data-source="summary" data-field="new_now" data-row="0">—</span><span class="cc-sub">4주 평균 <span data-source="summary" data-field="new_avg4" data-row="0">—</span>명</span></div>
+        <div><span class="cc-lab">직전 7일에 앱을 연 사람 중 최근 7일에도 연 비율</span><span class="cc-mid dash-skeleton" data-source="summary" data-field="return_now" data-row="0">—</span><span class="cc-delta" id="d-return"></span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 연결 -->
+  <div class="cc-page" id="connect" role="tabpanel" aria-labelledby="t-connect" hidden>
+    <section class="cc-sec">
+      <h2>핵심 지표 경험에 따른 재방문 비교</h2>
+      <p class="cc-why">직전 7일에 앱을 연 사람을 핵심 지표에 해당하는 경험을 한 사람과 하지 않은 사람으로 나눕니다. 두 집단이 최근 7일에도 앱을 연 비율을 비교합니다(최근 4주 합산). 두 점이 겹치면 재방문율 차이가 없다는 뜻입니다. 이때는 핵심 지표를 바꿉니다.</p>
+      <div class="cc-card" id="valid-card">
+        <h3>경험 여부에 따른 재방문율</h3>
+        <p class="cc-note">진한 점이 경험한 사람, 옅은 점이 경험하지 않은 사람입니다. 괄호 안은 사람 수입니다</p>
+        <div class="cc-chart" id="ch-valid" data-source="validation" style="min-height: 180px"></div>
+      </div>
+    </section>
+
+    <section class="cc-sec">
+      <h2>노크·지원 결과</h2>
+      <p class="cc-why">노크는 1:1 대화 요청, 지원은 프로젝트 참여 요청입니다. 둘은 따로 셉니다. 상대가 수락·거절을 누르거나 첫 메시지를 보내면 답한 것으로 보고, 14일 동안 답이 없으면 무응답으로 봅니다.</p>
+      <div class="cc-grid">
+        <div class="cc-card" id="knock-card">
+          <h3>주별 노크 결과</h3>
+          <p class="cc-note">최근 12주 동안 주별로 보낸 노크를 100%로 놓고 결과 비율을 비교합니다. 최근 2주는 아직 응답을 기다리는 노크가 많습니다</p>
+          <div class="cc-legend" id="lg-knock"></div>
+          <div class="cc-chart" id="ch-knock" data-source="knock_week_share"></div>
+        </div>
+        <div class="cc-card" id="req-card">
+          <h3>최근 7일 노크와 지원</h3>
+          <p class="cc-note">건수</p>
+          <div class="cc-tablewrap">
+            <table class="cc-table" id="tb-req" data-source="request_compare" data-row-key="kind">
+              <thead><tr><th data-field="kind">구분</th><th class="num" data-field="sent">보냄</th><th class="num" data-field="accepted">수락</th><th class="num" data-field="declined">거절·차단</th><th class="num" data-field="no_reply">무응답</th><th class="num" data-field="waiting">기다리는 중</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="cc-card" id="relation-card">
+        <h3>노크 전 두 사람의 관계</h3>
+        <p class="cc-note">최근 4주 동안 결과가 확정된 노크를 집계합니다. 각 노크는 가장 가까운 관계 한 가지로만 분류합니다. 반응과 조회는 노크 전 30일 이내 기록을 기준으로 합니다</p>
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-rel" data-source="relation_rate" data-row-key="relation">
+            <thead><tr><th data-field="relation">노크 전 관계</th><th class="num" data-field="sent">보냄</th><th data-field="answer_rate">답이 온 비율</th><th data-field="accept_rate">수락한 비율</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="cc-note">일촌·팔로우는 노크한 때의 상태입니다. 「반응을 주고받음」은 둘 중 한 명이라도 상대 게시물에 리스펙트·공감·댓글을 남긴 경우, 「보기만 함」은 프로필이나 게시물을 본 기록만 있는 경우, 「접점 없음」은 기록이 하나도 없는 경우입니다</p>
+      </div>
+    </section>
+
+    <section class="cc-sec">
+      <h2>어떤 반응을 받았나</h2>
+      <p class="cc-why">포트폴리오는 리스펙트, 영감은 공감, 프로젝트 카드는 지원이 대표 반응입니다. 한 사람이 여러 종류를 받으면 종류마다 셉니다.</p>
+      <div class="cc-card" id="reaction-card">
+        <h3>반응 종류별로 받은 사람</h3>
+        <p class="cc-note">최근 7일</p>
+        <div class="cc-chart" id="ch-react" data-source="reaction_types" style="min-height: 200px"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 새로 온 사람 -->
+  <div class="cc-page" id="new" role="tabpanel" aria-labelledby="t-new" hidden>
+    <section class="cc-sec">
+      <h2>신규 이용자는 어느 단계에서 멈추나</h2>
+      <p class="cc-why">주당 가입자가 서너 명이라 최근 4주 동안 앱을 설치한 사람을 모아 첫 연결까지의 진행 상황을 봅니다. 다음 단계로 넘어가지 않은 사람이 가장 많은 구간은 붉게 표시합니다.</p>
+      <div class="cc-grid">
+        <div class="cc-card" id="signup-card">
+          <h3>주별 신규 가입</h3>
+          <p class="cc-note">최근 12주</p>
+          <div class="cc-chart" id="ch-signup" data-source="weekly" style="min-height: 200px"></div>
+        </div>
+        <div class="cc-card" id="funnel-card">
+          <h3>설치부터 첫 연결까지</h3>
+          <p class="cc-note">굵은 막대는 최근 4주, 얇은 막대는 그 전 4주입니다. 커버 정보·자기소개·포트폴리오 1건을 모두 등록하면 프로필 완성입니다. 단계는 앞 단계를 마친 사람 중에서 셉니다</p>
+          <div class="cc-chart" id="ch-funnel" data-source="funnel funnel_loss"></div>
+          <p class="cc-when">어느 화면에서 멈췄는지는 GA의 「가입 단계」·「프로필 등록 단계」 분석에서 봅니다</p>
+        </div>
+        <div class="cc-card" id="ann-card">
+          <h3>마케팅·이벤트 기록</h3>
+          <p class="cc-note">어드민 운영툴에 등록한 캠페인과 이벤트입니다. 등록하면 모든 그래프에 기간이 띠로 표시되어, 가입이나 활동이 늘어난 때와 견줘 볼 수 있습니다</p>
+          <div class="cc-tablewrap">
+            <table class="cc-table" id="tb-ann" data-source="annotation_list" data-row-key="id">
+              <thead><tr><th data-field="id">번호</th><th data-field="kind">구분</th><th data-field="title">이름</th><th data-field="period">기간</th><th data-field="note">메모</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 이벤트 성과 -->
+  <div class="cc-page" id="event" role="tabpanel" aria-labelledby="t-event" hidden>
+    <section class="cc-sec" id="ev-sec">
+      <h2>이벤트 링크로 온 사람은 가입까지 갔나</h2>
+      <p class="cc-why">포스터·공유처럼 추적 링크(UTM)가 붙은 링크로 들어온 사람을 링크 클릭부터 회원가입까지 따라갑니다. 가입 전 단계는 에어브릿지에서, 회원가입은 서버의 가입 유입 기록에서 셉니다. 에어브릿지는 아이폰 설치·가입의 일부를 출처 없음으로 남기기 때문입니다.</p>
+      <div class="cc-base">
+        <div><span class="cc-lab">링크 클릭</span><span class="cc-mid" data-source="event_total" data-field="clicks" data-row="0">—</span></div>
+        <div><span class="cc-lab">이벤트 페이지 방문</span><span class="cc-mid" data-source="event_total" data-field="web_opens" data-row="0">—</span></div>
+        <div><span class="cc-lab">앱 설치하고 참여하기 클릭</span><span class="cc-mid" data-source="event_total" data-field="cta_clicks" data-row="0">—</span></div>
+        <div><span class="cc-lab">앱 설치</span><span class="cc-mid" data-source="event_total" data-field="installs" data-row="0">—</span></div>
+        <div><span class="cc-lab">회원가입</span><span class="cc-mid" data-source="event_total" data-field="signups_server" data-row="0">—</span></div>
+      </div>
+      <div class="cc-grid">
+        <div class="cc-card" id="ev-funnel-card">
+          <h3>단계마다 남은 사람</h3>
+          <p class="cc-note">괄호 안은 바로 앞 단계에서 넘어온 비율입니다. 앱 설치까지는 에어브릿지, 회원가입은 서버 기준입니다</p>
+          <div class="cc-chart" id="ch-ev-steps" data-source="event_steps" style="min-height: 190px"></div>
+        </div>
+        <div class="cc-card" id="ev-gap-card">
+          <h3>에어브릿지가 놓친 가입</h3>
+          <p class="cc-note">서버에는 남았지만 에어브릿지에는 이 링크로 잡히지 않은 가입입니다. 대부분 아이폰입니다</p>
+          <div class="cc-row"><span class="cc-big" data-source="event_total" data-field="missing" data-row="0">—</span><span class="cc-sub">명</span></div>
+          <p class="cc-sub">서버 <span data-source="event_total" data-field="signups_server" data-row="0">—</span>명 · 에어브릿지 <span data-source="event_total" data-field="signups_airbridge" data-row="0">—</span>명</p>
+          <p class="cc-note">서버 가입 중 IP 추정으로 맞춘 비율 <span data-source="event_total" data-field="ip_share" data-row="0">—</span>. 앱이 딥링크로 받은 값을 직접 보낸 나머지는 정확합니다. 이 비율이 높으면 채널별 숫자를 조심해서 봅니다</p>
+        </div>
+      </div>
+      <div class="cc-card" id="ev-channel-card">
+        <h3>채널별 성과</h3>
+        <p class="cc-note">채널 · 하위 채널(utm_medium) · 콘텐츠(utm_content, 예: 포스터 차수 2610). 방문→클릭은 페이지가 설득을 잘하는지, 클릭→가입은 설치·가입 과정에서 얼마나 빠지는지 봅니다. 설치는 아이폰이 일부 빠지므로 안드로이드를 기준으로 봅니다</p>
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-ev" data-source="event_by_channel" data-row-key="key">
+            <thead><tr>
+              <th data-field="key">채널</th>
+              <th class="num" data-field="clicks">링크 클릭</th>
+              <th class="num" data-field="web_opens">방문</th>
+              <th class="num" data-field="cta_clicks">버튼 클릭</th>
+              <th class="num" data-field="installs_aos">설치 안드로이드</th>
+              <th class="num" data-field="installs_ios">설치 아이폰</th>
+              <th class="num" data-field="signups_server">가입 서버</th>
+              <th class="num" data-field="signups_airbridge">가입 에어브릿지</th>
+              <th data-field="open_to_cta">방문→클릭</th>
+              <th data-field="cta_to_signup">클릭→가입</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="cc-when">앱이 딥링크로 받은 유입 정보를 가입 때 서버로 보내는 개선(CCQ-928)이 배포되기 전에는 아이폰 가입이 서버에도 남지 않습니다. 배포일을 기준선으로 두고 그 뒤 숫자부터 비교합니다</p>
+      <button class="cc-link" data-go="new" data-target="funnel-card">설치는 많은데 가입이 적으면: 새로 온 사람 탭의 가입 단계</button>
+    </section>
+  </div>
+
+  <!-- 재방문 -->
+  <div class="cc-page" id="retain" role="tabpanel" aria-labelledby="t-retain" hidden>
+    <section class="cc-sec">
+      <h2>재방문 현황</h2>
+      <p class="cc-why">세션 수는 백그라운드에 있던 앱을 다시 열 때마다 늘어납니다. 같은 사람의 반복 이용을 중복 집계하지 않도록 앱을 연 사람 수를 봅니다.</p>
+      <div class="cc-grid">
+        <div class="cc-card" id="active-card">
+          <h3>주별로 앱을 연 사람</h3>
+          <p class="cc-note">최근 12주</p>
+          <div class="cc-chart" id="ch-active" data-source="weekly" style="min-height: 200px"></div>
+        </div>
+        <div class="cc-card" id="return-card">
+          <h3>직전 7일에 앱을 연 사람 중 최근 7일에도 연 비율</h3>
+          <p class="cc-note">최근 11주</p>
+          <div class="cc-chart" id="ch-return" data-source="return_week" style="min-height: 200px"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 기능·AI 추천사 -->
+  <div class="cc-page" id="feature" role="tabpanel" aria-labelledby="t-feature" hidden>
+    <section class="cc-sec">
+      <h2>AI 추천사</h2>
+      <p class="cc-why">추천사 기능을 계속 고치고 있어서 매주 봅니다. 추천사는 직업·시그니처 키워드·경력·새 포트폴리오를 모두 채워야 받을 수 있습니다.</p>
+      <div class="cc-grid">
+        <div class="cc-card" id="ai-q-card">
+          <h3>AI 추천사 생성과 프로필 완성 현황</h3>
+          <p class="cc-note">전체 회원 기준입니다. AI 추천사는 한 번 받으면 삭제할 수 없습니다</p>
+          <div class="cc-tablewrap">
+            <table class="cc-table" id="tb-ai" data-source="ai_questions" data-row-key="key">
+              <thead><tr><th data-field="label">질문</th><th class="num" data-field="count">해당</th><th class="num" data-field="base">기준</th><th data-field="share">비율</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="cc-note">「받으려고 채웠나」는 마지막 조건을 채운 시점과 추천사를 처음 만든 시점의 간격이 7일 이내인 사람을 셉니다. 두 시점이 가깝다는 뜻이며, 추천사를 받으려고 조건을 채웠는지는 알 수 없습니다</p>
+        </div>
+        <div class="cc-card" id="ai-block-card">
+          <h3>가장 많이 빠진 조건</h3>
+          <p class="cc-note">조건을 하나라도 충족하지 못한 회원을 조건별로 집계합니다. 한 회원에게 여러 조건이 빠져 있으면 각 조건에 중복 집계합니다</p>
+          <div class="cc-chart" id="ch-aiblock" data-source="ai_blocks" style="min-height: 160px"></div>
+        </div>
+        <div class="cc-card" id="ai-week-card">
+          <h3>주별 추천사 생성</h3>
+          <p class="cc-note">처음 받은 사람과 다시 만든 사람, 최근 12주</p>
+          <div class="cc-legend" id="lg-ai"></div>
+          <div class="cc-chart" id="ch-aiweek" data-source="weekly" style="min-height: 180px"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cc-sec">
+      <h2>크리에이터클럽 고유 기능 이용 현황</h2>
+      <p class="cc-why">하단 탭에 바로 표시되지 않는 기능의 이용 현황입니다. 최근 7일 앱을 연 사람 중 기능을 써 본 비율과, 처음 쓴 사람 중 7일 안에 다시 쓴 비율을 봅니다. 두 비율의 기준선은 각각 30%입니다.</p>
+      <div class="cc-card" id="feature-card">
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-feat" data-source="feature_status" data-row-key="feature">
+            <thead><tr><th data-field="feature">기능</th><th data-field="tried">써 본 비율 (최근 7일 앱을 연 사람 중)</th><th data-field="repeat">7일 안에 다시 쓴 비율</th><th data-field="status">판정</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="cc-note">이용·재이용 모두 높음: 두 비율 모두 30% 이상 · 이용 낮음·재이용 높음: 이용률 30% 미만, 재이용률 30% 이상 · 이용 높음·재이용 낮음: 이용률 30% 이상, 재이용률 30% 미만 · 이용·재이용 모두 낮음: 두 비율 모두 30% 미만</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- 원인 찾기 -->
+  <div class="cc-page" id="detail" role="tabpanel" aria-labelledby="t-detail" hidden>
+    <p class="cc-why">핵심 지표가 하락했을 때 원인을 살펴보는 화면입니다. 각 카드에 확인이 필요한 상황을 안내합니다. 「최근 7일」 탭의 「지금 확인할 지표」에서도 바로 이동할 수 있습니다.</p>
+    <div class="cc-grid">
+      <div class="cc-card" id="post-card">
+        <h3>올린 게시물이 반응을 받나</h3>
+        <p class="cc-when">이럴 때 여세요 · 반응을 받은 크리에이터가 줄었을 때</p>
+        <p class="cc-note">최근 7일 동안 올라온 게시물, 유형별 대표 반응 수(게시물 1개당 중앙값)</p>
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-post" data-source="detail_post" data-row-key="label">
+            <thead><tr><th data-field="label">유형 · 대표 반응</th><th class="num" data-field="base">게시물</th><th class="num" data-field="value">1개당 반응(중앙값)</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cc-card" id="approach-card">
+        <h3>반응 후 작성자에게 한 행동</h3>
+        <p class="cc-when">이럴 때 여세요 · 보낸 노크가 줄었을 때</p>
+        <p class="cc-note">최근 7일 동안 반응한 사람이 7일 안에 작성자에게 한 행동</p>
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-approach" data-source="detail_approach" data-row-key="label">
+            <thead><tr><th data-field="label">행동</th><th class="num" data-field="value">사람</th><th data-field="share">반응한 사람 중</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cc-card" id="conn-card">
+        <h3>일촌 신청을 받아 주나</h3>
+        <p class="cc-when">이럴 때 여세요 · 노크 수락률이 떨어졌을 때(일촌 신청 수락도 줄었는지 확인)</p>
+        <p class="cc-note">최근 7일 동안 보낸 일촌 신청, 건수</p>
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-conn" data-source="detail_conn" data-row-key="label">
+            <thead><tr><th data-field="label">결과</th><th class="num" data-field="value">건수</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="cc-card" id="block-card">
+        <h3>차단이 늘었나</h3>
+        <p class="cc-when">이럴 때 여세요 · 노크 거절이나 무응답이 늘었을 때</p>
+        <p class="cc-note">최근 7일 동안 다른 사람을 차단한 이용자 수입니다. 채팅했던 상대를 차단하는 일이 늘면 원치 않는 노크나 메시지가 있었는지 살펴봅니다</p>
+        <div class="cc-tablewrap">
+          <table class="cc-table" id="tb-block" data-source="detail_block" data-row-key="label">
+            <thead><tr><th data-field="label">차단한 상대</th><th class="num" data-field="value">사람</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="cc-note">8주 동안 「지금 확인할 지표」에서 연결되지 않은 카드는 이 탭에서 제외하거나 다른 카드와 합칩니다.</p>
+  </div>
+</div>
+
+<script>
+const ccSort = (rows) => [...rows].sort((a, b) => (a.week < b.week ? -1 : 1));
+
+dash.calc('summary', {
+  title: '최근 7일과 직전 7일 비교',
+  description: '어제까지 최근 7일과 직전 7일의 기본 지표·핵심 지표를 비교합니다. 노크 수락률은 결과가 확정된 최근 4주 노크를 기준으로 계산합니다.',
+  inputs: ['weekly'],
+  fn: (weekly) => {
+    const w = [...weekly].sort((a, b) => (a.week < b.week ? -1 : 1));
+    const n = (r, k) => Number(r[k]);
+    const sum = (rs, k) => rs.reduce((t, r) => t + n(r, k), 0);
+    const L = w.length, a = w[L - 1], b = w[L - 2], c = w[L - 3];
+    const done = w.filter((r) => n(r, 'knock_waiting') === 0);
+    const d4 = done.slice(-4), p4 = done.slice(-8, -4);
+    const dec = (rs) => sum(rs, 'knocks_sent');
+    const acc = (rs) => sum(rs, 'knock_accepted') / dec(rs);
+    const ret = (x, prev) => n(x, 'returned_from_prev_week') / n(prev, 'active_members');
+    return [{
+      week: a.week,
+      members_now: n(a, 'members_current'), members_delta: n(a, 'members_current') - n(b, 'members_current'),
+      active_now: n(a, 'active_members'), active_delta: n(a, 'active_members') - n(b, 'active_members'),
+      new_now: n(a, 'new_signups'), new_avg4: sum(w.slice(-4), 'new_signups') / 4,
+      return_now: ret(a, b), return_delta: ret(a, b) - ret(b, c),
+      reacted_now: n(a, 'reacted_creators'), reacted_delta: n(a, 'reacted_creators') - n(b, 'reacted_creators'),
+      reacted_share: n(a, 'reacted_creators') / n(a, 'active_members'),
+      knocks_now: n(a, 'knocks_sent'), knocks_delta: n(a, 'knocks_sent') - n(b, 'knocks_sent'), senders_now: n(a, 'knock_senders'),
+      k_accept: acc(d4), k_accept_prev: acc(p4), k_accept_delta: acc(d4) - acc(p4),
+      k_decided: dec(d4), k_accepted: sum(d4, 'knock_accepted'), k_declined: sum(d4, 'knock_declined') + sum(d4, 'knock_blocked'),
+      k_noreply: sum(d4, 'knock_no_reply'), k_waiting: sum(w, 'knock_waiting')
+    }];
+  }
+});
+
+dash.calc('watch', {
+  title: '지금 확인할 지표',
+  description: '지난 4주 평균보다 최근 7일 사람 수가 15% 넘게, 비율이 5%p 넘게 하락한 지표를 표시합니다.',
+  inputs: ['weekly'],
+  fn: (weekly) => {
+    const w = [...weekly].sort((a, b) => (a.week < b.week ? -1 : 1));
+    const n = (r, k) => Number(r[k]);
+    const L = w.length, now = w[L - 1], prev4 = w.slice(L - 5, L - 1);
+    const avg = (k) => prev4.reduce((t, r) => t + n(r, k), 0) / prev4.length;
+    const out = [];
+    const count = (key, name, field, tab, target, cause) => {
+      const a = avg(field), v = n(now, field);
+      if (v < a * 0.85) out.push({ key, name, now: v, base: a, kind: 'count', tab, target, cause });
+    };
+    count('reacted', '반응을 받은 크리에이터', 'reacted_creators', 'detail', 'post-card', '올린 게시물이 반응을 받나');
+    count('knocks', '보낸 노크', 'knocks_sent', 'detail', 'approach-card', '반응한 사람이 작성자에게 다가갔나');
+    count('active', '앱을 연 사람', 'active_members', 'retain', 'return-card', '직전 7일에 앱을 연 사람 중 최근 7일에도 연 비율');
+    const rate = (i) => n(w[i], 'returned_from_prev_week') / n(w[i - 1], 'active_members');
+    const rNow = rate(L - 1), rAvg = [L - 5, L - 4, L - 3, L - 2].reduce((t, i) => t + rate(i), 0) / 4;
+    if (rNow < rAvg - 0.05) out.push({ key: 'return', name: '직전 7일에 앱을 연 사람 중 최근 7일에도 연 비율', now: rNow, base: rAvg, kind: 'rate', tab: 'connect', target: 'valid-card', cause: '핵심 지표가 사람을 다시 오게 하나' });
+    const done = w.filter((r) => n(r, 'knock_waiting') === 0);
+    const ar = (rs) => rs.reduce((t, r) => t + n(r, 'knock_accepted'), 0) / rs.reduce((t, r) => t + n(r, 'knocks_sent'), 0);
+    const a4 = ar(done.slice(-4)), p4 = ar(done.slice(-8, -4));
+    if (a4 < p4 - 0.05) out.push({ key: 'accept', name: '노크 수락률(최근 4주)', now: a4, base: p4, kind: 'rate', tab: 'connect', target: 'relation-card', cause: '노크하기 전에 두 사람은 어떤 사이였나' });
+    return out;
+  }
+});
+
+dash.calc('knock_week_share', {
+  title: '주별 노크 결과 비율',
+  description: '주마다 보낸 노크를 수락·거절·차단·무응답·기다리는 중 비율로 나눕니다.',
+  inputs: ['weekly'],
+  fn: (weekly) => weekly.map((r) => {
+    const s = Number(r.knocks_sent);
+    return { week: r.week, deploy: r.deploy, sent: s, accepted: r.knock_accepted / s, declined: r.knock_declined / s, blocked: r.knock_blocked / s, no_reply: r.knock_no_reply / s, waiting: r.knock_waiting / s };
+  }).sort((a, b) => (a.week < b.week ? -1 : 1))
+});
+
+dash.calc('request_compare', {
+  title: '노크와 지원 비교',
+  description: '최근 7일의 노크(1:1 대화 요청)와 지원(프로젝트 참여 요청) 결과를 나란히 놓습니다.',
+  inputs: ['weekly'],
+  fn: (weekly) => {
+    const a = [...weekly].sort((x, y) => (x.week < y.week ? -1 : 1)).pop();
+    const n = (k) => Number(a[k]);
+    return [
+      { kind: '노크', sent: n('knocks_sent'), accepted: n('knock_accepted'), declined: n('knock_declined') + n('knock_blocked'), no_reply: n('knock_no_reply'), waiting: n('knock_waiting') },
+      { kind: '지원', sent: n('applies_sent'), accepted: n('apply_accepted'), declined: n('apply_declined'), no_reply: n('apply_no_reply'), waiting: n('apply_waiting') }
+    ];
+  }
+});
+
+dash.calc('relation_rate', {
+  title: '노크 전 관계별 응답률·수락률',
+  description: '노크 전 두 사람의 관계별로 응답률과 수락률을 계산합니다.',
+  inputs: ['knock_relation'],
+  fn: (knock_relation) => [...knock_relation].sort((a, b) => a.order - b.order)
+    .map((r) => ({ relation: r.relation, sent: Number(r.sent), answer_rate: r.answered / r.sent, accept_rate: r.accepted / r.sent }))
+});
+
+dash.calc('reaction_types', {
+  title: '반응 종류별로 받은 사람',
+  description: '최근 7일 동안 반응을 받은 크리에이터 수를 반응 종류별로 보여 줍니다.',
+  inputs: ['weekly'],
+  fn: (weekly) => {
+    const a = [...weekly].sort((x, y) => (x.week < y.week ? -1 : 1)).pop();
+    return [['리스펙트 (포트폴리오)', 'reacted_respect'], ['팔로우', 'reacted_follow'], ['공감 (영감)', 'reacted_like'], ['댓글', 'reacted_comment'], ['지원 받음 (프로젝트)', 'reacted_apply']]
+      .map(([type, k]) => ({ type, creators: Number(a[k]) }));
+  }
+});
+
+dash.calc('funnel_loss', {
+  title: '다음 단계로 넘어가지 않은 비율',
+  description: '앞 단계 인원 중 다음 단계로 가지 못한 비율입니다(최근 4주).',
+  inputs: ['funnel'],
+  fn: (funnel) => {
+    const f = [...funnel].sort((a, b) => a.order - b.order);
+    return f.slice(1).map((r, i) => ({ step: r.step, lost: 1 - r.recent / f[i].recent }));
+  }
+});
+
+dash.calc('return_week', {
+  title: '주별 재방문율',
+  description: '직전 7일에 앱을 연 사람 중 최근 7일에도 연 사람의 비율입니다.',
+  inputs: ['weekly'],
+  fn: (weekly) => {
+    const w = [...weekly].sort((a, b) => (a.week < b.week ? -1 : 1));
+    return w.slice(1).map((r, i) => ({ week: r.week, deploy: r.deploy, return_rate: r.returned_from_prev_week / w[i].active_members }));
+  }
+});
+
+dash.calc('feature_status', {
+  title: '기능별 판정',
+  description: '써 본 비율과 7일 안에 다시 쓴 비율을 기준으로 기능을 네 유형으로 나눕니다. 각 비율이 30% 이상인지에 따라 구분합니다.',
+  inputs: ['features'],
+  fn: (features) => features.map((r) => {
+    const t = Number(r.tried) >= 0.3, p = Number(r.repeat) >= 0.3;
+    const status = t && p ? '이용·재이용 모두 높음' : !t && p ? '이용 낮음·재이용 높음' : t && !p ? '이용 높음·재이용 낮음' : '이용·재이용 모두 낮음';
+    return { feature: r.feature, tried: Number(r.tried), repeat: Number(r.repeat), status };
+  }).sort((a, b) => b.repeat - a.repeat)
+});
+
+dash.calc('ai_questions', {
+  title: 'AI 추천사 항목별 현황',
+  description: 'AI 추천사 관련 세 항목의 해당 인원, 기준 인원, 비율입니다.',
+  inputs: ['ai'],
+  fn: (ai) => ai.filter((r) => r.key.startsWith('q')).map((r) => ({ key: r.key, label: r.label, count: Number(r.count), base: Number(r.base), share: r.count / r.base }))
+});
+
+dash.calc('ai_blocks', {
+  title: 'AI 추천사 미충족 조건',
+  description: '추천사 조건을 못 채운 회원을 빠진 조건별로 셉니다.',
+  inputs: ['ai'],
+  fn: (ai) => ai.filter((r) => r.key.startsWith('b')).map((r) => ({ key: r.key, label: r.label, count: Number(r.count) }))
+});
+
+dash.calc('annotation_list', {
+  title: '마케팅·이벤트·업데이트 목록',
+  description: '그래프 위에 겹쳐 표시하는 마케팅·이벤트 기간과 업데이트 배포 목록입니다(어드민 운영툴에서 등록).',
+  inputs: ['annotations'],
+  fn: (annotations) => [...annotations].sort((a, b) => (a.start < b.start ? 1 : -1)).map((a) => ({ id: a.id, kind: a.kind, title: a.title, period: a.start === a.end ? a.start : `${a.start} ~ ${a.end}`, note: a.note }))
+});
+
+dash.calc('event_by_channel', {
+  title: '이벤트 채널별 성과',
+  description: '에어브릿지 단계 수와 서버 가입 수를 채널·하위 채널·콘텐츠로 맞붙인 표입니다.',
+  inputs: ['event_funnel', 'event_signups'],
+  fn: (event_funnel, event_signups) => {
+    const k = (r) => [r.channel, r.medium, r.content].filter((v) => v && v !== '-').join(' · ');
+    const sv = new Map(event_signups.map((r) => [r.campaign + '|' + k(r), r]));
+    return event_funnel.map((r) => {
+      const s = sv.get(r.campaign + '|' + k(r)) || { signups: 0, by_ip: 0 };
+      return { key: k(r), campaign: r.campaign, clicks: +r.clicks, web_opens: +r.web_opens, cta_clicks: +r.cta_clicks,
+        installs_aos: +r.installs_aos, installs_ios: +r.installs_ios, signups_server: +s.signups, signups_ip: +s.by_ip,
+        signups_airbridge: +r.signups_airbridge,
+        open_to_cta: r.web_opens ? r.cta_clicks / r.web_opens : 0, cta_to_signup: r.cta_clicks ? s.signups / r.cta_clicks : 0 };
+    }).sort((a, b) => b.clicks - a.clicks);
+  }
+});
+
+dash.calc('event_total', {
+  title: '이벤트 단계별 합계',
+  description: '모든 채널을 더한 단계별 인원과 에어브릿지가 놓친 가입 수입니다.',
+  inputs: ['event_by_channel'],
+  fn: (event_by_channel) => {
+    const sum = (f) => event_by_channel.reduce((a, r) => a + r[f], 0);
+    const server = sum('signups_server'), ab = sum('signups_airbridge');
+    return [{ clicks: sum('clicks'), web_opens: sum('web_opens'), cta_clicks: sum('cta_clicks'),
+      installs: sum('installs_aos') + sum('installs_ios'), signups_server: server, signups_airbridge: ab,
+      missing: Math.max(0, server - ab), ip_share: server ? sum('signups_ip') / server : 0 }];
+  }
+});
+
+dash.calc('event_steps', {
+  title: '이벤트 단계별 전환',
+  description: '단계마다 남은 사람과 바로 앞 단계에서 넘어온 비율입니다.',
+  inputs: ['event_total'],
+  fn: (event_total) => {
+    const t = event_total[0];
+    const s = [['링크 클릭', t.clicks], ['페이지 방문', t.web_opens], ['버튼 클릭', t.cta_clicks], ['앱 설치', t.installs], ['회원가입', t.signups_server]];
+    return s.map(([step, n], i) => ({ step, n, rate: i ? (s[i - 1][1] ? n / s[i - 1][1] : 0) : 1 }));
+  }
+});
+
+const ccDetail = (grp, title, desc) => dash.calc('detail_' + grp, {
+  title, description: desc, inputs: ['detail'],
+  fn: (detail) => detail.filter((r) => r.grp === grp).map((r) => ({ label: r.label, value: Number(r.value), base: Number(r.base), share: r.value / r.base }))
+});
+ccDetail('post', '게시물 유형별 반응', '최근 7일 동안 올라온 게시물의 유형별 대표 반응 수(중앙값)와 게시물 수입니다.');
+ccDetail('approach', '반응 후 작성자에게 한 행동', '반응한 사람이 7일 안에 작성자에게 한 행동별 인원과 비율입니다.');
+ccDetail('conn', '일촌 신청 결과', '최근 7일 일촌 신청의 결과별 건수입니다.');
+ccDetail('block', '차단', '최근 7일 차단한 사람을 상대와 채팅한 적이 있는지로 나눕니다.');
+
+(() => {
+  const root = document.getElementById('dash-root') || document.documentElement;
+  const fmtN = d3.format(',');
+  const fmtP = d3.format('.0%');
+  const md = (s) => { const d = new Date(s + 'T00:00:00Z'); return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`; };
+  const css = (name) => getComputedStyle(root).getPropertyValue(name).trim();
+  let current = 'week';
+
+  const tip = (card) => {
+    let t = card.querySelector('.cc-tip');
+    if (!t) { t = document.createElement('div'); t.className = 'cc-tip'; t.hidden = true; card.appendChild(t); }
+    return {
+      show(ev, head, lines) {
+        t.replaceChildren();
+        const h = document.createElement('div'); h.className = 't'; h.textContent = head; t.appendChild(h);
+        lines.forEach(([c, txt]) => {
+          const l = document.createElement('div');
+          if (c) { const i = document.createElement('i'); i.style.cssText = `display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:${c}`; l.appendChild(i); }
+          l.appendChild(document.createTextNode(txt)); t.appendChild(l);
+        });
+        t.hidden = false;
+        const r = card.getBoundingClientRect();
+        let x = ev.clientX - r.left + 12; const y = ev.clientY - r.top + 12;
+        if (x + t.offsetWidth > r.width - 8) x = Math.max(8, ev.clientX - r.left - t.offsetWidth - 12);
+        t.style.left = x + 'px'; t.style.top = y + 'px';
+      },
+      hide() { t.hidden = true; }
+    };
+  };
+  const fail = (el) => { el.replaceChildren(); const d = document.createElement('div'); d.className = 'cc-fail'; d.textContent = 'Failed to load'; el.appendChild(d); };
+  const delta = (el, v, kind) => {
+    el.className = 'cc-delta ' + (Math.abs(v) < 1e-9 ? 'flat' : v > 0 ? 'good' : 'bad');
+    const sign = v > 0 ? '+' : v < 0 ? '−' : '';
+    el.textContent = kind === 'pp' ? `${kind === 'pp' && el.dataset.base ? el.dataset.base : '직전 7일보다'} ${sign}${Math.abs(v * 100).toFixed(1)}%p` : `직전 7일보다 ${sign}${fmtN(Math.abs(v))}`;
+  };
+  const svgFor = (el, H) => { el.replaceChildren(); const Wd = el.clientWidth || 320; return [d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${Wd} ${H}`).attr('height', H), Wd]; };
+  const yAxis = (svg, y, m, Wd, fmt) => svg.append('g').attr('transform', `translate(${m.l},0)`)
+    .call(d3.axisLeft(y).ticks(4).tickFormat(fmt).tickSize(-(Wd - m.l - m.r)))
+    .attr('font-size', null).attr('font-family', null)
+    .call((g) => g.select('.domain').remove())
+    .call((g) => g.selectAll('line').attr('stroke', css('--cds-chart-grid')))
+    .call((g) => g.selectAll('text').attr('fill', css('--color-fg-muted')).style('font-size', 'var(--cds-font-size-caption)'));
+  const xAxis = (svg, x, ticks, m, H, Wd) => {
+    const every = Math.ceil(ticks.length / Math.max(2, Math.floor((Wd - m.l) / 48)));
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues(ticks.filter((_, i) => (ticks.length - 1 - i) % every === 0)).tickFormat(md).tickSize(0))
+      .attr('font-size', null).attr('font-family', null)
+      .call((g) => g.select('.domain').attr('stroke', css('--cds-chart-axis')))
+      .call((g) => g.selectAll('text').attr('fill', css('--color-fg-muted')).attr('dy', '1.2em').style('font-size', 'var(--cds-font-size-caption)'));
+  };
+  const annColor = { '마케팅': '#E65100', '이벤트': '#2E7D32' };
+  const deployMarks = (svg, rows, xpos, m, H, step) => {
+    const A = dash.data('annotations');
+    if (A.status === 'ok' && step) {
+      const back = svg.insert('g', ':first-child');
+      const wkEnd = (w) => { const d = new Date(w + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + 6); return d.toISOString().slice(0, 10); };
+      A.data.filter((a) => annColor[a.kind]).forEach((a) => {
+        const hit = rows.filter((r) => r.week <= a.end && wkEnd(r.week) >= a.start);
+        if (!hit.length) return;
+        const x0 = xpos(hit[0]), x1 = xpos(hit[hit.length - 1]) + step;
+        back.append('rect').attr('x', x0).attr('width', Math.max(2, x1 - x0)).attr('y', m.t).attr('height', H - m.b - m.t).attr('fill', annColor[a.kind]).attr('fill-opacity', 0.12);
+        back.append('rect').attr('x', x0).attr('width', Math.max(2, x1 - x0)).attr('y', m.t - 4).attr('height', 3).attr('fill', annColor[a.kind]);
+      });
+    }
+    const g = svg.append('g');
+    rows.filter((r) => r.deploy).forEach((r) => {
+      const xx = xpos(r);
+      g.append('line').attr('x1', xx).attr('x2', xx).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', '#1565C0').attr('stroke-opacity', 0.7).attr('stroke-dasharray', '3 3');
+      g.append('text').attr('x', xx + 3).attr('y', m.t + 9).attr('fill', css('--color-fg-muted')).style('font-size', '10px').text(r.deploy);
+    });
+  };
+
+  const bars = (el, rows, field, H, yfmt) => {
+    const m = { t: 16, r: 8, b: 24, l: 32 };
+    const [svg, Wd] = svgFor(el, H);
+    const ids = rows.map((r) => r.week);
+    const x = d3.scaleBand(ids, [m.l, Wd - m.r]).padding(0.3);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => Number(r[field])) || 1], [H - m.b, m.t]).nice();
+    yAxis(svg, y, m, Wd, yfmt || d3.format('d')); xAxis(svg, x, ids, m, H, Wd);
+    deployMarks(svg, rows, (r) => x(r.week) - (x.step() * x.paddingInner()) / 2, m, H, x.step());
+    const tt = tip(el.closest('.cc-card'));
+    svg.append('g').selectAll('rect').data(rows).join('rect')
+      .attr('x', (r) => x(r.week)).attr('width', x.bandwidth()).attr('rx', 4)
+      .attr('y', (r) => y(Number(r[field]))).attr('height', (r) => y(0) - y(Number(r[field])))
+      .attr('fill', (_, i) => (i === rows.length - 1 ? dash.colors[0] : css('--cds-chart-muted')))
+      .on('mousemove', (ev, r) => tt.show(ev, `${md(r.week)} 주${r.deploy ? ' · ' + r.deploy + ' 배포' : ''}`, [[null, `${fmtN(r[field])}명`]])).on('mouseleave', () => tt.hide());
+  };
+  const spark = (el, rows, key) => {
+    const H = 44, m = { t: 6, r: 6, b: 6, l: 2 };
+    const [svg, W] = svgFor(el, H);
+    const pts = rows.map((r) => ({ d: new Date(r.week + 'T00:00:00Z'), v: Number(r[key]), w: r.week }));
+    const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]);
+    const y = d3.scaleLinear(d3.extent(pts, (p) => p.v), [H - m.b, m.t]).nice();
+    svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+      .attr('d', d3.line().x((p) => x(p.d)).y((p) => y(p.v)));
+    const last = pts[pts.length - 1];
+    svg.append('circle').attr('cx', x(last.d)).attr('cy', y(last.v)).attr('r', 3).attr('fill', dash.colors[0]);
+    const tt = tip(el.closest('.cc-card'));
+    svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'transparent')
+      .on('mousemove', (ev) => { const [mx] = d3.pointer(ev); const p = d3.least(pts, (q) => Math.abs(x(q.d) - mx)); tt.show(ev, `${md(p.w)} 주`, [[null, fmtN(p.v)]]); })
+      .on('mouseleave', () => tt.hide());
+  };
+  const hbars = (el, rows, labelKey, valKey, fmtV) => {
+    const rowH = 34, H = rows.length * rowH + 8;
+    const [svg, Wd] = svgFor(el, H);
+    const lw = Wd < 420 ? 128 : 160;
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r[valKey]) || 1], [lw, Wd - 48]);
+    const tt = tip(el.closest('.cc-card'));
+    const g = svg.selectAll('g').data(rows).join('g').attr('transform', (_, i) => `translate(0,${i * rowH + 4})`);
+    g.append('text').attr('x', 0).attr('y', 17).attr('fill', css('--color-fg')).style('font-size', 'var(--cds-font-size-caption)').text((r) => r[labelKey]);
+    g.append('rect').attr('x', lw).attr('y', 6).attr('height', 16).attr('rx', 4).attr('fill', (_, i) => (i === 0 ? dash.colors[0] : css('--cds-chart-muted')))
+      .attr('width', (r) => Math.max(2, x(r[valKey]) - lw))
+      .on('mousemove', (ev, r) => tt.show(ev, r[labelKey], [[null, fmtV(r[valKey])]])).on('mouseleave', () => tt.hide());
+    g.append('text').attr('x', (r) => x(r[valKey]) + 6).attr('y', 18).attr('fill', css('--color-fg-muted')).style('font-size', 'var(--cds-font-size-caption)').text((r) => fmtV(r[valKey]));
+  };
+  const fillTable = (tbody, rows, cols) => {
+    tbody.replaceChildren();
+    rows.forEach((r) => {
+      const tr = document.createElement('tr');
+      cols.forEach(([f, c]) => { const td = document.createElement('td'); const v = f(r); if (v instanceof Node) td.appendChild(v); else td.textContent = v; if (c) td.className = c; tr.appendChild(td); });
+      tbody.appendChild(tr);
+    });
+  };
+  const barCell = (v, color) => {
+    const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex;align-items:center;gap:8px';
+    const bar = document.createElement('div'); bar.className = 'cc-bar'; bar.style.flex = '1';
+    const fill = document.createElement('span'); fill.style.width = Math.min(100, v * 100) + '%'; fill.style.background = color; bar.appendChild(fill);
+    const t = document.createElement('span'); t.textContent = fmtP(v); t.style.minWidth = '2.5rem'; t.style.textAlign = 'right';
+    wrap.appendChild(bar); wrap.appendChild(t); return wrap;
+  };
+
+  const knockKeys = [['accepted', '수락'], ['declined', '거절'], ['blocked', '차단'], ['no_reply', '무응답'], ['waiting', '기다리는 중']];
+  const knockColor = (k) => ({ accepted: dash.colors[0], declined: dash.colors[3], blocked: css('--cds-chart-status-critical'), no_reply: css('--cds-chart-muted'), waiting: css('--cds-chart-grid') })[k];
+
+  // 탭
+  const show = (tab, targetId) => {
+    if (!document.getElementById(tab)) return;
+    current = tab;
+    document.querySelectorAll('.cc-page').forEach((p) => { p.hidden = p.id !== tab; });
+    document.querySelectorAll('.cc-tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
+    dash.setLink(tab);
+    render();
+    if (targetId) {
+      const el = document.getElementById(targetId);
+      if (el) { el.scrollIntoView({ block: 'start' }); el.classList.remove('cc-flash'); void el.offsetWidth; el.classList.add('cc-flash'); }
+    }
+  };
+  document.querySelectorAll('.cc-tabs button').forEach((b) => b.addEventListener('click', () => show(b.dataset.tab)));
+  document.querySelector('.cc').addEventListener('click', (ev) => {
+    const b = ev.target.closest('[data-go]');
+    if (b) show(b.dataset.go, b.dataset.target);
+  });
+
+  const drawText = () => {
+    const S = dash.data('summary'), take = document.getElementById('takeaway');
+    if (S.status === 'ok' && S.data.length) {
+      const s = S.data[0];
+      document.querySelectorAll('[data-source="summary"]').forEach((el) => el.classList.remove('dash-skeleton'));
+      const put = (f, v) => document.querySelectorAll(`[data-source="summary"][data-field="${f}"]`).forEach((el) => { el.textContent = v; });
+      put('members_now', fmtN(s.members_now)); put('active_now', fmtN(s.active_now)); put('new_now', fmtN(s.new_now));
+      put('new_avg4', s.new_avg4.toFixed(1)); put('return_now', fmtP(s.return_now));
+      put('reacted_now', fmtN(s.reacted_now)); put('reacted_share', fmtP(s.reacted_share));
+      put('knocks_now', fmtN(s.knocks_now)); put('senders_now', fmtN(s.senders_now));
+      put('k_accept', fmtP(s.k_accept)); put('k_decided', fmtN(s.k_decided)); put('k_accepted', fmtN(s.k_accepted));
+      put('k_declined', fmtN(s.k_declined)); put('k_noreply', fmtN(s.k_noreply)); put('k_waiting', fmtN(s.k_waiting));
+      delta(document.getElementById('d-members'), s.members_delta); delta(document.getElementById('d-active'), s.active_delta);
+      delta(document.getElementById('d-return'), s.return_delta, 'pp');
+      delta(document.getElementById('d-reacted'), s.reacted_delta); delta(document.getElementById('d-knocks'), s.knocks_delta);
+      const da = document.getElementById('d-accept'); da.dataset.base = '그 전 4주보다'; delta(da, s.k_accept_delta, 'pp');
+      const W = dash.data('watch');
+      const nWatch = W.status === 'ok' ? W.data.length : 0;
+      const head = `최근 7일 동안 반응을 받은 크리에이터는 ${fmtN(s.reacted_now)}명, 보낸 노크는 ${fmtN(s.knocks_now)}건입니다.`;
+      take.textContent = nWatch ? `${head} 지난 4주 평균보다 크게 하락한 지표 ${nWatch}개를 아래에 표시했습니다.` : `${head} 지난 4주 평균보다 크게 하락한 지표는 없습니다.`;
+    } else if (S.status === 'error') take.textContent = '';
+
+    const W = dash.data('watch'), ul = document.getElementById('watch');
+    if (W.status === 'ok') {
+      ul.replaceChildren();
+      if (!W.data.length) { const li = document.createElement('li'); li.textContent = '지난 4주 평균보다 크게 하락한 지표가 없습니다.'; ul.appendChild(li); }
+      W.data.forEach((r) => {
+        const li = document.createElement('li');
+        const nm = document.createElement('span'); nm.className = 'w-name'; nm.textContent = r.name;
+        const v = document.createElement('span'); v.className = 'cc-delta bad';
+        v.textContent = r.kind === 'rate' ? `${fmtP(r.now)} · 기준 ${fmtP(r.base)}` : `${fmtN(r.now)} · 4주 평균 ${r.base.toFixed(1)}`;
+        const b = document.createElement('button'); b.className = 'cc-link'; b.dataset.go = r.tab; b.dataset.target = r.target; b.textContent = `원인 찾기: ${r.cause}`;
+        li.append(nm, v, b); ul.appendChild(li);
+      });
+    } else if (W.status === 'error') fail(ul);
+  };
+
+  const drawWeek = () => {
+    const C = dash.data('weekly');
+    if (C.status === 'ok') {
+      const rows = ccSort(C.data);
+      spark(document.getElementById('sp-reacted'), rows, 'reacted_creators');
+      spark(document.getElementById('sp-knocks'), rows, 'knocks_sent');
+    } else if (C.status === 'error') { fail(document.getElementById('sp-reacted')); fail(document.getElementById('sp-knocks')); }
+  };
+
+  const drawConnect = () => {
+    const V = dash.data('validation'), cv = document.getElementById('ch-valid');
+    if (V.status === 'ok') {
+      const rows = V.data, narrow = (cv.clientWidth || 320) < 560;
+      const lw = narrow ? 0 : 200, rowH = narrow ? 58 : 46, H = rows.length * rowH + 28;
+      const [svg, Wd] = svgFor(cv, H);
+      const x = d3.scaleLinear([0, 1], [lw + 8, Wd - 16]);
+      const g0 = svg.append('g').attr('transform', `translate(0,${H - 20})`);
+      [0, 0.25, 0.5, 0.75, 1].forEach((v) => {
+        svg.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', 0).attr('y2', H - 22).attr('stroke', css('--cds-chart-grid'));
+        g0.append('text').attr('x', x(v)).attr('y', 12).attr('text-anchor', v === 0 ? 'start' : v === 1 ? 'end' : 'middle').attr('fill', css('--color-fg-muted')).style('font-size', 'var(--cds-font-size-caption)').text(fmtP(v));
+      });
+      const tt = tip(cv.closest('.cc-card'));
+      const g = svg.selectAll('g.row').data(rows).join('g').attr('class', 'row').attr('transform', (_, i) => `translate(0,${i * rowH})`);
+      const cy = narrow ? 38 : 24;
+      g.append('text').attr('x', 0).attr('y', narrow ? 14 : 28).attr('fill', css('--color-fg')).style('font-size', 'var(--cds-font-size-caption)').text((r) => r.outcome);
+      g.append('line').attr('x1', (r) => x(r.not_return)).attr('x2', (r) => x(r.experienced_return)).attr('y1', cy).attr('y2', cy).attr('stroke', css('--cds-chart-axis')).attr('stroke-width', 2);
+      g.append('circle').attr('cx', (r) => x(r.not_return)).attr('cy', cy).attr('r', 6).attr('fill', css('--cds-chart-muted'));
+      g.append('circle').attr('cx', (r) => x(r.experienced_return)).attr('cy', cy).attr('r', 6).attr('fill', dash.colors[0])
+        .on('mousemove', (ev, r) => tt.show(ev, r.outcome, [[dash.colors[0], `경험함 ${fmtP(r.experienced_return)} (${r.experienced}명)`], [css('--cds-chart-muted'), `경험 안 함 ${fmtP(r.not_return)} (${r.not_experienced}명)`]]))
+        .on('mouseleave', () => tt.hide());
+      g.append('text').attr('x', (r) => Math.min(x(r.experienced_return) + 10, Wd - 64)).attr('y', cy - 10).attr('fill', css('--color-fg-muted')).style('font-size', 'var(--cds-font-size-caption)').text((r) => `${fmtP(r.experienced_return)} (${r.experienced})`);
+      g.append('text').attr('x', (r) => x(r.not_return)).attr('y', cy - 10).attr('text-anchor', 'middle').attr('fill', css('--color-fg-muted')).style('font-size', 'var(--cds-font-size-caption)').text((r) => `${fmtP(r.not_return)} (${r.not_experienced})`);
+    } else if (V.status === 'error') fail(cv);
+
+    const lg = document.getElementById('lg-knock'); lg.replaceChildren();
+    knockKeys.forEach(([k, name]) => { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = knockColor(k); s.append(i, document.createTextNode(name)); lg.appendChild(s); });
+    const K = dash.data('knock_week_share'), ck = document.getElementById('ch-knock');
+    if (K.status === 'ok') {
+      const H = 240, m = { t: 16, r: 8, b: 24, l: 40 };
+      const [svg, Wd] = svgFor(ck, H);
+      const ids = K.data.map((r) => r.week);
+      const x = d3.scaleBand(ids, [m.l, Wd - m.r]).padding(0.25);
+      const y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+      yAxis(svg, y, m, Wd, fmtP); xAxis(svg, x, ids, m, H, Wd);
+      const stack = d3.stack().keys(knockKeys.map((k) => k[0]))(K.data);
+      const tt = tip(ck.closest('.cc-card'));
+      svg.append('g').selectAll('g').data(stack).join('g').attr('fill', (s) => knockColor(s.key))
+        .selectAll('rect').data((s) => s).join('rect')
+        .attr('x', (d) => x(d.data.week)).attr('width', x.bandwidth())
+        .attr('y', (d) => y(d[1])).attr('height', (d) => Math.max(0, y(d[0]) - y(d[1])))
+        .on('mousemove', (ev, d) => tt.show(ev, `${md(d.data.week)} 주 · 노크 ${d.data.sent}건`, knockKeys.map(([k, n]) => [knockColor(k), `${n} ${fmtP(d.data[k])}`])))
+        .on('mouseleave', () => tt.hide());
+      deployMarks(svg, K.data, (r) => x(r.week) - (x.step() * x.paddingInner()) / 2, m, H, x.step());
+    } else if (K.status === 'error') fail(ck);
+
+    const RQ = dash.data('request_compare');
+    if (RQ.status === 'ok') fillTable(document.querySelector('#tb-req tbody'), RQ.data, [[(r) => r.kind], [(r) => fmtN(r.sent), 'num'], [(r) => fmtN(r.accepted), 'num'], [(r) => fmtN(r.declined), 'num'], [(r) => fmtN(r.no_reply), 'num'], [(r) => fmtN(r.waiting), 'num']]);
+    const RL = dash.data('relation_rate');
+    if (RL.status === 'ok') fillTable(document.querySelector('#tb-rel tbody'), RL.data, [[(r) => r.relation], [(r) => fmtN(r.sent), 'num'], [(r) => barCell(r.answer_rate, dash.colors[1])], [(r) => barCell(r.accept_rate, dash.colors[0])]]);
+
+    const R = dash.data('reaction_types'), cr = document.getElementById('ch-react');
+    if (R.status === 'ok') hbars(cr, R.data, 'type', 'creators', (v) => `${fmtN(v)}명`);
+    else if (R.status === 'error') fail(cr);
+  };
+
+  const drawNew = () => {
+    const C = dash.data('weekly'), cs = document.getElementById('ch-signup');
+    if (C.status === 'ok') bars(cs, ccSort(C.data), 'new_signups', 200);
+    else if (C.status === 'error') fail(cs);
+    const F = dash.data('funnel'), FL = dash.data('funnel_loss'), cf = document.getElementById('ch-funnel');
+    if (F.status === 'ok' && FL.status === 'ok') {
+      const f = [...F.data].sort((a, b) => a.order - b.order);
+      const lossBy = new Map(FL.data.map((r) => [r.step, r.lost]));
+      const worst = d3.greatest(FL.data, (r) => r.lost);
+      const narrow = (cf.clientWidth || 320) < 440, lw = narrow ? 0 : 130, rowH = narrow ? 52 : 38, H = f.length * rowH + 4;
+      const [svg, Wd] = svgFor(cf, H);
+      const x = d3.scaleLinear([0, d3.max(f, (r) => Math.max(r.recent, r.before))], [lw, Wd - 96]);
+      const tt = tip(cf.closest('.cc-card'));
+      const g = svg.selectAll('g').data(f).join('g').attr('transform', (_, i) => `translate(0,${i * rowH})`);
+      const by = narrow ? 18 : 4;
+      g.append('text').attr('x', 0).attr('y', narrow ? 12 : 19).attr('fill', css('--color-fg')).style('font-size', 'var(--cds-font-size-caption)').text((r) => r.step);
+      g.append('rect').attr('x', lw).attr('y', by + 20).attr('height', 4).attr('rx', 2).attr('fill', css('--cds-chart-muted')).attr('width', (r) => Math.max(2, x(r.before) - lw));
+      g.append('rect').attr('x', lw).attr('y', by).attr('height', 18).attr('rx', 4)
+        .attr('fill', (r) => (worst && r.step === worst.step ? css('--cds-chart-status-critical') : dash.colors[0]))
+        .attr('width', (r) => Math.max(2, x(r.recent) - lw))
+        .on('mousemove', (ev, r) => tt.show(ev, r.step, [[null, `최근 4주 ${fmtN(r.recent)}명 · 그 전 4주 ${fmtN(r.before)}명`]].concat(lossBy.has(r.step) ? [[null, `앞 단계 인원의 ${fmtP(lossBy.get(r.step))}가 이 단계로 넘어오지 않았습니다`]] : [])))
+        .on('mouseleave', () => tt.hide());
+      g.append('text').attr('x', (r) => x(r.recent) + 6).attr('y', by + 14).attr('fill', css('--color-fg-muted')).style('font-size', 'var(--cds-font-size-caption)')
+        .text((r) => fmtN(r.recent) + '명' + (lossBy.has(r.step) ? ` (−${fmtP(lossBy.get(r.step))})` : ''));
+    } else if (F.status === 'error' || FL.status === 'error') fail(cf);
+  };
+
+  const drawRetain = () => {
+    const C = dash.data('weekly'), ca = document.getElementById('ch-active');
+    if (C.status === 'ok') bars(ca, ccSort(C.data), 'active_members', 200);
+    else if (C.status === 'error') fail(ca);
+    const RC = dash.data('return_week'), crt = document.getElementById('ch-return');
+    if (RC.status === 'ok') {
+      const pts = ccSort(RC.data);
+      const H = 200, m = { t: 16, r: 12, b: 24, l: 40 };
+      const [svg, Wd] = svgFor(crt, H);
+      const ids = pts.map((p) => p.week);
+      const x = d3.scalePoint(ids, [m.l + 8, Wd - m.r - 8]);
+      const y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+      yAxis(svg, y, m, Wd, fmtP); xAxis(svg, x, ids, m, H, Wd);
+      deployMarks(svg, pts, (r) => x(r.week) - x.step() / 2, m, H, x.step());
+      svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+        .attr('d', d3.line().x((p) => x(p.week)).y((p) => y(p.return_rate)));
+      const last = pts[pts.length - 1];
+      svg.append('circle').attr('cx', x(last.week)).attr('cy', y(last.return_rate)).attr('r', 3.5).attr('fill', dash.colors[0]);
+      const tt = tip(crt.closest('.cc-card'));
+      svg.append('rect').attr('x', m.l).attr('width', Wd - m.l - m.r).attr('height', H).attr('fill', 'transparent')
+        .on('mousemove', (ev) => { const [mx] = d3.pointer(ev); const p = d3.least(pts, (q) => Math.abs(x(q.week) - mx)); tt.show(ev, `${md(p.week)} 주${p.deploy ? ' · ' + p.deploy + ' 배포' : ''}`, [[null, fmtP(p.return_rate)]]); })
+        .on('mouseleave', () => tt.hide());
+    } else if (RC.status === 'error') fail(crt);
+  };
+
+  const drawFeature = () => {
+    const AQ = dash.data('ai_questions');
+    if (AQ.status === 'ok') fillTable(document.querySelector('#tb-ai tbody'), AQ.data, [[(r) => r.label], [(r) => fmtN(r.count), 'num'], [(r) => fmtN(r.base), 'num'], [(r) => barCell(r.share, dash.colors[0])]]);
+    const AB = dash.data('ai_blocks'), cb = document.getElementById('ch-aiblock');
+    if (AB.status === 'ok') hbars(cb, AB.data, 'label', 'count', (v) => `${fmtN(v)}명`);
+    else if (AB.status === 'error') fail(cb);
+
+    const lg = document.getElementById('lg-ai'); lg.replaceChildren();
+    [['처음 받음', dash.colors[0]], ['다시 만듦', dash.colors[1]]].forEach(([n, c]) => { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = c; s.append(i, document.createTextNode(n)); lg.appendChild(s); });
+    const C = dash.data('weekly'), cw = document.getElementById('ch-aiweek');
+    if (C.status === 'ok') {
+      const rows = ccSort(C.data);
+      const H = 180, m = { t: 16, r: 8, b: 24, l: 28 };
+      const [svg, Wd] = svgFor(cw, H);
+      const ids = rows.map((r) => r.week);
+      const x = d3.scaleBand(ids, [m.l, Wd - m.r]).padding(0.25);
+      const x1 = d3.scaleBand(['ai_rec_first', 'ai_rec_regen'], [0, x.bandwidth()]).padding(0.1);
+      const y = d3.scaleLinear([0, d3.max(rows, (r) => Math.max(r.ai_rec_first, r.ai_rec_regen)) || 1], [H - m.b, m.t]).nice();
+      yAxis(svg, y, m, Wd, d3.format('d')); xAxis(svg, x, ids, m, H, Wd);
+      deployMarks(svg, rows, (r) => x(r.week) - (x.step() * x.paddingInner()) / 2, m, H, x.step());
+      const tt = tip(cw.closest('.cc-card'));
+      const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r) => `translate(${x(r.week)},0)`);
+      g.selectAll('rect').data((r) => [['ai_rec_first', r], ['ai_rec_regen', r]]).join('rect')
+        .attr('x', ([k]) => x1(k)).attr('width', x1.bandwidth()).attr('rx', 3)
+        .attr('y', ([k, r]) => y(Number(r[k]))).attr('height', ([k, r]) => y(0) - y(Number(r[k])))
+        .attr('fill', ([k]) => (k === 'ai_rec_first' ? dash.colors[0] : dash.colors[1]))
+        .on('mousemove', (ev, [, r]) => tt.show(ev, `${md(r.week)} 주`, [[dash.colors[0], `처음 받음 ${r.ai_rec_first}명`], [dash.colors[1], `다시 만듦 ${r.ai_rec_regen}명`]]))
+        .on('mouseleave', () => tt.hide());
+    } else if (C.status === 'error') fail(cw);
+
+    const FS = dash.data('feature_status');
+    if (FS.status === 'ok') {
+      const cls = { '이용·재이용 모두 높음': 's-good', '이용 낮음·재이용 높음': 's-hidden', '이용 높음·재이용 낮음': 's-warn', '이용·재이용 모두 낮음': 's-bad' };
+      fillTable(document.querySelector('#tb-feat tbody'), FS.data, [[(r) => r.feature], [(r) => barCell(r.tried, dash.colors[0])], [(r) => barCell(r.repeat, dash.colors[1])],
+        [(r) => { const c = document.createElement('span'); c.className = 'cc-chip ' + cls[r.status]; c.textContent = r.status; return c; }]]);
+    }
+  };
+
+  const drawDetail = () => {
+    const P = dash.data('detail_post');
+    if (P.status === 'ok') fillTable(document.querySelector('#tb-post tbody'), P.data, [[(r) => r.label], [(r) => fmtN(r.base), 'num'], [(r) => fmtN(r.value), 'num']]);
+    const A = dash.data('detail_approach');
+    if (A.status === 'ok') fillTable(document.querySelector('#tb-approach tbody'), A.data, [[(r) => r.label], [(r) => fmtN(r.value), 'num'], [(r) => barCell(r.share, dash.colors[0])]]);
+    const CN = dash.data('detail_conn');
+    if (CN.status === 'ok') fillTable(document.querySelector('#tb-conn tbody'), CN.data, [[(r) => r.label], [(r) => fmtN(r.value), 'num']]);
+    const B = dash.data('detail_block');
+    if (B.status === 'ok') fillTable(document.querySelector('#tb-block tbody'), B.data, [[(r) => r.label], [(r) => fmtN(r.value), 'num']]);
+  };
+
+  const drawAnn = () => {
+    const AL = dash.data('annotation_list'), tb = document.querySelector('#tb-ann tbody');
+    if (AL.status === 'ok') fillTable(tb, AL.data, [[(r) => r.id], [(r) => { const c = document.createElement('span'); c.className = 'cc-chip'; c.style.color = annColor[r.kind] || 'inherit'; c.textContent = r.kind; return c; }], [(r) => r.title], [(r) => r.period], [(r) => r.note]]);
+  };
+
+  const drawEvent = () => {
+    const T = dash.data('event_total');
+    if (T.status === 'ok' && T.data.length) {
+      const t = T.data[0];
+      document.querySelectorAll('[data-source="event_total"]').forEach((el) => {
+        const f = el.dataset.field; el.textContent = f === 'ip_share' ? fmtP(t[f]) : fmtN(t[f]);
+      });
+    }
+    const ST = dash.data('event_steps'), ch = document.getElementById('ch-ev-steps');
+    if (ST.status === 'ok') hbars(ch, ST.data.map((r, i) => ({ label: i ? `${r.step} (${fmtP(r.rate)})` : r.step, n: r.n })), 'label', 'n', fmtN);
+    else if (ST.status === 'error') fail(ch);
+    const B = dash.data('event_by_channel'), tb = document.querySelector('#tb-ev tbody');
+    if (B.status === 'ok') fillTable(tb, B.data, [[(r) => r.key], [(r) => fmtN(r.clicks), 'num'], [(r) => fmtN(r.web_opens), 'num'], [(r) => fmtN(r.cta_clicks), 'num'],
+      [(r) => fmtN(r.installs_aos), 'num'], [(r) => fmtN(r.installs_ios), 'num'], [(r) => fmtN(r.signups_server), 'num'], [(r) => fmtN(r.signups_airbridge), 'num'],
+      [(r) => barCell(r.open_to_cta, dash.colors[0])], [(r) => barCell(r.cta_to_signup, dash.colors[1])]]);
+    else if (B.status === 'error') fail(tb);
+  };
+
+  const drawers = { week: drawWeek, connect: drawConnect, new: drawNew, retain: drawRetain, feature: drawFeature, detail: drawDetail, event: drawEvent };
+  function render() { drawText(); drawers[current](); if (current === 'new') drawAnn(); }
+
+  const start = location.hash.slice(1);
+  if (drawers[start]) show(start);
+  dash.onData(render);
+})();
+</script>
+
+</div>
+</body>
+</html>
