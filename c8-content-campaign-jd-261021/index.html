@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cre8orClub 기획팀 콘텐츠·캠페인 기획자 채용 안내">
+  <title>콘텐츠·캠페인 기획자 · Cre8orClub</title>
+  <style>
+    :root {
+      --ink: #10131a;
+      --muted: #626a79;
+      --line: #dce2ec;
+      --paper: #f6f7fa;
+      --white: #ffffff;
+      --blue: #315bea;
+      --blue-soft: #eaf0ff;
+      --mint: #20c997;
+      --yellow: #ffd867;
+      --radius: 22px;
+      --shadow: 0 18px 45px rgba(28, 42, 78, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+      line-height: 1.72;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 720px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 83% 15%, rgba(32, 201, 151, .8) 0 7%, transparent 7.3%),
+        radial-gradient(circle at 91% 27%, rgba(255, 216, 103, .9) 0 4%, transparent 4.3%),
+        linear-gradient(135deg, #1a2241 0%, #1839a3 55%, #315bea 100%);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -10vw;
+      bottom: -28vw;
+      width: 60vw;
+      height: 60vw;
+      border: 2px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      align-content: center;
+      min-height: 720px;
+      padding: 90px 0 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 24px;
+      color: #bfcaff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .18em;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(52px, 9vw, 108px);
+      line-height: .98;
+      letter-spacing: -.06em;
+    }
+
+    .hero-copy {
+      max-width: 740px;
+      margin: 34px 0 0;
+      color: rgba(255,255,255,.84);
+      font-size: clamp(19px, 2.4vw, 27px);
+      line-height: 1.55;
+      letter-spacing: -.025em;
+    }
+
+    .hero-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 46px;
+    }
+
+    .hero-flow span {
+      padding: 9px 15px;
+      border: 1px solid rgba(255,255,255,.23);
+      border-radius: 999px;
+      background: rgba(255,255,255,.09);
+      font-size: 14px;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+
+    main { padding: 70px 0 100px; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: -128px 0 88px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .summary-card {
+      min-height: 196px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card small {
+      display: block;
+      margin-bottom: 15px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: 29px;
+      line-height: 1.24;
+      letter-spacing: -.04em;
+    }
+
+    .summary-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    section { margin-top: 94px; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 34px;
+    }
+
+    .section-no {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+
+    h2 {
+      max-width: 800px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -.055em;
+    }
+
+    .lead {
+      max-width: 810px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .role-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .panel {
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 10px 30px rgba(22,35,66,.04);
+    }
+
+    .panel h3 {
+      margin: 0 0 20px;
+      color: var(--blue);
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+
+    .panel ul,
+    .fit-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .panel li,
+    .fit-list li {
+      position: relative;
+      margin-top: 13px;
+      padding-left: 22px;
+      color: #303746;
+    }
+
+    .panel li:first-child,
+    .fit-list li:first-child { margin-top: 0; }
+
+    .panel li::before,
+    .fit-list li::before {
+      position: absolute;
+      top: .74em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--mint);
+      content: "";
+    }
+
+    .blue-panel {
+      color: var(--white);
+      border-color: transparent;
+      background: var(--blue);
+    }
+
+    .blue-panel h3 { color: var(--white); }
+    .blue-panel li { color: rgba(255,255,255,.9); }
+    .blue-panel li::before { background: var(--yellow); }
+
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .metric {
+      padding: 24px 20px;
+      border-left: 1px solid var(--line);
+    }
+
+    .metric:first-child { border-left: 0; }
+
+    .metric small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 18px;
+      letter-spacing: -.025em;
+    }
+
+    .fit-grid {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 22px;
+    }
+
+    .fit-list {
+      padding: 34px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .fit-list li { margin-top: 20px; }
+
+    .must {
+      position: relative;
+      display: grid;
+      align-content: end;
+      min-height: 390px;
+      padding: 38px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .must::before {
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: var(--blue);
+      content: "";
+    }
+
+    .must b {
+      position: relative;
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.16;
+      letter-spacing: -.05em;
+    }
+
+    .must p {
+      position: relative;
+      margin: 20px 0 0;
+      color: rgba(255,255,255,.7);
+    }
+
+    .appeal {
+      margin-top: 110px;
+      padding: 78px 0 90px;
+      background: #111827;
+      color: var(--white);
+    }
+
+    .appeal .section-no { color: #8da7ff; }
+    .appeal .lead { color: rgba(255,255,255,.62); }
+
+    .appeal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .appeal-card {
+      min-height: 230px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 19px;
+      background: rgba(255,255,255,.055);
+    }
+
+    .appeal-card .num {
+      color: var(--mint);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .appeal-card h3 {
+      margin: 12px 0 13px;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -.03em;
+    }
+
+    .appeal-card p {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      font-size: 15px;
+    }
+
+    blockquote {
+      margin: 22px 0 0;
+      padding: 35px;
+      border: 0;
+      border-radius: var(--radius);
+      background: var(--blue);
+      color: var(--white);
+      font-size: clamp(24px, 3.5vw, 39px);
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: -.04em;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      background: #111827;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(calc(100% - 28px), 640px); }
+      .hero, .hero-inner { min-height: 650px; }
+      .hero-inner { padding-top: 72px; }
+      .summary-grid {
+        grid-template-columns: 1fr;
+        margin-top: -82px;
+      }
+      .summary-card { min-height: auto; }
+      main { padding-top: 44px; }
+      section { margin-top: 72px; }
+      .section-head { grid-template-columns: 1fr; gap: 8px; }
+      .role-box, .fit-grid, .appeal-grid { grid-template-columns: 1fr; }
+      .metric-strip { grid-template-columns: 1fr 1fr; }
+      .metric:nth-child(3) { border-top: 1px solid var(--line); border-left: 0; }
+      .metric:nth-child(4) { border-top: 1px solid var(--line); }
+      .panel { padding: 27px 24px; }
+      .must { min-height: 320px; }
+      .appeal { margin-top: 80px; padding-top: 65px; }
+    }
+
+    @media print {
+      body { background: var(--white); }
+      .hero { min-height: 92vh; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .hero-inner { min-height: 92vh; }
+      .summary-grid { margin-top: -100px; }
+      .panel, .summary-card, .appeal-card, .must { break-inside: avoid; }
+      .appeal { break-before: page; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  @media (max-width: 760px) { h1 { font-size: clamp(38px, 8.2vw, 60px); line-height: 1.12; overflow-wrap: anywhere; } }
+.hero-inner > *, .section-head > *, .panel, .summary-card, .appeal-card { min-width: 0; overflow-wrap: anywhere; }
+</style>
+  <meta name="robots" content="noindex">
+</head>
+<body><header class="hero"><div class="wrap hero-inner"><p class="eyebrow">Cre8orClub · 채용</p><h1>콘텐츠·캠페인<br>기획자</h1><p class="hero-copy">콘텐츠와 채널을 운영하고 캠페인·이벤트를 실행합니다. 이를 알리는 광고를 운영하며 유입과 참여 성과를 함께 확인합니다.</p><div class="hero-flow" aria-label="마케팅에서 살펴볼 사용자 흐름"><span>콘텐츠·캠페인</span><span>→</span><span>채널·광고</span><span>→</span><span>유입·참여</span></div></div></header><main><div class="wrap"><div class="summary-grid" aria-label="핵심 업무 요약"><article class="summary-card"><small>콘텐츠·채널</small><strong>콘텐츠 기획과 채널 운영</strong><p>채널에 맞는 콘텐츠를 꾸준히 발행하고 이용자와 소통합니다.</p></article><article class="summary-card"><small>캠페인·이벤트</small><strong>기획부터 실행까지</strong><p>목표와 참여 방식을 정하고 제작·홍보·현장 운영을 조율합니다.</p></article><article class="summary-card"><small>광고·성과</small><strong>광고 운영과 유입 추적</strong><p>콘텐츠와 캠페인을 광고로 알리고 유입·가입·참여 성과를 확인합니다.</p></article></div><section><div class="section-head"><span class="section-no">01 · 역할</span><div><h2>콘텐츠·캠페인 실행과 광고·유입 성과 관리</h2><p class="lead">Cre8orClub은 크리에이터가 작업물을 소개하고 함께할 사람을 만나는 서비스입니다. 기획팀에서 콘텐츠·채널 운영과 캠페인·이벤트를 맡습니다. 서비스 목표와 크리에이터의 관심을 바탕으로 무엇을, 왜 할지 제안하고, 참여 방식·콘텐츠·일정·예산을 구체화해 실행합니다. 이를 알리는 광고 운영과 유입·참여 성과 확인도 함께 맡습니다.</p></div></div></section><section><div class="section-head"><span class="section-no">02 · 주요 업무 1</span><div><h2>콘텐츠·채널 운영과 캠페인·이벤트 실행</h2><p class="lead">크리에이터가 관심을 갖고 참여할 콘텐츠와 캠페인을 기획합니다. 콘텐츠 발행부터 이용자 소통, 이벤트 실행까지 맡고 반응을 다음 기획에 반영합니다.</p></div></div><div class="role-box"><article class="panel"><h3>콘텐츠와 채널 운영</h3><ul><li>채널별 목적과 이용자 특성에 맞춰 콘텐츠 주제·형식·발행 일정을 정합니다.</li><li>SNS 등 서비스의 운영 채널에 콘텐츠를 발행하고 댓글·메시지로 이용자와 소통합니다.</li><li>앱에서 확인한 이용 사례와 크리에이터의 이야기를 외부 콘텐츠로 기획합니다.</li><li>이미지·영상·문구를 기획하고 제작 담당자와 협업해 콘텐츠를 완성합니다.</li><li>콘텐츠별 반응과 유입을 살펴보고 주제·형식·운영 방식을 개선합니다.</li></ul></article><article class="panel"><h3>캠페인과 이벤트 실행</h3><ul><li>목표·대상·콘셉트·참여 방식·일정·예산을 정하고 실행안을 만듭니다.</li><li>내부 제작팀, 외부 파트너와 역할·일정을 조율합니다.</li><li>사전 홍보부터 참여 안내, 진행 중 소통과 현장 운영, 종료 후 결과 정리까지 맡습니다.</li><li>진행 중 발생하는 문제를 해결하고 참여자 반응에 맞춰 운영 방식을 조정합니다.</li><li>실행 결과와 참여자 반응을 정리해 다음 콘텐츠와 캠페인에 반영합니다.</li></ul></article></div></section><section><div class="section-head"><span class="section-no">03 · 주요 업무 2</span><div><h2>광고 운영과 유입 성과 추적</h2><p class="lead">콘텐츠·캠페인·이벤트를 알리는 광고를 함께 운영합니다. 광고 클릭이나 설치 수와 함께 가입 전환과 유입 후 참여를 확인하고, 성과에 따라 매체·소재·예산을 조정합니다.</p></div></div><div class="role-box"><article class="panel"><h3>광고 기획과 운영</h3><ul><li>콘텐츠와 캠페인의 목표에 맞춰 광고 타깃·매체·예산·일정을 정합니다.</li><li>광고 메시지와 이미지·영상 소재를 기획하고 제작 담당자와 협업합니다.</li><li>광고를 집행하고 매체·소재별 성과에 따라 예산과 운영 방식을 조정합니다.</li><li>대행사와 협업할 때는 목표·소재·운영 방향을 전달하고 결과를 검토합니다.</li><li>광고에서 전달한 내용이 유입 후 화면과 참여 과정에서도 이어지는지 점검합니다.</li></ul></article><article class="panel"><h3>성과 추적과 개선</h3><ul><li>콘텐츠·캠페인·광고별 목표 지표를 정하고, 필요한 데이터를 제품·개발팀과 협의합니다.</li><li>채널·매체·소재별 유입과 비용, 설치·가입 전환, 유입 후 활동과 캠페인 참여를 분석합니다.</li><li>사용자 반응과 행동 데이터를 바탕으로 광고와 유입 후 경험을 개선합니다.</li><li>실험할 항목과 판단 기준을 정하고 결과에 따라 다음 실행을 결정합니다.</li><li>성과 보고에는 결과와 원인에 대한 판단, 다음에 바꿀 내용을 함께 담습니다.</li></ul></article></div></section><section><div class="section-head"><span class="section-no">04 · 자격 요건</span><div><h2>이런 분을 찾습니다</h2><p class="lead">서비스 목표와 사용자에 대한 이해를 바탕으로 기획하고 실행할 수 있는 분을 찾습니다. 광고 운영 경험과 함께, 자신의 판단이 어떤 결과로 이어졌는지 설명할 수 있어야 합니다.</p></div></div><article class="panel"><h3>필요한 경험과 역량</h3><ul><li>목표와 사용자에 대한 이해를 바탕으로 아이디어를 구체적인 실행안으로 만들 수 있는 분</li><li>디지털 광고를 직접 운영하고 성과를 개선해 본 분</li><li>목표에 맞춰 매체·타깃·예산·소재를 정하고 조정할 수 있는 분</li><li>유입 비용과 전환 데이터를 분석하고 다음 실행을 제안할 수 있는 분</li><li>광고 소재를 기획하고 제작 담당자나 외부 파트너와 협업할 수 있는 분</li><li>목표를 바탕으로 우선순위를 정하고 실행부터 결과 확인까지 맡을 수 있는 분</li></ul></article></section></div><section class="appeal"><div class="wrap"><div class="section-head"><span class="section-no">05 · 우대사항</span><div><h2>이런 경험이 있다면 더 좋습니다</h2><p class="lead">아래 경험은 크리에이터를 이해하고 마케팅을 실행하는 데 도움이 됩니다. 모두 갖추어야 하는 조건은 아닙니다.</p></div></div><div class="appeal-grid"><article class="appeal-card"><span class="num">01</span><h3>개인 콘텐츠·채널 운영</h3><p>인스타툰·유튜브·SNS 등을 직접 기획하고 꾸준히 운영하며, 이용자 반응을 보고 콘텐츠를 개선한 경험</p></article><article class="appeal-card"><span class="num">02</span><h3>창작 활동과 협업</h3><p>음악·디자인·영상 등 창작 활동에 참여하고, 다른 창작자와 작업물을 완성한 경험</p></article><article class="appeal-card"><span class="num">03</span><h3>행사·참여 프로그램 운영</h3><p>공연·행사·커뮤니티·서포터즈 등에서 참여자를 모집하고 역할·일정·현장을 조율한 경험</p></article><article class="appeal-card"><span class="num">04</span><h3>크리에이터 섭외와 소통</h3><p>캠페인에 맞는 크리에이터를 찾아 제안하고, 참여와 협업을 이끌어 낸 경험</p></article><article class="appeal-card"><span class="num">05</span><h3>이미지·영상 직접 제작</h3><p>광고나 콘텐츠에 쓸 이미지·영상을 직접 만들고, 아이디어를 시안으로 빠르게 구체화한 경험</p></article><article class="appeal-card"><span class="num">06</span><h3>앱 마케팅과 전환 개선</h3><p>앱 광고, 앱스토어 최적화(ASO), 가입 전환이나 재방문을 높이는 실험을 해 본 경험</p></article></div></div></section></main><footer><div class="wrap">Cre8orClub · 콘텐츠·캠페인 기획자</div></footer></body></html>
