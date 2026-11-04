@@ -84,399 +84,411 @@ footer{padding:32px 0 56px;color:var(--fg3);font-size:13px}
 <div class="cover"><div class="container">
 <p class="eyebrow">크리에이터클럽 · 26.46.0 · 앱푸시 · 알림 목록 · 알림 설정</p>
 <h1>26.46.0 알림 정책 최종안</h1>
-<p class="lede">26.46.0에서 앱이 보내는 모든 알림의 받는 사람, 보내는 때, 앱푸시를 끄는 곳, 눌렀을 때 열리는 화면을 정리했습니다. 기존 알림과 프로젝트·팀이 클럽으로 옮겨 오면서 새로 생기거나 바뀌는 알림을 함께 담았습니다. 알림마다 카드 하나로 정리하되, 문구가 같은 알림은 한 카드로 묶었습니다. 「보기」에서 「새로」·「바뀜」을 고르면 26.46.0 변경분만 볼 수 있습니다.</p>
+<p class="lede">26.46.0에서 앱이 보내는 모든 알림의 받는 사람, 보내는 때, 앱푸시를 끄는 곳, 눌렀을 때 열리는 화면을 정리했습니다. 기존 알림과 프로젝트·팀이 클럽으로 옮겨 오면서 새로 생기거나 바뀌는 알림을 함께 담았습니다. 알림마다 카드 하나로 정리하되, 문구가 같은 알림은 한 카드로 묶었습니다. 「보기」에서 「신규」·「변경」을 고르면 26.46.0 변경분만 볼 수 있습니다.</p>
 <div class="meta"><span>버전 26.46.0</span><span>최종 업데이트 2026-11-04</span><span>기준 앱 정본 c94f78c (2026-11-03)</span><span>이전 기준 앱푸시 알림 정본 v26.42.0</span></div>
-<div class="stats"><div class="stat"><b>70</b><span>26.46.0 알림 (카드 64장)</span></div><div class="stat n"><b>22</b><span>새로 보내는 알림</span></div><div class="stat m"><b>22</b><span>바뀌는 알림</span></div><div class="stat"><b>26</b><span>그대로 두는 알림</span></div></div>
+<div class="stats"><div class="stat"><b>72</b><span>26.46.0 알림 (카드 66장)</span></div><div class="stat n"><b>24</b><span>신규 알림</span></div><div class="stat m"><b>22</b><span>변경 알림</span></div><div class="stat"><b>26</b><span>유지 알림</span></div></div>
 </div></div>
 <nav class="nav"><div><a href="#rules">핵심 규칙</a><a href="#layers">앱푸시가 가는 조건</a><a href="#settings">알림 설정</a><a href="#menus">메뉴에서 끄기</a><a href="#feed">포트폴리오</a><a href="#people">사람</a><a href="#news">소식</a><a href="#project">프로젝트</a><a href="#post">게시글</a><a href="#schedule">일정</a><a href="#team">팀</a><a href="#chat">노크</a><a href="#system">시스템</a><a href="#nosend">보내지 않는 것</a><a href="#archived">보관한 알림</a><a href="#dev">개발·서버 확인</a></div></nav>
 <section id="rules" class="section"><div class="container"><div class="sec-head"><span class="sec-num">01</span><h2>핵심 규칙</h2></div><p class=sec-note>모든 알림 판단에 앞서는 원칙입니다.</p><ol class="rules"><li><span class="rn">01</span><div><h3>스위치는 앱푸시만 막습니다</h3><p>앱 설정, 프로젝트·팀 설정, 채팅방 알림 버튼 중 어느 것을 꺼도 <b>앱푸시만</b> 오지 않습니다. 알림 목록에 남는 알림은 그대로 남습니다. 지금 정책과 같습니다.</p></div></li><li><span class="rn">02</span><div><h3>앱 설정 스위치 = 알림 목록 탭</h3><p>각 알림의 앱푸시는 <b>그 알림이 표시되는 목록 탭과 같은 이름의 스위치</b>로 켜고 끕니다. 반응 탭은 반응, 관계 탭은 관계, 소식 탭은 소식 스위치입니다. 채티 스위치는 목록에 남지 않는 채팅방 알림만 맡습니다.</p></div></li><li><span class="rn">03</span><div><h3>「프로젝트」 줄과 탭은 만들지 않습니다</h3><p>앱 설정과 알림 목록은 알림을 <b>종류</b>로 나눕니다. 프로젝트마다 끄고 켜는 일은 <b>프로젝트 설정의 스위치 셋</b>이 맡습니다.</p></div></li><li><span class="rn">04</span><div><h3>지목·결과 알림은 메뉴에서 끌 수 없습니다</h3><p>지원·수락·거절·내보내기·종료·나감 알림의 앱푸시는 <b>프로젝트·팀 설정 스위치가 꺼져 있어도</b> 보냅니다. 앱 설정의 관계 스위치로만 끕니다.</p></div></li><li><span class="rn">05</span><div><h3>라벨은 「팀」만 새로 만듭니다</h3><p>프로젝트 게시판·일정 알림은 <b>「프로젝트」</b> 라벨을 씁니다. 댓글·답글은 「댓글」, 멘션은 「멘션」, 좋아요는 「좋아요」로 기존 라벨을 씁니다.</p></div></li><li><span class="rn">06</span><div><h3>링크는 하나, 화면은 보는 사람에 따라</h3><p>프로젝트·팀으로 가는 알림은 <b>링크 하나</b>로 보냅니다. 앱은 알림을 누른 사람의 참여 상태에 따라 프로젝트 메인이나 모집 공고를 엽니다. 팀 지원 수락과 팀 해체 알림은 팀 채팅방으로 갑니다.</p></div></li><li><span class="rn">07</span><div><h3>알림을 만들 때의 스위치 값으로 판단합니다</h3><p>스위치를 다시 켜도 꺼져 있던 동안의 앱푸시를 뒤늦게 보내지 않습니다. 일정 전날 안내는 <b>발송 시점의 스위치 설정</b>에 따라 앱푸시를 보낼지 판단합니다. 이미 보낸 알림은 원글이 지워져도 회수하지 않습니다.</p></div></li><li><span class="rn">08</span><div><h3>나만 보기는 알리지 않습니다</h3><p>나만 보기로 올린 게시글과 일정은 <b>어떤 알림도 보내지 않습니다</b>.</p></div></li></ol></div></section>
 <section id="layers" class="section alt"><div class="container"><div class="sec-head"><span class="sec-num">02</span><h2>앱푸시가 가는 조건</h2></div><p class=sec-note>앱푸시는 세 단계를 차례로 확인해 보냅니다.</p><div class="layers"><div class="layer"><span class="ln">1</span><div><b>휴대폰 OS 알림 권한</b><span class="lw">휴대폰 설정 · 처음 한 번 켜 두는 것</span><p>휴대폰에서 알림 권한을 끄면 Cre8orClub 앱푸시를 모두 받을 수 없습니다</p></div></div><div class="layer"><span class="ln">2</span><div><b>앱 설정 「알림 설정」</b><span class="lw">푸시 알림 받기 · 반응 · 관계 · 소식 · 채티 · 휴대폰 권한과 따로 저장</span><p>「푸시 알림 받기」를 끄면 모든 앱푸시를 받을 수 없습니다. 반응·관계·소식·채티 스위치를 각각 끄면 해당 종류의 앱푸시를 받을 수 없습니다</p></div></div><div class="layer"><span class="ln">3</span><div><b>메뉴 스위치</b><span class="lw">프로젝트 설정 · 팀 설정 · 채팅방 알림 버튼 · 사람·팀 더보기</span><p>메뉴 스위치를 끄면 해당 프로젝트·팀·채팅방·사람의 앱푸시만 받을 수 없습니다</p></div></div></div><div class="osbox"><h3>휴대폰 권한과 앱 설정은 연동하지 않습니다</h3><ul><li><b>휴대폰 권한은 한 번 켜 두는 것</b><span>휴대폰 알림 권한은 처음 한 번 요청합니다. 권한을 켠 뒤에는 앱 안 설정에서 알림을 켜고 끕니다. 휴대폰 권한과 앱 설정 값은 따로 저장하며, 한쪽을 바꿔도 다른 쪽은 바뀌지 않습니다. 「푸시 알림 받기」는 서버에 저장합니다.</span></li><li><b>한 번도 요청하지 않았을 때</b><span>스위치를 켜면 안내 팝업 없이 휴대폰의 알림 권한 요청 창을 바로 띄웁니다.</span></li><li><b>앱 설정은 켜져 있는데 휴대폰에서 권한을 껐을 때</b><span>앱 설정 값은 켜진 그대로 둡니다. 휴대폰 알림 권한을 다시 켜면 기존 앱 설정에 따라 앱푸시를 바로 받습니다. 앱이 열릴 때는 권한 상태만 확인하며, 별도 팝업은 띄우지 않습니다.</span></li><li><b>알림 설정 화면에 들어왔을 때</b><span>휴대폰 권한이 꺼져 있는 동안에는 화면 맨 위에 「Cre8orClub 알림이 꺼져 있어요」 안내 띠와 [설정으로 이동] 버튼을 계속 보여 줍니다. 스위치는 앱 설정 값대로 보입니다. 다른 화면에는 띠를 띄우지 않습니다.</span></li><li><b>휴대폰 권한이 꺼진 상태에서 스위치를 켤 때</b><span>앱 설정이나 프로젝트·팀 설정의 스위치, 채팅방 알림 버튼을 켜면 아래 1번 팝업을 띄웁니다. 끌 때는 휴대폰 알림 권한과 관계없이 해당 설정을 바로 끕니다.</span></li></ul></div><p class="foot">세 단계에서 해당 알림을 허용해야 앱푸시를 받을 수 있습니다. 어느 단계에서 앱푸시를 꺼도 <b>알림 목록에는 그대로 남습니다</b>(채팅방 알림은 원래 목록에 남지 않습니다).</p><h3 class="sub">스위치를 켰는데 위 단계가 꺼져 있으면</h3><p class="sec-note">앱 설정 스위치를 켤 때는 1번 팝업을, 메뉴 스위치를 켤 때는 조건에 따라 1·2·3번 팝업 중 하나를 띄웁니다. 켠 스위치는 켜진 상태로 유지됩니다. 팝업에서는 앱푸시를 받을 수 없는 이유와 알림을 켤 수 있는 설정 화면을 안내합니다. 끌 때는 안내하지 않습니다. 여러 단계가 꺼져 있으면 1→2→3 순서로 확인해, 처음 꺼져 있는 단계의 안내 팝업만 표시합니다.</p><div class="guides"><div class="guide"><p class="gw">1. 휴대폰 OS 알림 권한이 꺼져 있을 때</p><div class="pop"><b>Cre8orClub 알림이 꺼져 있어요</b><p>알림을 받으려면 휴대폰 설정에서 Cre8orClub 알림을 켜 주세요.</p><div class="btns"><span>닫기</span><span class="pri">설정으로 이동</span></div></div><p class="gg"><em>버튼을 누르면</em>휴대폰 설정의 Cre8orClub 알림 화면</p></div><div class="guide"><p class="gw">2. 앱 설정 「푸시 알림 받기」가 꺼져 있을 때</p><div class="pop"><b>푸시 알림이 꺼져 있어요</b><p>알림을 받으려면 알림 설정에서 「푸시 알림 받기」를 켜 주세요.</p><div class="btns"><span>닫기</span><span class="pri">알림 설정으로 이동</span></div></div><p class="gg"><em>버튼을 누르면</em>앱 설정 「알림 설정」</p></div><div class="guide"><p class="gw">3. 켠 스위치에 묶인 앱 설정 스위치가 모두 꺼져 있을 때</p><div class="pop"><b><span class="v">{소식}</span> 알림이 꺼져 있어요</b><p>알림을 받으려면 알림 설정에서 <span class="v">{소식}</span> 알림을 켜 주세요.</p><div class="btns"><span>닫기</span><span class="pri">알림 설정으로 이동</span></div></div><p class="gg"><em>버튼을 누르면</em>앱 설정 「알림 설정」</p></div></div><div class="bind"><p class="gw">3번 안내 조건을 판단할 때 확인하는 앱 설정 스위치</p><ul><li><b>프로젝트 설정 「게시판」·「일정」</b><span>소식 · 반응 — 두 스위치가 모두 꺼져 있을 때만 안내합니다. 팝업 제목은 「소식·반응 알림이 꺼져 있어요」입니다</span></li><li><b>프로젝트 설정 「채팅방」 · 팀 설정 「팀 채팅 새 메시지」 · 채팅방 알림 버튼</b><span>채티</span></li><li><b>팀 설정 「팀 포트폴리오 새 게시물」 · 사람·팀 더보기 「알림 켜짐」</b><span>소식</span></li></ul></div></div></section>
-<section id="settings" class="section"><div class="container"><div class="sec-head"><span class="sec-num">03</span><h2>앱 설정 · 알림 설정</h2></div><p class=sec-note>스위치 이름은 알림 목록의 탭 이름과 같습니다. 스위치를 끄면 그 스위치에 묶인 알림의 앱푸시가 오지 않습니다.</p><div class="setgrid"><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>반응 알림</b><span>댓글과 좋아요 등 반응을 알려드려요</span></div></div><div class="setinfo"><span class="st st-same">그대로</span><p><em>끄면 앱푸시가 오지 않는 알림</em>포트폴리오·영감의 리스펙트·멘션·댓글·답글·공감 + 게시글·일정의 댓글·답글·좋아요·댓글 좋아요·멘션 + 노트 댓글·답글 좋아요</p></div></div><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>관계 알림</b><span>노크·팔로우·지원 등 새로운 연결을 알려드려요</span></div></div><div class="setinfo"><span class="st st-mod">바뀜 · 지금 「프로필 방문과 팔로우 등 새로운 연결을 알려드려요」</span><p><em>끄면 앱푸시가 오지 않는 알림</em>기존 팔로우·일촌·프로필 방문 + 노크 도착·수락 + 프로젝트 지원·수락·거절·내보내기·종료·멤버 나감 + 팀 초대·지원·나감·내보내기·해체·팔로우 받음</p></div></div><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>소식 알림</b><span>내 성과와 팔로우한 유저의 새 소식을 알려드려요</span></div></div><div class="setinfo"><span class="st st-same">그대로</span><p><em>끄면 앱푸시가 오지 않는 알림</em>기존 새 포트폴리오·새 프로젝트·GOAT·Weekly Best + 팀 포트폴리오 + 새 게시글·새 공지·새 일정·일정 수정·삭제·전날 안내</p></div></div><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>채티 알림</b><span>채팅방의 새 메시지를 알려드려요</span></div></div><div class="setinfo"><span class="st st-mod">바뀜 · 지금 「새 대화 요청과 수락, 새 메시지를 알려드려요」</span><p><em>끄면 앱푸시가 오지 않는 알림</em>채팅방 새 메시지(노트·공지·공유 포함) · 새 멤버 입장</p></div></div></div><p class="foot">휴대폰 알림 권한이 꺼져 있으면 이 화면 맨 위에 「Cre8orClub 알림이 꺼져 있어요」 안내와 [설정으로 이동] 버튼이 보입니다. 휴대폰 알림 권한이 꺼진 상태에서 스위치를 켜면 휴대폰 설정으로 안내하는 팝업이 뜨고, 끌 때는 바로 꺼집니다. 맨 위의 「푸시 알림 받기」를 끄면 반응·관계·소식·채티 스위치가 켜져 있어도 모든 앱푸시를 받지 않습니다. 알림 목록에는 반응·관계·소식 세 탭과 「전체」 칩이 있고, 채티 알림은 목록에 남지 않습니다.</p></div></section>
+<section id="settings" class="section"><div class="container"><div class="sec-head"><span class="sec-num">03</span><h2>앱 설정 · 알림 설정</h2></div><p class=sec-note>스위치 이름은 알림 목록의 탭 이름과 같습니다. 스위치를 끄면 그 스위치에 묶인 알림의 앱푸시가 오지 않습니다.</p><div class="setgrid"><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>반응 알림</b><span>댓글과 좋아요 등 반응을 알려드려요</span></div></div><div class="setinfo"><span class="st st-same">유지</span><p><em>끄면 앱푸시가 오지 않는 알림</em>포트폴리오·영감의 리스펙트·멘션·댓글·답글·공감 + 게시글·일정의 댓글·답글·좋아요·댓글 좋아요·멘션 + 노트 댓글·답글·댓글 좋아요</p></div></div><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>관계 알림</b><span>노크·팔로우·지원 등 새로운 연결을 알려드려요</span></div></div><div class="setinfo"><span class="st st-mod">변경 · 지금 「프로필 방문과 팔로우 등 새로운 연결을 알려드려요」</span><p><em>끄면 앱푸시가 오지 않는 알림</em>기존 팔로우·일촌·프로필 방문 + 노크 도착·수락 + 프로젝트 지원·수락·거절·내보내기·종료·멤버 나감 + 팀 초대·지원·나감·내보내기·해체·팔로우 받음</p></div></div><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>소식 알림</b><span>내 성과와 팔로우한 유저의 새 소식을 알려드려요</span></div></div><div class="setinfo"><span class="st st-same">유지</span><p><em>끄면 앱푸시가 오지 않는 알림</em>기존 새 포트폴리오·새 프로젝트·GOAT·Weekly Best + 팀 포트폴리오 + 새 게시글·새 공지·새 일정·일정 수정·삭제·전날 안내</p></div></div><div class="setrow"><div class="sw"><span class="toggle"></span><div><b>채티 알림</b><span>채팅방의 새 메시지를 알려드려요</span></div></div><div class="setinfo"><span class="st st-mod">변경 · 지금 「새 대화 요청과 수락, 새 메시지를 알려드려요」</span><p><em>끄면 앱푸시가 오지 않는 알림</em>채팅방 새 메시지(노트·공지·공유 포함) · 새 멤버 입장</p></div></div></div><p class="foot">휴대폰 알림 권한이 꺼져 있으면 이 화면 맨 위에 「Cre8orClub 알림이 꺼져 있어요」 안내와 [설정으로 이동] 버튼이 보입니다. 휴대폰 알림 권한이 꺼진 상태에서 스위치를 켜면 휴대폰 설정으로 안내하는 팝업이 뜨고, 끌 때는 바로 꺼집니다. 맨 위의 「푸시 알림 받기」를 끄면 반응·관계·소식·채티 스위치가 켜져 있어도 모든 앱푸시를 받지 않습니다. 알림 목록에는 반응·관계·소식 세 탭과 「전체」 칩이 있고, 채티 알림은 목록에 남지 않습니다.</p></div></section>
 <section id="menus" class="section alt"><div class="container"><div class="sec-head"><span class="sec-num">04</span><h2>메뉴에서 끄기</h2></div><p class=sec-note>프로젝트·팀·채팅방·사람마다 따로 끄는 스위치입니다. 켤 때 위 단계가 꺼져 있으면 02의 안내 팝업을 띄웁니다.</p><div class="menus"><div class="menu"><h3>프로젝트 설정</h3><p class="msub">멤버·리더 같음 · 세 스위치 모두 기본 켬</p><ul><li><b>게시판</b><span>새 게시글 · 새 공지 · 게시글 댓글 · 답글 · 좋아요 · 댓글 좋아요 · 멘션</span></li><li><b>일정</b><span>새 일정 · 일정 수정 · 일정 삭제 · 전날 안내 · 일정 댓글 · 답글 · 좋아요 · 댓글 좋아요 · 멘션</span></li><li><b>채팅방</b><span>프로젝트 채팅방 새 메시지 · 새 멤버 입장. 채팅방 메뉴의 알림 버튼과 같은 값입니다</span></li></ul><p class="keep">계속 받는 알림: 지원 도착·수락·거절, 내보내기, 종료, 멤버 나감</p><p class="mnote">스위치 아래 설명: 「끄면 이 프로젝트의 새 글·일정·채팅 푸시 알림이 꺼져요. 지원·참여 결과 알림은 계속 받아요.」 프로젝트에서 나가거나 내보내진 경우에는 그 사용자의 프로젝트 알림 설정값을 삭제합니다. 다시 참여하면 세 스위치를 모두 켬으로 설정합니다.</p></div><div class="menu"><h3>팀 설정</h3><p class="msub">관리자·팀원 같음 · 두 스위치 모두 기본 켬</p><ul><li><b>팀 포트폴리오 새 게시물</b><span>팀원에게 가는 「팀 포트폴리오 등록」 앱푸시를 켜고 끕니다. 이 스위치를 꺼도 팀원에게 팀 팔로워 알림이나 팔로우한 사람의 새 포트폴리오 알림을 대신 보내지 않습니다</span></li><li><b>팀 채팅 새 메시지</b><span>팀 채팅방 새 메시지 · 팀 새 멤버 입장. 팀 채팅방 메뉴의 알림 버튼과 같은 값입니다</span></li></ul><p class="keep">계속 받는 알림: 초대 수락·거절, 팀원 나감, 팀 지원, 내보내기, 해체, 팀 팔로우 받음</p></div><div class="menu"><h3>채팅방 알림 버튼</h3><p class="msub">1:1 · 오픈채팅 · 프로젝트 · 팀 모든 채팅방에서 같음</p><ul><li><b>알림 끄기</b><span>그 방의 새 메시지(노트·공지·공유 포함)와 새 멤버 입장</span></li></ul></div><div class="menu"><h3>사람·팀 더보기 「알림 켜짐/꺼짐」</h3><p class="msub">팔로우 중일 때만 더보기 메뉴 맨 앞에 보임</p><ul><li><b>사람</b><span>그 사람이 올린 새 포트폴리오·새 프로젝트 알림의 앱푸시를 켜고 끕니다. 이 스위치를 꺼도 그 사람의 댓글·좋아요·노크·메시지 알림은 계속 받습니다</span></li><li><b>팀</b><span>그 팀이 올린 새 포트폴리오 알림(팀 팔로워에게 가는 알림)의 앱푸시를 켜고 끕니다. 팀원에게 가는 「팀 포트폴리오 등록」은 팀 설정에서 켜고 끕니다</span></li></ul></div></div></div></section>
 <div class="filterwrap"><div class="filters" id="filters"><span class="fl">보기</span>
-<button class="f on" data-k="all">전체 64</button><button class="f" data-k="new">새로 22</button><button class="f" data-k="mod">바뀜 21</button><button class="f" data-k="same">그대로 21</button>
+<button class="f on" data-k="all">전체 66</button><button class="f" data-k="new">신규 24</button><button class="f" data-k="mod">변경 21</button><button class="f" data-k="same">유지 21</button>
 <span class="fl">탭</span><button class="t on" data-t="all">전체</button><button class="t" data-t="반응">반응</button><button class="t" data-t="관계">관계</button><button class="t" data-t="소식">소식</button><button class="t" data-t="없음">목록에 안 남음</button>
 <input id="q" type="search" placeholder="알림 이름·받는 사람 검색"></div></div>
 <section id="feed" class="alertsec section"><div class="container"><div class="sec-head"><span class="sec-num">05</span><h2>포트폴리오 · 영감</h2></div><p class=sec-note>내 포트폴리오와 영감에 생긴 반응입니다. 모두 반응 탭에 들어가고 앱푸시는 앱 설정 「반응 알림」으로 끕니다. 26.46.0에서 바뀌는 것은 없습니다.</p><div class="cards"><article class="card" data-kind="same" data-tab="반응" data-s="#3 리스펙트 포트폴리오를 올린 사람(팀 포트폴리오는 팀원 전체) 포트폴리오에 리스펙트가 왔을 때. 여러 메시지를 한 번에 보내면 앱푸시는 한 번만 보내고, 알림 목록에는 메시지마다 한 건씩 남깁니다. 리스펙트를 취소하면 알림 목록에서 지웁니다 반응 리스펙트 반응 ">
-<header><h3>리스펙트</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #3</span></header>
+<header><h3>리스펙트</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #3</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>리스펙트</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>포트폴리오를 올린 사람(팀 포트폴리오는 팀원 전체)</dd><dt>보내는 때</dt><dd>포트폴리오에 리스펙트가 왔을 때. 여러 메시지를 한 번에 보내면 앱푸시는 한 번만 보내고, 알림 목록에는 메시지마다 한 건씩 남깁니다. 리스펙트를 취소하면 알림 목록에서 지웁니다</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 리스펙트를 보냈어요.<br>팀 포트폴리오: 팀 포폴에 <span class="v">{활동명}</span>님이 리스펙트를 보냈어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">리스펙트</span><p><span class="v">{활동명}</span>님이 리스펙트를 보냈어요.<br>&quot;<span class="v">{리스펙트 메시지}</span>&quot;</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#4 · #5 포트폴리오·영감 멘션 언급된 사람 포트폴리오나 영감 게시물에서 나를 언급했을 때 반응 멘션 반응 ">
-<header><h3>포트폴리오·영감 멘션</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #4 · #5</span></header>
+<header><h3>포트폴리오·영감 멘션</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #4 · #5</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>멘션</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>언급된 사람</dd><dt>보내는 때</dt><dd>포트폴리오나 영감 게시물에서 나를 언급했을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세 또는 영감 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 게시물에서 나를 언급했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">멘션</span><p><span class="v">{활동명}</span>님이 게시물에서 나를 언급했어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#8 포트폴리오 댓글 포트폴리오를 올린 사람 내 포트폴리오에 댓글이 달렸을 때 반응 댓글 반응 ">
-<header><h3>포트폴리오 댓글</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #8</span></header>
+<header><h3>포트폴리오 댓글</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #8</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>포트폴리오를 올린 사람</dd><dt>보내는 때</dt><dd>내 포트폴리오에 댓글이 달렸을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 포트폴리오에 댓글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 내 포트폴리오에 댓글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#7 영감 댓글 영감을 올린 사람 내 영감에 댓글이 달렸을 때 반응 댓글 반응 ">
-<header><h3>영감 댓글</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #7</span></header>
+<header><h3>영감 댓글</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #7</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>영감을 올린 사람</dd><dt>보내는 때</dt><dd>내 영감에 댓글이 달렸을 때</dd><dt>누르면 이동</dt><dd>영감 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 영감에 댓글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 내 영감에 댓글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#9 · #11 내 댓글에 답글 댓글 쓴 사람 포트폴리오나 영감에 단 내 댓글에 답글이 달렸을 때 반응 댓글 반응 ">
-<header><h3>내 댓글에 답글</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #9 · #11</span></header>
+<header><h3>내 댓글에 답글</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #9 · #11</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>댓글 쓴 사람</dd><dt>보내는 때</dt><dd>포트폴리오나 영감에 단 내 댓글에 답글이 달렸을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세 또는 영감 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 댓글에 답글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 내 댓글에 답글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#10 포트폴리오 답글 · 글쓴이에게 포트폴리오를 올린 사람 내 포트폴리오의 댓글에 답글이 달렸을 때 반응 댓글 반응 ">
-<header><h3>포트폴리오 답글 · 글쓴이에게</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #10</span></header>
+<header><h3>포트폴리오 답글 · 글쓴이에게</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #10</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>포트폴리오를 올린 사람</dd><dt>보내는 때</dt><dd>내 포트폴리오의 댓글에 답글이 달렸을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 포트폴리오에 답글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 내 포트폴리오에 답글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#12 영감 답글 · 글쓴이에게 영감을 올린 사람 내 영감의 댓글에 답글이 달렸을 때 반응 댓글 반응 ">
-<header><h3>영감 답글 · 글쓴이에게</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #12</span></header>
+<header><h3>영감 답글 · 글쓴이에게</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #12</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>영감을 올린 사람</dd><dt>보내는 때</dt><dd>내 영감의 댓글에 답글이 달렸을 때</dd><dt>누르면 이동</dt><dd>영감 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 영감에 답글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 내 영감에 답글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#13 · #14 · #15 · #16 댓글·답글 공감 댓글·답글 쓴 사람 포트폴리오나 영감에 단 내 댓글·답글에 공감했을 때 반응 좋아요 반응 ">
-<header><h3>댓글·답글 공감</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #13 · #14 · #15 · #16</span></header>
+<header><h3>댓글·답글 공감</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #13 · #14 · #15 · #16</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>댓글·답글 쓴 사람</dd><dt>보내는 때</dt><dd>포트폴리오나 영감에 단 내 댓글·답글에 공감했을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세 또는 영감 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 댓글에 공감했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p><span class="v">{활동명}</span>님이 내 댓글에 공감했어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="반응" data-s="#17 영감 공감 영감을 올린 사람 내 영감에 공감했을 때 반응 좋아요 반응 ">
-<header><h3>영감 공감</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #17</span></header>
+<header><h3>영감 공감</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #17</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>영감을 올린 사람</dd><dt>보내는 때</dt><dd>내 영감에 공감했을 때</dd><dt>누르면 이동</dt><dd>영감 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 영감에 공감했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p><span class="v">{활동명}</span>님이 내 영감에 공감했어요.</p></div></div>
 </div></article></div></div></section><section id="people" class="alertsec section alt"><div class="container"><div class="sec-head"><span class="sec-num">06</span><h2>사람 · 팔로우와 일촌</h2></div><p class=sec-note>관계 탭에 들어가고 앱푸시는 앱 설정 「관계 알림」으로 끕니다. 26.46.0에서 바뀌는 것은 없습니다.</p><div class="cards"><article class="card" data-kind="same" data-tab="관계" data-s="#18 프로필 방문 프로필 주인 누군가 내 프로필을 봤을 때 관계 프로필 방문 관계 ">
-<header><h3>프로필 방문</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #18</span></header>
+<header><h3>프로필 방문</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #18</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로필 방문</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>프로필 주인</dd><dt>보내는 때</dt><dd>누군가 내 프로필을 봤을 때</dd><dt>누르면 이동</dt><dd>방문한 사람의 프로필</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 내 프로필을 확인했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로필 방문</span><p><span class="v">{활동명}</span>님이 내 프로필을 확인했어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="관계" data-s="#19 팔로우 팔로우된 사람 누군가 나를 팔로우했을 때 관계 팔로워 관계 ">
-<header><h3>팔로우</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #19</span></header>
+<header><h3>팔로우</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #19</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팔로워</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팔로우된 사람</dd><dt>보내는 때</dt><dd>누군가 나를 팔로우했을 때</dd><dt>누르면 이동</dt><dd>팔로우한 사람의 프로필</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 나를 팔로우했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팔로워</span><p><span class="v">{활동명}</span>님이 나를 팔로우했어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="관계" data-s="#20 일촌 신청 일촌 신청을 받은 사람 누군가 나에게 일촌을 신청했을 때 관계 일촌 관계 ">
-<header><h3>일촌 신청</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #20</span></header>
+<header><h3>일촌 신청</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #20</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>일촌</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일촌 신청을 받은 사람</dd><dt>보내는 때</dt><dd>누군가 나에게 일촌을 신청했을 때</dd><dt>누르면 이동</dt><dd>채티 연락처 · 일촌 탭</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 일촌을 신청했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">일촌</span><p><span class="v">{활동명}</span>님이 일촌을 신청했어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="관계" data-s="#21 일촌 수락 일촌을 신청한 사람 상대가 내 일촌 신청을 수락했을 때 관계 일촌 관계 ">
-<header><h3>일촌 수락</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #21</span></header>
+<header><h3>일촌 수락</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #21</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>일촌</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일촌을 신청한 사람</dd><dt>보내는 때</dt><dd>상대가 내 일촌 신청을 수락했을 때</dd><dt>누르면 이동</dt><dd>채티 연락처 · 일촌 탭</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님과 일촌이 됐어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">일촌</span><p><span class="v">{활동명}</span>님과 일촌이 됐어요.</p></div></div>
 </div></article></div></div></section><section id="news" class="alertsec section"><div class="container"><div class="sec-head"><span class="sec-num">07</span><h2>소식 · 성과와 운영자 알림</h2></div><p class=sec-note>소식 탭에 들어가고 앱푸시는 앱 설정 「소식 알림」으로 끕니다.</p><div class="cards"><article class="card" data-kind="same" data-tab="소식" data-s="#22 GOAT 달성 포트폴리오를 올린 사람(팀 포트폴리오는 팀원 전체) 리스펙트 8개를 받아 처음 GOAT가 될 때 한 번만 소식 🎉 GOAT 달성 소식 ">
-<header><h3>GOAT 달성</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #22</span></header>
+<header><h3>GOAT 달성</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #22</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>🎉 GOAT 달성</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>포트폴리오를 올린 사람(팀 포트폴리오는 팀원 전체)</dd><dt>보내는 때</dt><dd>리스펙트 8개를 받아 처음 GOAT가 될 때 한 번만</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p>🎉 내 포트폴리오가 GOAT를 달성했어요.<br>팀 포트폴리오: 🎉 팀 포트폴리오가 GOAT를 달성했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">🎉 GOAT 달성</span><p>내 포트폴리오가 리스펙트 8개를 받아 GOAT를 달성했어요.</p></div></div>
 </div></article><article class="card" data-kind="mod" data-tab="소식" data-s="#24 새 포트폴리오 · 일촌에게 올린 사람의 일촌 일촌이 새 포트폴리오를 일촌 공개 이상으로 올렸을 때. 나만 보기는 보내지 않습니다 소식 포트폴리오 소식 사람 더보기 「알림 켜짐」">
-<header><h3>새 포트폴리오 · 일촌에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #24</span></header>
+<header><h3>새 포트폴리오 · 일촌에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #24</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>포트폴리오</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>사람 더보기 「알림 켜짐」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>올린 사람의 일촌</dd><dt>보내는 때</dt><dd>일촌이 새 포트폴리오를 일촌 공개 이상으로 올렸을 때. 나만 보기는 보내지 않습니다</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 포트폴리오를 등록했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">포트폴리오</span><p><span class="v">{활동명}</span>님이 포트폴리오를 등록했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 사람 더보기 알림으로 끌 수 있음</p></article><article class="card" data-kind="mod" data-tab="소식" data-s="#26 새 포트폴리오 · 팔로워에게 올린 사람의 팔로워(그 팀의 팀원·팀 팔로워는 제외) 팔로우한 사람이 새 포트폴리오를 전체 공개로 올렸을 때 소식 포트폴리오 소식 사람 더보기 「알림 켜짐」">
-<header><h3>새 포트폴리오 · 팔로워에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #26</span></header>
+<header><h3>새 포트폴리오 · 팔로워에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #26</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>포트폴리오</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>사람 더보기 「알림 켜짐」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>올린 사람의 팔로워(그 팀의 팀원·팀 팔로워는 제외)</dd><dt>보내는 때</dt><dd>팔로우한 사람이 새 포트폴리오를 전체 공개로 올렸을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 포트폴리오를 등록했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">포트폴리오</span><p><span class="v">{활동명}</span>님이 포트폴리오를 등록했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 사람 더보기 알림으로 끌 수 있음</p></article><article class="card" data-kind="same" data-tab="소식" data-s="#23 갤러리 전시 시작 작품을 올린 사람 내 작품의 갤러리 전시가 시작될 때. 작품마다 한 번. 갤러리 기능 설계 때 다시 정합니다 소식 갤러리 소식 ">
-<header><h3>갤러리 전시 시작</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #23</span></header>
+<header><h3>갤러리 전시 시작</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #23</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>갤러리</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>작품을 올린 사람</dd><dt>보내는 때</dt><dd>내 작품의 갤러리 전시가 시작될 때. 작품마다 한 번. 갤러리 기능 설계 때 다시 정합니다</dd><dt>누르면 이동</dt><dd>없음 (갤러리로 가는 링크가 아직 없음)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님의 작품이 갤러리에 전시되었어요. (~<span class="v">{종료일}</span>)</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">갤러리</span><p><span class="v">{활동명}</span>님의 작품이 갤러리에 전시되었어요. (~<span class="v">{종료일}</span>)</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="소식" data-s="#64 정보성 운영자 알림 운영자가 고른 사람 운영자가 어드민에서 직접 보낼 때. 광고성 수신 동의는 보지 않습니다 소식 크리에이터 클럽 소식 ">
-<header><h3>정보성 운영자 알림</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #64</span></header>
+<header><h3>정보성 운영자 알림</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #64</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>크리에이터 클럽</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>운영자가 고른 사람</dd><dt>보내는 때</dt><dd>운영자가 어드민에서 직접 보낼 때. 광고성 수신 동의는 보지 않습니다</dd><dt>누르면 이동</dt><dd>어드민에서 입력한 링크 (없으면 읽음 처리만)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p>어드민에서 입력한 문구</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">크리에이터 클럽</span><p>어드민에서 입력한 문구</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="소식" data-s="#65 광고성 운영자 알림 광고성 알림 수신에 동의한 사람 운영자가 어드민에서 직접 보낼 때. 오후 9시부터 다음 날 오전 8시까지는 보내지 않습니다 소식 크리에이터 클럽 소식 ">
-<header><h3>광고성 운영자 알림</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #65</span></header>
+<header><h3>광고성 운영자 알림</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #65</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>크리에이터 클럽</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>광고성 알림 수신에 동의한 사람</dd><dt>보내는 때</dt><dd>운영자가 어드민에서 직접 보낼 때. 오후 9시부터 다음 날 오전 8시까지는 보내지 않습니다</dd><dt>누르면 이동</dt><dd>어드민에서 입력한 링크 (없으면 이동 없음)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p>어드민에서 입력한 문구</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">크리에이터 클럽</span><p>어드민에서 입력한 문구</p></div></div>
 </div></article></div></div></section><section id="project" class="alertsec section alt"><div class="container"><div class="sec-head"><span class="sec-num">08</span><h2>프로젝트 · 지원과 종료</h2></div><p class=sec-note>리더와 지원자, 멤버에게 가는 알림입니다. 나를 지목하거나 내 참여가 끝났다는 알림이라 프로젝트 설정 스위치로는 끌 수 없습니다.</p><div class="cards"><article class="card" data-kind="mod" data-tab="관계" data-s="#62 새 지원자 리더 프로젝트에 새 지원이 왔을 때. 같은 지원자의 첫 지원에만 한 번 보냅니다 관계 프로젝트 관계 ">
-<header><h3>새 지원자</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #62</span></header>
+<header><h3>새 지원자</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #62</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>리더</dd><dt>보내는 때</dt><dd>프로젝트에 새 지원이 왔을 때. 같은 지원자의 첫 지원에만 한 번 보냅니다</dd><dt>누르면 이동</dt><dd>프로젝트 멤버 목록 (리더용) · 지원자 목록 펼친 상태</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 지원했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 <span class="v">{프로젝트 이름}</span>에 지원했어요. 지원 현황을 확인해 주세요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 스위치 채티 → 관계 · 이동 채팅방 지원자 리스트 → 프로젝트 멤버 목록</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="#2 지원 수락 지원자 리더가 지원을 수락했을 때 관계 프로젝트 관계 ">
-<header><h3>지원 수락</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #2</span></header>
+<header><h3>지원 수락</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #2</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>지원자</dd><dt>보내는 때</dt><dd>리더가 지원을 수락했을 때</dd><dt>누르면 이동</dt><dd>프로젝트 메인</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>지원 결과, 수락되었어요. 프로젝트 공지부터 확인해 보세요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{프로젝트 이름}</span> 지원 결과, 수락되었어요. 프로젝트 공지부터 확인해 보세요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 스위치 채티 → 관계 · 이동 채팅방 → 프로젝트 메인 · 문구 둘째 문장</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="N15 지원 거절 지원자 리더가 지원을 거절했을 때 관계 프로젝트 관계 ">
-<header><h3>지원 거절</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N15</span></header>
+<header><h3>지원 거절</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N15</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>지원자</dd><dt>보내는 때</dt><dd>리더가 지원을 거절했을 때</dd><dt>누르면 이동</dt><dd>모집 공고 · 하단 버튼 「수락되지 않음」</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>지원 결과, 수락되지 않았어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{프로젝트 이름}</span> 지원 결과, 수락되지 않았어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 스위치 채티 → 관계</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="N14 멤버 내보내기 내보내진 멤버 리더가 프로젝트 멤버 목록에서 내보내기를 눌렀을 때. 내보내진 멤버는 프로젝트와 채팅방에서 모두 제외됩니다 관계 프로젝트 관계 ">
-<header><h3>멤버 내보내기</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N14</span></header>
+<header><h3>멤버 내보내기</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N14</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>내보내진 멤버</dd><dt>보내는 때</dt><dd>리더가 프로젝트 멤버 목록에서 내보내기를 눌렀을 때. 내보내진 멤버는 프로젝트와 채팅방에서 모두 제외됩니다</dd><dt>누르면 이동</dt><dd>모집 공고 · 하단 버튼 「참여 불가」</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>프로젝트에 더 이상 참여할 수 없어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{프로젝트 이름}</span> 프로젝트에 더 이상 참여할 수 없어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이름 「프로젝트 채팅방 내보내기」 → 「멤버 내보내기」 · 문구 채팅방 → 프로젝트 · 스위치 채티 → 관계</p></article><article class="card" data-kind="new" data-tab="관계" data-s="새로 멤버 나감 리더 멤버가 프로젝트 설정에서 직접 나갔을 때 관계 프로젝트 관계 ">
-<header><h3>멤버 나감</h3><span class="kind k-new">새로</span></header>
+<header><h3>멤버 나감</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>리더</dd><dt>보내는 때</dt><dd>멤버가 프로젝트 설정에서 직접 나갔을 때</dd><dt>누르면 이동</dt><dd>프로젝트 멤버 목록 (리더용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 프로젝트에서 나갔어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 <span class="v">{프로젝트 이름}</span> 프로젝트에서 나갔어요.</p></div></div>
 </div></article><article class="card" data-kind="mod" data-tab="관계" data-s="N12 프로젝트 종료 · 멤버에게 멤버(리더 제외) 리더가 프로젝트 설정에서 프로젝트 종료하기를 눌렀을 때 관계 프로젝트 관계 ">
-<header><h3>프로젝트 종료 · 멤버에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N12</span></header>
+<header><h3>프로젝트 종료 · 멤버에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N12</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>멤버(리더 제외)</dd><dt>보내는 때</dt><dd>리더가 프로젝트 설정에서 프로젝트 종료하기를 눌렀을 때</dd><dt>누르면 이동</dt><dd>프로젝트 메인 · 종료된 프로젝트</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>프로젝트가 종료되어 더 이상 참여할 수 없어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p>참여 중인 <span class="v">{프로젝트 이름}</span> 프로젝트가 종료되었어요.<br>프로젝트에 남은 글과 일정은 계속 볼 수 있어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이름 「삭제·종료」 → 「종료」 · 목록 둘째 줄 · 이동 채팅방 → 끝난 프로젝트 메인 · 스위치 채티 → 관계</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="N17 프로젝트 종료 · 지원자에게 결과를 기다리던 지원자 리더가 프로젝트를 종료했을 때 관계 프로젝트 관계 ">
-<header><h3>프로젝트 종료 · 지원자에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N17</span></header>
+<header><h3>프로젝트 종료 · 지원자에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N17</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>결과를 기다리던 지원자</dd><dt>보내는 때</dt><dd>리더가 프로젝트를 종료했을 때</dd><dt>누르면 이동</dt><dd>모집 공고 · 종료된 프로젝트</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>프로젝트가 종료되어 지원이 취소됐어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p>지원한 <span class="v">{프로젝트 이름}</span> 프로젝트가 종료돼 지원이 취소됐어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 없음 → 끝난 모집 공고 · 스위치 채티 → 관계</p></article><article class="card" data-kind="mod" data-tab="소식" data-s="#27 · #28 새 프로젝트 · 일촌과 팔로워에게 일촌 · 팔로워 일촌이나 팔로우한 사람이 새 프로젝트를 열었을 때 소식 프로젝트 소식 사람 더보기 「알림 켜짐」">
-<header><h3>새 프로젝트 · 일촌과 팔로워에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #27 · #28</span></header>
+<header><h3>새 프로젝트 · 일촌과 팔로워에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #27 · #28</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>사람 더보기 「알림 켜짐」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일촌 · 팔로워</dd><dt>보내는 때</dt><dd>일촌이나 팔로우한 사람이 새 프로젝트를 열었을 때</dd><dt>누르면 이동</dt><dd>모집 공고 (알림을 받는 사람이 멤버가 아닌 경우)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 새 프로젝트를 열었어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 새 프로젝트를 열었어요. 프로젝트 내용을 확인해 보세요!</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 표기 「프로젝트 상세」 → 「프로젝트」 · 사람 더보기 알림으로 끌 수 있음</p></article></div></div></section><section id="post" class="alertsec section"><div class="container"><div class="sec-head"><span class="sec-num">09</span><h2>게시글 · 프로젝트 게시판</h2></div><p class=sec-note>모두 프로젝트 설정 「게시판」 스위치로 앱푸시를 끌 수 있습니다. 나만 보기 글은 알림을 보내지 않습니다. 누르면 글 상세가 열립니다.</p><div class="cards"><article class="card" data-kind="new" data-tab="소식" data-s="새로 새 게시글 멤버(쓴 사람 제외) 멤버가 게시판에 글을 올렸을 때 소식 프로젝트 소식 프로젝트 설정 「게시판」">
-<header><h3>새 게시글</h3><span class="kind k-new">새로</span></header>
+<header><h3>새 게시글</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>멤버(쓴 사람 제외)</dd><dt>보내는 때</dt><dd>멤버가 게시판에 글을 올렸을 때</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>[새글] <span class="v">{활동명}</span>: <span class="v">{게시글 제목}</span></p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 <span class="v">{프로젝트 이름}</span>에 새 글을 올렸어요.<br><span class="v">{게시글 제목}</span></p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="소식" data-s="새로 새 공지 멤버(리더 제외) 리더가 공지 게시판에 글을 올렸을 때. 이때는 새 게시글 알림을 함께 보내지 않습니다 소식 프로젝트 소식 프로젝트 설정 「게시판」">
-<header><h3>새 공지</h3><span class="kind k-new">새로</span></header>
+<header><h3>새 공지</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>멤버(리더 제외)</dd><dt>보내는 때</dt><dd>리더가 공지 게시판에 글을 올렸을 때. 이때는 새 게시글 알림을 함께 보내지 않습니다</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>[공지] <span class="v">{활동명}</span>: <span class="v">{게시글 제목}</span></p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{프로젝트 이름}</span>에 새 공지가 올라왔어요.<br><span class="v">{게시글 제목}</span></p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 게시글 댓글 글쓴이 내 글에 댓글이 달렸을 때 반응 댓글 반응 프로젝트 설정 「게시판」">
-<header><h3>게시글 댓글</h3><span class="kind k-new">새로</span></header>
+<header><h3>게시글 댓글</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>글쓴이</dd><dt>보내는 때</dt><dd>내 글에 댓글이 달렸을 때</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 내 글에 댓글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{프로젝트 이름}</span>에 내가 올린 글에 <span class="v">{활동명}</span>님이 댓글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 내 댓글에 답글 댓글 쓴 사람 내 댓글에 답글이 달렸을 때 반응 댓글 반응 프로젝트 설정 「게시판」">
-<header><h3>내 댓글에 답글</h3><span class="kind k-new">새로</span></header>
+<header><h3>내 댓글에 답글</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>댓글 쓴 사람</dd><dt>보내는 때</dt><dd>내 댓글에 답글이 달렸을 때</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 내 댓글에 답글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 <span class="v">{프로젝트 이름}</span>에서 내 댓글에 답글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 게시글 좋아요 글쓴이 내 글에 좋아요가 눌렸을 때 반응 좋아요 반응 프로젝트 설정 「게시판」">
-<header><h3>게시글 좋아요</h3><span class="kind k-new">새로</span></header>
+<header><h3>게시글 좋아요</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>글쓴이</dd><dt>보내는 때</dt><dd>내 글에 좋아요가 눌렸을 때</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 내 글에 좋아요를 눌렀어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p><span class="v">{프로젝트 이름}</span>에 내가 올린 글에 <span class="v">{활동명}</span>님이 좋아요를 눌렀어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 댓글 좋아요 댓글·답글 쓴 사람 내 댓글이나 답글에 좋아요가 눌렸을 때. 포트폴리오 댓글 공감과 같은 방식입니다 반응 좋아요 반응 프로젝트 설정 「게시판」">
-<header><h3>댓글 좋아요</h3><span class="kind k-new">새로</span></header>
+<header><h3>댓글 좋아요</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>댓글·답글 쓴 사람</dd><dt>보내는 때</dt><dd>내 댓글이나 답글에 좋아요가 눌렸을 때. 포트폴리오 댓글 공감과 같은 방식입니다</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 내 댓글에 좋아요를 눌렀어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p><span class="v">{활동명}</span>님이 <span class="v">{프로젝트 이름}</span>에서 내 댓글에 좋아요를 눌렀어요.</p></div></div>
 </div></article><article class="card" data-kind="mod" data-tab="반응" data-s="#6 멘션 언급된 멤버 게시글이나 댓글에서 @로 나를 언급했을 때 반응 멘션 반응 프로젝트 설정 「게시판」">
-<header><h3>멘션</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #6</span></header>
+<header><h3>멘션</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #6</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>멘션</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「게시판」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>언급된 멤버</dd><dt>보내는 때</dt><dd>게시글이나 댓글에서 @로 나를 언급했을 때</dd><dt>누르면 이동</dt><dd>게시글 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 게시물에서 나를 언급했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">멘션</span><p><span class="v">{활동명}</span>님이 게시물에서 나를 언급했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 「프로젝트 상세」 → 글 상세 · 문구는 그대로</p></article></div></div></section><section id="schedule" class="alertsec section alt"><div class="container"><div class="sec-head"><span class="sec-num">10</span><h2>일정 · 프로젝트 일정</h2></div><p class=sec-note>모두 프로젝트 설정 「일정」 스위치로 앱푸시를 끌 수 있습니다. 나만 보기 일정은 알림을 보내지 않습니다. 누르면 일정 상세가 열립니다.</p><div class="cards"><article class="card" data-kind="new" data-tab="소식" data-s="새로 새 일정 멤버(만든 사람 제외) 멤버가 새 일정을 만들었을 때 소식 프로젝트 소식 프로젝트 설정 「일정」">
-<header><h3>새 일정</h3><span class="kind k-new">새로</span></header>
+<header><h3>새 일정</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>멤버(만든 사람 제외)</dd><dt>보내는 때</dt><dd>멤버가 새 일정을 만들었을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p>[일정] <span class="v">{활동명}</span>: <span class="v">{일정 이름}</span> · <span class="v">{M월 D일(요일)}</span></p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 <span class="v">{프로젝트 이름}</span>에 새 일정을 만들었어요.<br><span class="v">{일정 이름}</span> · <span class="v">{M월 D일(요일) 오전/오후 H:MM}</span></p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="소식" data-s="새로 일정 수정 그 일정 참여자(고친 사람 제외) 참여하는 일정의 날짜·시간·장소가 바뀌었을 때 소식 프로젝트 소식 프로젝트 설정 「일정」">
-<header><h3>일정 수정</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 수정</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>그 일정 참여자(고친 사람 제외)</dd><dt>보내는 때</dt><dd>참여하는 일정의 날짜·시간·장소가 바뀌었을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p>일정이 변경되었어요. 날짜와 장소를 확인해 주세요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p>참여하는 <span class="v">{일정 이름}</span> 일정이 변경되었어요. 날짜와 장소를 확인해 주세요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="소식" data-s="새로 일정 삭제 그 일정 참여자(지운 사람 제외) 참여하는 일정이 삭제되었을 때. 참여자가 스스로 빠지는 「참여 취소」와는 다릅니다 소식 프로젝트 소식 프로젝트 설정 「일정」">
-<header><h3>일정 삭제</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 삭제</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>그 일정 참여자(지운 사람 제외)</dd><dt>보내는 때</dt><dd>참여하는 일정이 삭제되었을 때. 참여자가 스스로 빠지는 「참여 취소」와는 다릅니다</dd><dt>누르면 이동</dt><dd>프로젝트 일정 목록 (삭제된 일정의 상세 화면은 열 수 없음)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p>일정이 삭제되었어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p>참여하던 <span class="v">{일정 이름}</span> 일정이 삭제되었어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="소식" data-s="새로 일정 전날 안내 그 일정 참여자 일정 전날 오후 7시. 보낼 때의 스위치 값을 봅니다 소식 프로젝트 소식 프로젝트 설정 「일정」">
-<header><h3>일정 전날 안내</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 전날 안내</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>그 일정 참여자</dd><dt>보내는 때</dt><dd>일정 전날 오후 7시. 보낼 때의 스위치 값을 봅니다</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p>내일 <span class="v">{오전/오후 H:MM}</span>에 일정이 있어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p>내일 <span class="v">{오전/오후 H:MM}</span>에 <span class="v">{일정 이름}</span> 일정이 있어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 내 일정 참여 일정을 만든 사람 누군가 내 일정에 참여했을 때 반응 프로젝트  ">
-<header><h3>내 일정 참여</h3><span class="kind k-new">새로</span></header>
+<header><h3>내 일정 참여</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>— (앱푸시 없음)</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일정을 만든 사람</dd><dt>보내는 때</dt><dd>누군가 내 일정에 참여했을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="none">앱푸시를 보내지 않습니다</div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정에 참여했어요. (<span class="v">{참여자 수}</span>/<span class="v">{정원}</span>)</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 내 일정 참여 취소 일정을 만든 사람 참여자가 일정 참여를 취소했을 때 반응 프로젝트  ">
-<header><h3>내 일정 참여 취소</h3><span class="kind k-new">새로</span></header>
+<header><h3>내 일정 참여 취소</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>프로젝트</span><span class="meta-i"><em>앱 설정</em>— (앱푸시 없음)</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일정을 만든 사람</dd><dt>보내는 때</dt><dd>참여자가 일정 참여를 취소했을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="none">앱푸시를 보내지 않습니다</div><div class="cl">알림 목록</div><div class="lst"><span class="lab">프로젝트</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정 참여를 취소했어요. (<span class="v">{참여자 수}</span>/<span class="v">{정원}</span>)</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 일정 댓글 일정을 만든 사람 내 일정에 댓글이 달렸을 때. 만든 사람이 직접 단 댓글은 알리지 않습니다 반응 댓글 반응 프로젝트 설정 「일정」">
-<header><h3>일정 댓글</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 댓글</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일정을 만든 사람</dd><dt>보내는 때</dt><dd>내 일정에 댓글이 달렸을 때. 만든 사람이 직접 단 댓글은 알리지 않습니다</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p><span class="v">{활동명}</span>님이 일정에 댓글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정에 댓글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 일정 답글 댓글 쓴 사람 일정에 단 내 댓글에 답글이 달렸을 때 반응 댓글 반응 프로젝트 설정 「일정」">
-<header><h3>일정 답글</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 답글</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>댓글 쓴 사람</dd><dt>보내는 때</dt><dd>일정에 단 내 댓글에 답글이 달렸을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p><span class="v">{활동명}</span>님이 내 댓글에 답글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정에서 내 댓글에 답글을 남겼어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 일정 좋아요 일정을 만든 사람 내 일정에 좋아요가 눌렸을 때 반응 좋아요 반응 프로젝트 설정 「일정」">
-<header><h3>일정 좋아요</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 좋아요</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>일정을 만든 사람</dd><dt>보내는 때</dt><dd>내 일정에 좋아요가 눌렸을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p><span class="v">{활동명}</span>님이 내 일정에 좋아요를 눌렀어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정에 좋아요를 눌렀어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 일정 댓글 좋아요 댓글·답글 쓴 사람 일정에 단 내 댓글이나 답글에 좋아요가 눌렸을 때 반응 좋아요 반응 프로젝트 설정 「일정」">
-<header><h3>일정 댓글 좋아요</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 댓글 좋아요</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>댓글·답글 쓴 사람</dd><dt>보내는 때</dt><dd>일정에 단 내 댓글이나 답글에 좋아요가 눌렸을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p><span class="v">{활동명}</span>님이 내 댓글에 좋아요를 눌렀어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정에서 내 댓글에 좋아요를 눌렀어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 일정 멘션 언급된 멤버 일정 댓글이나 답글에서 @로 나를 언급했을 때 반응 멘션 반응 프로젝트 설정 「일정」">
-<header><h3>일정 멘션</h3><span class="kind k-new">새로</span></header>
+<header><h3>일정 멘션</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>멘션</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>프로젝트 설정 「일정」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>언급된 멤버</dd><dt>보내는 때</dt><dd>일정 댓글이나 답글에서 @로 나를 언급했을 때</dd><dt>누르면 이동</dt><dd>일정 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{일정 이름}</span></b><p><span class="v">{활동명}</span>님이 일정에서 나를 언급했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">멘션</span><p><span class="v">{활동명}</span>님이 <span class="v">{일정 이름}</span> 일정에서 나를 언급했어요.</p></div></div>
 </div></article></div></div></section><section id="team" class="alertsec section"><div class="container"><div class="sec-head"><span class="sec-num">11</span><h2>팀</h2></div><p class=sec-note>초대·지원·나감·해체는 관계 탭에, 팀 포트폴리오는 소식 탭에 들어갑니다. 관계 알림은 팀 설정으로 끌 수 없습니다. 팀 알림의 토스트와 채팅방 메시지는 CCO-172를 따릅니다.</p><div class="cards"><article class="card" data-kind="mod" data-tab="관계" data-s="N1 팀 초대 초대받은 사람 팀 관리자가 나를 팀에 초대했을 때 관계 팀 관계 ">
-<header><h3>팀 초대</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N1</span></header>
+<header><h3>팀 초대</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N1</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>초대받은 사람</dd><dt>보내는 때</dt><dd>팀 관리자가 나를 팀에 초대했을 때</dd><dt>누르면 이동</dt><dd>클럽 홈 · 팀 탭 (받은 팀 초대에서 수락·거절)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 팀에 초대했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{활동명}</span>님이 나를 <span class="v">{팀 이름}</span> 팀에 초대했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 연락처 팀 탭 → 클럽 팀 탭</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="N2 팀 초대 수락 팀 관리자 초대받은 사람이 수락했을 때 관계 팀 관계 ">
-<header><h3>팀 초대 수락</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N2</span></header>
+<header><h3>팀 초대 수락</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N2</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀 관리자</dd><dt>보내는 때</dt><dd>초대받은 사람이 수락했을 때</dd><dt>누르면 이동</dt><dd>팀 멤버 (관리자용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 팀 초대를 수락했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{활동명}</span>님이 <span class="v">{팀 이름}</span> 팀에 합류했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 연락처 → 팀 멤버</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="N8 팀 초대 거절 팀 관리자 초대받은 사람이 거절했을 때 관계 팀 관계 ">
-<header><h3>팀 초대 거절</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N8</span></header>
+<header><h3>팀 초대 거절</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N8</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀 관리자</dd><dt>보내는 때</dt><dd>초대받은 사람이 거절했을 때</dd><dt>누르면 이동</dt><dd>팀 멤버 관리 (관리자용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 팀 초대를 거절했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{활동명}</span>님이 <span class="v">{팀 이름}</span> 팀 초대를 거절했어요. 멤버 현황을 확인해 주세요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 연락처 → 팀 멤버 관리</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="N9 팀원 나감 팀 관리자 팀원이 팀을 나갔을 때. 나간 사람의 팀 팔로우는 해제합니다 관계 팀 관계 ">
-<header><h3>팀원 나감</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N9</span></header>
+<header><h3>팀원 나감</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N9</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀 관리자</dd><dt>보내는 때</dt><dd>팀원이 팀을 나갔을 때. 나간 사람의 팀 팔로우는 해제합니다</dd><dt>누르면 이동</dt><dd>팀 멤버 관리 (관리자용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 팀에서 나갔어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{활동명}</span>님이 <span class="v">{팀 이름}</span> 팀에서 나갔어요. 멤버 현황을 확인해 주세요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 연락처 → 팀 멤버 관리 · 나간 사람의 팀 팔로우 해제</p></article><article class="card" data-kind="new" data-tab="관계" data-s="새로 팀 지원 도착 팀 관리자 팀 연락하기에서 지원하기를 선택해 지원했을 때. 첫 지원 때 한 번만 보냅니다 관계 팀 관계 ">
-<header><h3>팀 지원 도착</h3><span class="kind k-new">새로</span></header>
+<header><h3>팀 지원 도착</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀 관리자</dd><dt>보내는 때</dt><dd>팀 연락하기에서 지원하기를 선택해 지원했을 때. 첫 지원 때 한 번만 보냅니다</dd><dt>누르면 이동</dt><dd>팀 멤버 관리 (관리자용) · 지원자 목록</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{팀 이름}</span></b><p><span class="v">{활동명}</span>님이 지원했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{활동명}</span>님이 <span class="v">{팀 이름}</span> 팀에 지원했어요. 지원 현황을 확인해 주세요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="관계" data-s="새로 팀 지원 수락 지원자 팀 관리자가 지원을 수락했을 때. 기존 팀원에게는 팀 새 멤버 입장 알림이 갑니다 관계 팀 관계 ">
-<header><h3>팀 지원 수락</h3><span class="kind k-new">새로</span></header>
+<header><h3>팀 지원 수락</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>지원자</dd><dt>보내는 때</dt><dd>팀 관리자가 지원을 수락했을 때. 기존 팀원에게는 팀 새 멤버 입장 알림이 갑니다</dd><dt>누르면 이동</dt><dd>팀 채팅방</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{팀 이름}</span></b><p>지원 결과, 수락되었어요. 팀 채팅방에서 인사를 나눠 보세요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{팀 이름}</span> 지원 결과, 수락되었어요.</p></div></div>
 </div></article><article class="card" data-kind="new" data-tab="관계" data-s="새로 팀 지원 거절 지원자 팀 관리자가 지원을 거절했을 때 관계 팀 관계 ">
-<header><h3>팀 지원 거절</h3><span class="kind k-new">새로</span></header>
+<header><h3>팀 지원 거절</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>지원자</dd><dt>보내는 때</dt><dd>팀 관리자가 지원을 거절했을 때</dd><dt>누르면 이동</dt><dd>팀 홈 (멤버 아닌 사람용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{팀 이름}</span></b><p>지원 결과, 수락되지 않았어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{팀 이름}</span> 지원 결과, 수락되지 않았어요.</p></div></div>
 </div></article><article class="card" data-kind="mod" data-tab="관계" data-s="N13 팀원 내보내기 내보내진 팀원 팀 관리자가 팀원을 내보냈을 때 관계 팀 관계 ">
-<header><h3>팀원 내보내기</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N13</span></header>
+<header><h3>팀원 내보내기</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N13</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>내보내진 팀원</dd><dt>보내는 때</dt><dd>팀 관리자가 팀원을 내보냈을 때</dd><dt>누르면 이동</dt><dd>팀 홈 (멤버 아닌 사람용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{팀 이름}</span></b><p>팀 멤버에서 제외됐어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{팀 이름}</span> 팀 멤버에서 제외됐어요.<br>함께 올린 팀 포트폴리오는 그대로 남아요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 팀 프로필 상세 → 팀 홈</p></article><article class="card" data-kind="same" data-tab="관계" data-s="N11 팀 해체 팀원(해체한 관리자 제외) 팀 관리자가 팀을 해체했을 때 관계 팀 관계 ">
-<header><h3>팀 해체</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 N11</span></header>
+<header><h3>팀 해체</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 N11</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팀</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀원(해체한 관리자 제외)</dd><dt>보내는 때</dt><dd>팀 관리자가 팀을 해체했을 때</dd><dt>누르면 이동</dt><dd>팀 채팅방 (읽기 전용)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{팀 이름}</span></b><p>팀이 해체됐어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팀</span><p><span class="v">{팀 이름}</span> 팀이 해체됐어요.<br>팀 포트폴리오는 그대로 남고, 채팅방은 <span class="v">{N월 N일}</span>까지 읽기만 할 수 있어요.</p></div></div>
 </div></article><article class="card" data-kind="same" data-tab="관계" data-s="N6 팀 팔로우 받음 팀 관리자 멤버가 아닌 사람이 팀을 직접 팔로우했을 때. 자동 팔로우에는 보내지 않습니다 관계 팔로워 관계 ">
-<header><h3>팀 팔로우 받음</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 N6</span></header>
+<header><h3>팀 팔로우 받음</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 N6</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>팔로워</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀 관리자</dd><dt>보내는 때</dt><dd>멤버가 아닌 사람이 팀을 직접 팔로우했을 때. 자동 팔로우에는 보내지 않습니다</dd><dt>누르면 이동</dt><dd>팔로우한 사람의 프로필</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 팀을 팔로우했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">팔로워</span><p><span class="v">{활동명}</span>님이 <span class="v">{팀 이름}</span> 팀을 팔로우했어요.</p></div></div>
 </div></article><article class="card" data-kind="mod" data-tab="소식" data-s="N3 팀 포트폴리오 등록 · 팀원에게 다른 팀원(올린 사람 제외) 팀 포트폴리오가 올라왔을 때. 팀원에게는 이 알림 하나만 보내고, 팀 팔로워 알림이나 팔로우한 사람의 새 포트폴리오 알림은 보내지 않습니다 소식 포트폴리오 소식 팀 설정 「팀 포트폴리오 새 게시물」">
-<header><h3>팀 포트폴리오 등록 · 팀원에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N3</span></header>
+<header><h3>팀 포트폴리오 등록 · 팀원에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N3</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>포트폴리오</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>팀 설정 「팀 포트폴리오 새 게시물」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>다른 팀원(올린 사람 제외)</dd><dt>보내는 때</dt><dd>팀 포트폴리오가 올라왔을 때. 팀원에게는 이 알림 하나만 보내고, 팀 팔로워 알림이나 팔로우한 사람의 새 포트폴리오 알림은 보내지 않습니다</dd><dt>누르면 이동</dt><dd>팀 홈 · 포트폴리오 메뉴</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 팀 포트폴리오를 등록했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">포트폴리오</span><p><span class="v">{활동명}</span>님이 <span class="v">{팀 이름}</span> 팀 포트폴리오를 등록했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 이동 연락처 → 팀 포트폴리오 · 팀 설정 스위치로 끌 수 있음</p></article><article class="card" data-kind="mod" data-tab="소식" data-s="N7 팀 새 포트폴리오 · 팀 팔로워에게 팀 팔로워(팀원 제외) 팔로우한 팀이 포트폴리오를 올렸을 때 소식 포트폴리오 소식 팀 더보기 「알림 켜짐」">
-<header><h3>팀 새 포트폴리오 · 팀 팔로워에게</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N7</span></header>
+<header><h3>팀 새 포트폴리오 · 팀 팔로워에게</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N7</span></header>
 <div class="metas"><span class="chip tab-s">소식 탭</span><span class="meta-i"><em>라벨</em>포트폴리오</span><span class="meta-i"><em>앱 설정</em>소식 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>팀 더보기 「알림 켜짐」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>팀 팔로워(팀원 제외)</dd><dt>보내는 때</dt><dd>팔로우한 팀이 포트폴리오를 올렸을 때</dd><dt>누르면 이동</dt><dd>포트폴리오 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{팀 이름}</span> 팀이 포트폴리오를 등록했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">포트폴리오</span><p><span class="v">{팀 이름}</span> 팀이 포트폴리오를 등록했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 팀 더보기 알림으로 끌 수 있음</p></article></div></div></section><section id="chat" class="alertsec section alt"><div class="container"><div class="sec-head"><span class="sec-num">12</span><h2>노크 · 채팅방</h2></div><p class=sec-note>노크는 관계 탭과 관계 스위치로 옮겨 갑니다. 채티 스위치는 알림 목록에 남지 않는 채팅방 알림만 맡습니다.</p><div class="cards"><article class="card" data-kind="mod" data-tab="관계" data-s="#61 노크 도착 노크를 받은 사람 노크가 도착했을 때. 팀 연락하기(의뢰·기타)도 팀 관리자에게 이 알림으로 갑니다. 받은 사람이 「관심없음」을 눌러도 노크 알림은 알림 목록에 남습니다. 이 알림을 눌러 받은 노크 화면을 다시 열면 받아주기·관심없음을 다시 고를 수 있습니다 관계 지금과 같음 관계 ">
-<header><h3>노크 도착</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #61</span></header>
+<header><h3>노크 도착</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #61</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>지금과 같음</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>노크를 받은 사람</dd><dt>보내는 때</dt><dd>노크가 도착했을 때. 팀 연락하기(의뢰·기타)도 팀 관리자에게 이 알림으로 갑니다. 받은 사람이 「관심없음」을 눌러도 노크 알림은 알림 목록에 남습니다. 이 알림을 눌러 받은 노크 화면을 다시 열면 받아주기·관심없음을 다시 고를 수 있습니다</dd><dt>누르면 이동</dt><dd>받은 노크 화면 (수락·관심없음 선택)</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 노크했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab"></span><p><span class="v">{활동명}</span>님이 &quot;<span class="v">{노크 메시지}</span>&quot; 메시지와 함께 노크했어요.</p></div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 스위치 채티 → 관계 · 보낸 사람이 수락 전에 나가면 알림 목록에서 지움</p></article><article class="card" data-kind="mod" data-tab="관계" data-s="#1 노크 수락 노크를 보낸 사람 상대가 내 노크를 수락했을 때 관계 지금과 같음 관계 ">
-<header><h3>노크 수락</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #1</span></header>
+<header><h3>노크 수락</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #1</span></header>
 <div class="metas"><span class="chip tab-g">관계 탭</span><span class="meta-i"><em>라벨</em>지금과 같음</span><span class="meta-i"><em>앱 설정</em>관계 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>노크를 보낸 사람</dd><dt>보내는 때</dt><dd>상대가 내 노크를 수락했을 때</dd><dt>누르면 이동</dt><dd>노크로 열린 1:1 채팅방</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><p><span class="v">{활동명}</span>님이 노크를 수락했어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab"></span><p><span class="v">{활동명}</span>님이 내 노크를 수락했어요.</p></div></div>
-</div><p class="change"><b>v26.42.0에서 바뀐 점</b> 스위치 채티 → 관계</p></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 노트 댓글·답글 좋아요 노트에 댓글·답글을 쓴 사람 채팅방 노트에 단 내 댓글·답글에 좋아요가 눌렸을 때. 포트폴리오 댓글 공감과 같은 방식입니다 반응 좋아요 반응 ">
-<header><h3>노트 댓글·답글 좋아요</h3><span class="kind k-new">새로</span></header>
+</div><p class="change"><b>v26.42.0에서 바뀐 점</b> 스위치 채티 → 관계</p></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 노트 댓글 노트를 쓴 사람 채팅방에 내가 올린 노트에 댓글이 달렸을 때. 나만 보기 노트는 알림을 보내지 않습니다 반응 댓글 반응 ">
+<header><h3>노트 댓글</h3><span class="kind k-new">신규</span></header>
+<div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
+<div class="body">
+ <dl><dt>받는 사람</dt><dd>노트를 쓴 사람</dd><dt>보내는 때</dt><dd>채팅방에 내가 올린 노트에 댓글이 달렸을 때. 나만 보기 노트는 알림을 보내지 않습니다</dd><dt>누르면 이동</dt><dd>노트 상세</dd></dl>
+ <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{방 이름}</span></b><p><span class="v">{활동명}</span>님이 내 노트에 댓글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{방 이름}</span>에 내가 올린 노트에 <span class="v">{활동명}</span>님이 댓글을 남겼어요.</p></div></div>
+</div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 노트 답글 댓글 쓴 사람 노트에 단 내 댓글에 답글이 달렸을 때 반응 댓글 반응 ">
+<header><h3>노트 답글</h3><span class="kind k-new">신규</span></header>
+<div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>댓글</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
+<div class="body">
+ <dl><dt>받는 사람</dt><dd>댓글 쓴 사람</dd><dt>보내는 때</dt><dd>노트에 단 내 댓글에 답글이 달렸을 때</dd><dt>누르면 이동</dt><dd>노트 상세</dd></dl>
+ <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{방 이름}</span></b><p><span class="v">{활동명}</span>님이 내 댓글에 답글을 남겼어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">댓글</span><p><span class="v">{활동명}</span>님이 <span class="v">{방 이름}</span>에 올라온 노트에서 내 댓글에 답글을 남겼어요.</p></div></div>
+</div></article><article class="card" data-kind="new" data-tab="반응" data-s="새로 노트 댓글·답글 좋아요 노트에 댓글·답글을 쓴 사람 채팅방 노트에 단 내 댓글·답글에 좋아요가 눌렸을 때. 포트폴리오 댓글 공감과 같은 방식입니다 반응 좋아요 반응 ">
+<header><h3>노트 댓글·답글 좋아요</h3><span class="kind k-new">신규</span></header>
 <div class="metas"><span class="chip tab-r">반응 탭</span><span class="meta-i"><em>라벨</em>좋아요</span><span class="meta-i"><em>앱 설정</em>반응 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>노트에 댓글·답글을 쓴 사람</dd><dt>보내는 때</dt><dd>채팅방 노트에 단 내 댓글·답글에 좋아요가 눌렸을 때. 포트폴리오 댓글 공감과 같은 방식입니다</dd><dt>누르면 이동</dt><dd>노트 상세</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{방 이름}</span></b><p><span class="v">{활동명}</span>님이 노트에 남긴 내 댓글에 좋아요를 눌렀어요.</p></div><div class="cl">알림 목록</div><div class="lst"><span class="lab">좋아요</span><p>노트에 남긴 내 댓글에 <span class="v">{활동명}</span>님이 좋아요를 눌렀어요.</p></div></div>
 </div></article><article class="card" data-kind="mod" data-tab="없음" data-s="#63 채팅방 새 메시지 방 참여자(보낸 사람 제외) 채팅방에 메시지·노트·공지·공유가 올라왔을 때   채티 채팅방 알림 버튼 · 프로젝트 「채팅방」 · 팀 「팀 채팅 새 메시지」">
-<header><h3>채팅방 새 메시지</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 #63</span></header>
+<header><h3>채팅방 새 메시지</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 #63</span></header>
 <div class="metas"><span class="chip tab-n">목록에 안 남음</span><span class="meta-i"><em>앱 설정</em>채티 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>채팅방 알림 버튼 · 프로젝트 「채팅방」 · 팀 「팀 채팅 새 메시지」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>방 참여자(보낸 사람 제외)</dd><dt>보내는 때</dt><dd>채팅방에 메시지·노트·공지·공유가 올라왔을 때</dd><dt>누르면 이동</dt><dd>그 채팅방</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{방 이름}</span></b><p><span class="v">{활동명}</span>: <span class="v">{메시지}</span><br>[노트] <span class="v">{활동명}</span>: <span class="v">{노트 내용}</span><br>[공지] <span class="v">{활동명}</span>: <span class="v">{공지 내용}</span><br>[공유] <span class="v">{활동명}</span>: <span class="v">{게시글 제목 · 일정 이름}</span></p></div><div class="cl">알림 목록</div><div class="none">알림 목록에 남지 않습니다</div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 노트 머리말 [새글] → [노트] · 공유 본문은 게시글 제목이나 일정 이름</p></article><article class="card" data-kind="same" data-tab="없음" data-s="N5 프로젝트 새 멤버 입장 기존 멤버(들어온 사람·수락한 리더 제외) 지원이 수락되어 새 멤버가 프로젝트 채팅방에 들어왔을 때   채티 채팅방 알림 버튼 · 프로젝트 「채팅방」">
-<header><h3>프로젝트 새 멤버 입장</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 N5</span></header>
+<header><h3>프로젝트 새 멤버 입장</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 N5</span></header>
 <div class="metas"><span class="chip tab-n">목록에 안 남음</span><span class="meta-i"><em>앱 설정</em>채티 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>채팅방 알림 버튼 · 프로젝트 「채팅방」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>기존 멤버(들어온 사람·수락한 리더 제외)</dd><dt>보내는 때</dt><dd>지원이 수락되어 새 멤버가 프로젝트 채팅방에 들어왔을 때</dd><dt>누르면 이동</dt><dd>프로젝트 채팅방</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{프로젝트 이름}</span></b><p><span class="v">{활동명}</span>님이 프로젝트에 합류했어요. 먼저 인사를 건네 보세요.</p></div><div class="cl">알림 목록</div><div class="none">알림 목록에 남지 않습니다</div></div>
 </div></article><article class="card" data-kind="mod" data-tab="없음" data-s="N18 팀 새 멤버 입장 기존 팀원(관리자 제외) 팀 초대를 수락하거나 팀 지원이 수락되어 팀 채팅방에 들어왔을 때   채티 채팅방 알림 버튼 · 팀 「팀 채팅 새 메시지」">
-<header><h3>팀 새 멤버 입장</h3><span class="kind k-mod">바뀜</span><span class="aid">알림 정본 번호 N18</span></header>
+<header><h3>팀 새 멤버 입장</h3><span class="kind k-mod">변경</span><span class="aid">알림 정본 번호 N18</span></header>
 <div class="metas"><span class="chip tab-n">목록에 안 남음</span><span class="meta-i"><em>앱 설정</em>채티 알림</span><span class="meta-i"><em>메뉴에서 끄기</em>채팅방 알림 버튼 · 팀 「팀 채팅 새 메시지」</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>기존 팀원(관리자 제외)</dd><dt>보내는 때</dt><dd>팀 초대를 수락하거나 팀 지원이 수락되어 팀 채팅방에 들어왔을 때</dd><dt>누르면 이동</dt><dd>팀 채팅방</dd></dl>
  <div class="copy"><div class="cl">앱푸시</div><div class="push"><div class="ph"><span class="appic"></span>Cre8orClub<span class="now">지금</span></div><b><span class="v">{팀 이름}</span></b><p><span class="v">{활동명}</span>님이 팀에 합류했어요. 먼저 인사를 건네 보세요.</p></div><div class="cl">알림 목록</div><div class="none">알림 목록에 남지 않습니다</div></div>
 </div><p class="change"><b>v26.42.0에서 바뀐 점</b> 팀 지원 수락으로 들어온 경우도 보냄</p></article></div></div></section><section id="system" class="alertsec section"><div class="container"><div class="sec-head"><span class="sec-num">13</span><h2>시스템</h2></div><p class=sec-note>서비스 상태를 알리는 알림입니다. 앱 설정 스위치 없이 휴대폰 알림 권한만 따릅니다.</p><div class="cards"><article class="card" data-kind="same" data-tab="없음" data-s="#59 포트폴리오 업로드 실패 업로드한 본인 내 포트폴리오 업로드가 서버에서 실패했을 때. 알림 목록에도 남기는 안은 백로그에 있습니다   없음 (휴대폰 권한만 따름) ">
-<header><h3>포트폴리오 업로드 실패</h3><span class="kind k-same">그대로</span><span class="aid">알림 정본 번호 #59</span></header>
+<header><h3>포트폴리오 업로드 실패</h3><span class="kind k-same">유지</span><span class="aid">알림 정본 번호 #59</span></header>
 <div class="metas"><span class="chip tab-n">목록에 안 남음</span><span class="meta-i"><em>앱 설정</em>없음 (휴대폰 권한만 따름)</span><span class="meta-i"><em>메뉴에서 끄기</em>없음</span></div>
 <div class="body">
  <dl><dt>받는 사람</dt><dd>업로드한 본인</dd><dt>보내는 때</dt><dd>내 포트폴리오 업로드가 서버에서 실패했을 때. 알림 목록에도 남기는 안은 백로그에 있습니다</dd><dt>누르면 이동</dt><dd>내 포트폴리오</dd></dl>
@@ -484,7 +496,7 @@ footer{padding:32px 0 56px;color:var(--fg3);font-size:13px}
 </div></article></div></div></section>
 <section id="nosend" class="section"><div class="container"><div class="sec-head"><span class="sec-num">14</span><h2>보내지 않는 것</h2></div><p class=sec-note>아래 경우에는 앱푸시를 보내지 않고 알림 목록에도 남기지 않습니다.</p><div class="nosend"><div><b>자료실에 자료를 올릴 때</b><p>채팅방에도 표시되지 않고, 자료실 알림 스위치도 없습니다.</p></div><div><b>지원 마감 · 다시 모집</b><p>마감 뒤에도 받은 지원은 수락·거절할 수 있습니다. 기다리던 지원자는 수락·거절이나 프로젝트 종료 알림으로 결과를 받습니다.</p></div><div><b>일정 정원이 찼을 때</b><p>버튼이 「신청 마감」으로 바뀌는 것으로 충분합니다.</p></div><div><b>글·댓글 수정과 삭제</b><p>일정 수정·삭제만 참여자에게 알립니다.</p></div><div><b>오픈채팅 입장 · 종료 · 내보내기</b><p>오픈채팅은 누구나 드나드는 방이므로 참여자를 소속 멤버로 보지 않습니다. 입장·종료·내보내기는 채팅방 안 시스템 메시지로만 알립니다.</p></div><div><b>팀 연락하기 수락 인사</b><p>수락하면 자동으로 가는 「팀에 연락 주셔서 감사해요.」에는 앱푸시를 보내지 않습니다.</p></div><div><b>수락 전 같은 사람이 다시 보낸 팀 연락</b><p>첫 연락 때만 노크 도착 알림을 한 번 보냅니다. 「관심없음」 처리 후 같은 사람이 다시 연락하면 새 채팅방이 열리고 노크 도착 알림을 다시 보냅니다.</p></div></div></div></section>
 <section id="archived" class="section alt"><div class="container"><div class="sec-head"><span class="sec-num">15</span><h2>보관한 알림</h2></div><p class=sec-note>지금 보내지 않는 옛 알림입니다. 기능이 돌아오면 이 문서의 규칙에 맞춰 새로 설계합니다.</p><div class="nosend"><div><b>캐스팅 · 지원 · 제안 (구 2.0)</b><p>지원 내용 댓글 · 캐스팅 지원 접수 · 지원 내용 답글 · 캐스팅 댓글 · 새 캐스팅(일촌·구 팔로워·팔로워) · 캐스팅 답글(글쓴이·댓글 쓴 사람) · 캐스팅 댓글 좋아요 · 캐스팅 좋아요 · 캐스팅 답글 좋아요 · 보낸·받은 제안 댓글 · 새 제안 수신 · 제안 댓글 답글 · 보낸·받은 제안 답글</p></div><div><b>클럽 · 뮤즈 (구 운영)</b><p>클럽 운영 종료 · 클럽 종료(입장 회원·대기자) · 클럽 입장(기존·신규 회원) · 클럽 입장 승인 만료 · 클럽 입장 대기자 · 뮤즈 가입 환영(라운지·굿즈·특권 안내) · 클럽 오픈 · 클럽 입장 미승인</p></div><div><b>기타</b><p>베타 배지 부여</p></div></div></div></section>
-<section id="dev" class="section"><div class="container"><div class="sec-head"><span class="sec-num">16</span><h2>개발 · 서버 확인</h2></div><p class=sec-note>이 정책을 적용하려면 아래를 함께 바꾸거나 확인해야 합니다.</p><ul class="dev"><li><span class="who">서버</span><p>10-28 답에서 「프로젝트 설정 스위치를 끄면 알림을 보내지 않아요」라고 했던 것을 <b>「앱푸시만 보내지 않아요」</b>로 바로잡습니다. 알림 목록에는 남깁니다.</p></li><li><span class="who">서버</span><p>지금은 노크와 새 메시지를 <b>CHATTY 분류 하나</b>로 함께 처리합니다. 노크 도착·노크 수락이 관계 스위치를 따르도록 분류를 나눠야 합니다. 프로젝트 새 지원자·지원 수락·지원 거절·멤버 내보내기·프로젝트 종료 알림도 관계 스위치로 옮깁니다.</p></li><li><span class="who">개발</span><p>새 알림의 타입 코드와 딥링크를 만들어야 합니다. 게시글 상세, 일정 상세, 일정 목록, 팀 멤버 관리, 끝난 모집 공고로 가는 링크가 새로 필요합니다.</p></li><li><span class="who">개발</span><p>현재 iOS 앱의 「푸시 알림 받기」는 휴대폰 알림 권한 상태를 그대로 표시하고, 누르면 휴대폰 설정으로 이동합니다. 휴대폰 권한이 꺼지면 반응·관계·소식·채티 스위치도 꺼진 채 비활성됩니다(iOS main 910e847, 10월 28일 기준). 휴대폰 알림 권한과 「푸시 알림 받기」를 서로 연동하지 않도록 변경합니다. 「푸시 알림 받기」 값은 서버에 저장하고, 휴대폰 알림 권한은 처음 한 번 요청합니다(02).</p></li><li><span class="who">개발</span><p>앱이 열릴 때마다 휴대폰 알림 권한 상태를 확인합니다. 결과는 알림 설정 화면의 안내 띠와 스위치를 켤 때의 팝업에만 씁니다.</p></li><li><span class="who">개발</span><p>스위치를 켤 때 휴대폰 알림 권한과 앱 설정 스위치 상태를 확인해 안내 팝업을 띄웁니다(02). 아이폰에서는 사용자가 알림 권한 요청을 한 번 거절하면 앱에서 다시 요청할 수 없습니다. 따라서 안내 팝업에 [설정으로 이동] 버튼을 표시합니다. 「설정으로 이동」은 휴대폰 설정의 Cre8orClub 알림 화면을 엽니다.</p></li><li><span class="who">개발</span><p>원글이나 일정이 지워진 뒤 알림을 누르면 공통 처리(「삭제된 게시물이에요」 등)를 따릅니다.</p></li><li><span class="who">개발</span><p>알림 정본 문서에 있는 「메시지 내용 미리보기」·「잠금화면에서 내용 숨기기(Android)」 설정은 정본 앱 알림 설정 화면에 없습니다. 46.0 범위인지 확인이 필요합니다.</p></li><li><span class="who">개발</span><p>「그대로」로 둔 문구도 운영 DB 기준으로 한 번 더 확인합니다. 알림 정본 문서는 2026-08-28 운영 DB 복제본을 기준으로 합니다.</p></li></ul></div></section>
+<section id="dev" class="section"><div class="container"><div class="sec-head"><span class="sec-num">16</span><h2>개발 · 서버 확인</h2></div><p class=sec-note>이 정책을 적용하려면 아래를 함께 바꾸거나 확인해야 합니다.</p><ul class="dev"><li><span class="who">서버</span><p>10-28 답에서 「프로젝트 설정 스위치를 끄면 알림을 보내지 않아요」라고 했던 것을 <b>「앱푸시만 보내지 않아요」</b>로 바로잡습니다. 알림 목록에는 남깁니다.</p></li><li><span class="who">서버</span><p>지금은 노크와 새 메시지를 <b>CHATTY 분류 하나</b>로 함께 처리합니다. 노크 도착·노크 수락이 관계 스위치를 따르도록 분류를 나눠야 합니다. 프로젝트 새 지원자·지원 수락·지원 거절·멤버 내보내기·프로젝트 종료 알림도 관계 스위치로 옮깁니다.</p></li><li><span class="who">개발</span><p>새 알림의 타입 코드와 딥링크를 만들어야 합니다. 게시글 상세, 일정 상세, 일정 목록, 팀 멤버 관리, 끝난 모집 공고로 가는 링크가 새로 필요합니다.</p></li><li><span class="who">개발</span><p>현재 iOS 앱의 「푸시 알림 받기」는 휴대폰 알림 권한 상태를 그대로 표시하고, 누르면 휴대폰 설정으로 이동합니다. 휴대폰 권한이 꺼지면 반응·관계·소식·채티 스위치도 꺼진 채 비활성됩니다(iOS main 910e847, 10월 28일 기준). 휴대폰 알림 권한과 「푸시 알림 받기」를 서로 연동하지 않도록 변경합니다. 「푸시 알림 받기」 값은 서버에 저장하고, 휴대폰 알림 권한은 처음 한 번 요청합니다(02).</p></li><li><span class="who">개발</span><p>앱이 열릴 때마다 휴대폰 알림 권한 상태를 확인합니다. 결과는 알림 설정 화면의 안내 띠와 스위치를 켤 때의 팝업에만 씁니다.</p></li><li><span class="who">개발</span><p>스위치를 켤 때 휴대폰 알림 권한과 앱 설정 스위치 상태를 확인해 안내 팝업을 띄웁니다(02). 아이폰에서는 사용자가 알림 권한 요청을 한 번 거절하면 앱에서 다시 요청할 수 없습니다. 따라서 안내 팝업에 [설정으로 이동] 버튼을 표시합니다. 「설정으로 이동」은 휴대폰 설정의 Cre8orClub 알림 화면을 엽니다.</p></li><li><span class="who">개발</span><p>원글이나 일정이 지워진 뒤 알림을 누르면 공통 처리(「삭제된 게시물이에요」 등)를 따릅니다.</p></li><li><span class="who">개발</span><p>알림 정본 문서에 있는 「메시지 내용 미리보기」·「잠금화면에서 내용 숨기기(Android)」 설정은 정본 앱 알림 설정 화면에 없습니다. 46.0 범위인지 확인이 필요합니다.</p></li><li><span class="who">개발</span><p>「유지」 알림과 문구를 바꾸지 않은 알림도 운영 DB 기준으로 한 번 더 확인합니다. 알림 정본 문서는 2026-08-28 운영 DB 복제본을 기준으로 합니다.</p></li></ul></div></section>
 <footer><div class="container">카드 오른쪽 위 「알림 정본 번호」는 앱푸시 알림 정본 v26.42.0에서 해당 알림에 붙인 번호입니다. 개발에서 이 번호로 기존 알림을 찾을 수 있습니다. 새로 만드는 알림의 번호는 개발에서 정합니다. 문구 안의 <span class="v">{보라 글씨}</span>는 실제 값으로 바뀌는 자리입니다.</div></footer>
 <script>
 const st={k:'all',t:'all',q:''};
