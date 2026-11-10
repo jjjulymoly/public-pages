@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<title>약관 개정 안내 메일 편집기</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: 왼쪽 입력 양식, 오른쪽 메일 미리보기. 좁은 화면에서는 위아래로 쌓는다. 원래 위클리 베스트 편집기의 토큰을 따른다. */
+:root{--bg:#f4f4f2;--panel:#ffffff;--ink:#141414;--muted:#6b6b6b;--line:#e3e3df;--field:#fafaf8;--accent:#07ED21;--accent-ink:#111111;--dark:#141414;--ok:#0a7a1c;--warn:#a15c00;
+  --body:'Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;--mono:ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--panel:#1c1c1c;--ink:#f0f0f0;--muted:#a0a0a0;--line:#2e2e2e;--field:#232323;--dark:#f0f0f0;--ok:#4ade80;--warn:#f0b35a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121212;--panel:#1c1c1c;--ink:#f0f0f0;--muted:#a0a0a0;--line:#2e2e2e;--field:#232323;--dark:#f0f0f0;--ok:#4ade80;--warn:#f0b35a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);word-break:keep-all}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--panel);border-bottom:1px solid var(--line);padding-block:14px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+h1{font-size:17px;margin:0;font-weight:700;text-wrap:balance}
+.sub{font-size:12px;color:var(--muted);margin-top:2px;max-width:60ch}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;font-weight:600;border-radius:8px;border:1px solid var(--line);background:var(--field);color:var(--ink);padding:8px 12px;cursor:pointer;min-height:38px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.ghost{background:transparent}
+button.danger{color:var(--warn)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+main{display:grid;grid-template-columns:minmax(320px,460px) minmax(0,1fr);min-height:calc(100vh - 72px)}
+.form{background:var(--panel);border-right:1px solid var(--line);padding-block:16px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:20px;min-width:0}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tabs button[aria-selected="true"]{background:var(--dark);color:var(--panel);border-color:var(--dark)}
+fieldset{border:0;padding:0;margin:0 0 20px;min-width:0}
+legend{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
+label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+.hint{font-weight:400;color:var(--muted);font-size:12px}
+input,textarea{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+textarea{resize:vertical;min-height:64px;line-height:1.55}
+#raw{min-height:60vh;font-family:var(--mono);font-size:12px;white-space:pre}
+.copyline{display:flex;gap:6px}.copyline input{flex:1;min-width:0}
+.doc{border:1px solid var(--line);border-radius:10px;padding:10px 12px 12px;margin-bottom:10px;background:var(--panel)}
+.dochead{display:flex;gap:6px;align-items:center;justify-content:space-between}
+.dochead strong{font-size:13px}
+.dochead .actions button{min-height:30px;padding:4px 9px;font-size:12px}
+.warn{font-size:12px;color:var(--warn);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:10px}
+.preview{padding-block:16px 32px;padding-left:20px;padding-right:max(16px,env(safe-area-inset-right,0px));min-width:0;display:flex;flex-direction:column;gap:10px}
+.ptools{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:700;color:var(--muted)}
+.ptools button{min-height:30px;padding:4px 10px;font-size:12px}
+.ptools button[aria-pressed="true"]{background:var(--dark);color:var(--panel);border-color:var(--dark)}
+#frame{width:100%;max-width:100%;height:calc(100vh - 150px);min-height:560px;border:1px solid var(--line);border-radius:10px;background:#f2f2f2;transition:width .2s}
+#frame.mobile{width:390px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--dark);color:var(--panel);font-size:13px;font-weight:600;padding:10px 14px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.confirm{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--warn)}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.form{border-right:0;border-bottom:1px solid var(--line);padding-right:max(16px,env(safe-area-inset-right,0px))}.preview{padding-left:max(16px,env(safe-area-inset-left,0px))}#frame{height:640px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>약관 개정 안내 메일 편집기</h1>
+    <div class="sub">문서별 개정 전·개정 후를 고치면 오른쪽 미리보기가 바로 바뀌어요. 다 고친 뒤 「HTML 소스 복사」로 발송용 HTML을 가져가세요. 고친 내용은 이 브라우저에만 저장돼요.</div>
+  </div>
+  <div class="actions">
+    <button class="primary" id="copyHtml">HTML 소스 복사</button>
+    <button id="copyRich">메일 본문으로 복사</button>
+    <button id="copySubject2">제목 복사</button>
+    <span id="resetWrap"><button class="ghost danger" id="reset">처음 양식으로</button></span>
+  </div>
+</header>
+<main>
+  <section class="form">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tabForm" aria-selected="true">양식으로 고치기</button>
+      <button role="tab" id="tabRaw" aria-selected="false">HTML 직접 고치기</button>
+    </div>
+    <div id="paneForm">
+      <fieldset><legend>메일 정보</legend>
+        <label for="subject">메일 제목</label><input id="subject">
+        <label for="preheader">받은편지함 미리보기 문장 <span class="hint">제목 옆에 보이는 한 줄</span></label><input id="preheader">
+        <label for="headline">머리 제목 <span class="hint">줄바꿈 그대로 들어가요</span></label><textarea id="headline" style="min-height:52px"></textarea>
+      </fieldset>
+      <fieldset><legend>인사와 개정 이유</legend>
+        <label for="greeting">인사</label><input id="greeting">
+        <label for="intro">개정 이유</label><textarea id="intro" style="min-height:96px"></textarea>
+        <label for="lead">이어지는 한 문장</label><input id="lead">
+      </fieldset>
+      <fieldset><legend>문서별 변경 사항</legend>
+        <p class="hint" style="margin:0 0 8px">개정 후는 한 줄에 하나씩 「라벨: 내용」으로 써 주세요. 라벨은 굵게 들어가요. 문장 안에서 **두 별표**로 감싸면 굵게 바뀌어요.</p>
+        <div id="docs"></div>
+        <button id="addDoc">문서 추가</button>
+      </fieldset>
+      <fieldset><legend>개정 문서 전문</legend>
+        <label for="linksLead">안내 문장</label><input id="linksLead">
+        <label for="links">링크 <span class="hint">한 줄에 하나 · 「문서 이름 | 주소」</span></label><textarea id="links" style="min-height:84px"></textarea>
+      </fieldset>
+      <fieldset><legend>시행일</legend>
+        <label for="effTitle">상자 제목</label><input id="effTitle">
+        <label for="eff">시행일 문장 <span class="hint">한 줄에 하나 · 날짜는 **두 별표**로 굵게</span></label><textarea id="eff" style="min-height:84px"></textarea>
+        <label for="reject">동의하지 않을 때 안내</label><textarea id="reject" style="min-height:96px"></textarea>
+      </fieldset>
+      <fieldset><legend>맺음</legend>
+        <label for="contact">문의 안내</label><textarea id="contact" style="min-height:52px"></textarea>
+        <label for="closing">맺음말 <span class="hint">마지막 줄은 굵게 들어가요</span></label><textarea id="closing" style="min-height:52px"></textarea>
+      </fieldset>
+      <fieldset><legend>하단 고지</legend>
+        <label for="notice">발송 근거 문장</label><textarea id="notice" style="min-height:52px"></textarea>
+        <label for="bizno">사업자등록번호 <span class="hint">비워 두면 빠져요</span></label><input id="bizno">
+      </fieldset>
+    </div>
+    <div id="paneRaw" hidden>
+      <div class="warn">여기서 고친 내용은 미리보기와 복사에 그대로 쓰여요. 「양식으로 고치기」로 돌아가면 양식 내용으로 다시 만들어지니, 직접 고친 내용은 먼저 복사해 두세요.</div>
+      <textarea id="raw" spellcheck="false" aria-label="메일 HTML"></textarea>
+    </div>
+  </section>
+  <section class="preview">
+    <div class="ptools">미리보기 <button id="wDesk" aria-pressed="true">PC</button><button id="wMobile" aria-pressed="false">휴대폰</button></div>
+    <iframe id="frame" title="메일 미리보기" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+  </section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const LOGO='https://euna-source.github.io/public-pages/c8-weeklybest-mail/c8-logo-mark.png';
+const LOGO_PREVIEW='data:image/png;base64,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';
+const DEFAULTS={"subject": "[Cre8orClub] 약관 및 개인정보 처리방침 개정 안내", "preheader": "개인정보 처리방침은 11월 10일, 서비스 이용약관은 12월 11일부터 바뀌어요. 주요 변경 사항을 확인해 주세요.", "headline": "약관 및 개인정보 처리방침\n개정 안내", "greeting": "안녕하세요, Cre8orClub입니다.", "intro": "프로젝트 게시판·일정·자료실과 팀 지원·연락하기 기능을 추가하고, 개인정보 처리 기준을 정비함에 따라 서비스 이용약관, 개인정보 처리방침, 개인정보 수집·이용 안내 및 동의를 개정합니다.", "lead": "주요 변경 사항과 문서별 시행일은 아래와 같습니다. 자세한 내용은 각 개정 문서의 전문을 확인해 주세요.", "docs": [{"title": "서비스 이용약관", "before": "기능별 이용 방법을 약관에서 안내했습니다. 채팅 첨부물은 열람·수신 범위로 이용을 허락했고, 전송한 메시지·첨부물은 회원이 삭제할 수 없도록 정했습니다.", "after": "운영정책: 기능별 세부 기준을 화면·운영정책에서 안내하도록 정리하고, 운영정책의 공지·변경 절차와 약관이 우선한다는 기준을 추가했습니다.\n채팅 첨부물·자료실: 첨부물을 개인 보관용으로 기기에 저장할 수 있도록 했습니다. 기존 열람 권한을 유지하면서 같은 프로젝트의 자료실에도 표시할 수 있도록 했습니다.\n메시지·첨부물 삭제: 전송 후 삭제할 수 없던 기준을 바꿔, 서비스가 제공하는 방법으로 본인이 보낸 메시지·첨부물을 삭제할 수 있도록 했습니다.\n프로젝트 종료: 프로젝트는 종료 후에도 기록으로 남기고, 삭제가 필요하면 고객센터에 요청하도록 했습니다. 관리자가 탈퇴해 종료된 모임은 안내된 열람 기간 후 서비스에 표시하지 않습니다.\n팀 연락: 개인 대화 수신 제한과 별개로 팀 연락을 관리자에게 전달하는 기준을 추가했습니다. 관리자가 차단한 회원의 연락은 제외합니다.\n외부 공개: 프로젝트 지원·멤버 정보와 팀원 프로필·팀 포트폴리오의 외부 공유 웹페이지 표시 범위를 추가했습니다. 프로젝트 지원 사실은 검색엔진에 노출하지 않도록 명시했습니다.\n탈퇴 후 모임 콘텐츠: 탈퇴만으로 삭제되지 않는 정보에 모임 게시글·일정·자료를 추가했습니다. 탈퇴 전 직접 삭제하거나, 직접 삭제할 수 없는 내용은 고객센터에 삭제를 요청할 수 있도록 했습니다.\nAI 이용: AI 모델 개선 대상에서 채팅 메시지·첨부물을 제외하고, 다른 콘텐츠는 개인을 알아볼 수 없게 처리한 뒤 이용하는 원칙을 추가했습니다. 학습을 마친 모델은 콘텐츠 원문·식별정보를 담거나 출력하지 않는 조건에서 계속 이용하도록 했습니다."}, {"title": "개인정보 처리방침", "before": "회원가입 정보는 탈퇴 시 즉시 파기하고, 서비스 이용 기록·기기 정보는 수집일부터 3년간 보관한다고 안내했습니다. 탈퇴 후 댓글·반응의 익명 처리와 채팅 프로필 연결 해제 기준은 이미 있었습니다.", "after": "새 기능: 프로젝트 게시판·일정·자료실과 노트 댓글·답글·좋아요 등 새 기능의 수집 항목·이용 목적·보유기간을 추가했습니다.\n오류·의견 신고: 신고 내용·첨부 화면·기기·앱 정보를 수집해 오류 확인과 개선에 이용하며, 신고일부터 3년간 보관하는 기준을 추가했습니다.\n탈퇴 사유: 탈퇴 사유를 문의 대응과 서비스 개선에 이용하고, 탈퇴일부터 6개월간 보관하는 항목을 추가했습니다.\n회원가입 정보: 보유기간을 ‘탈퇴 시 즉시 파기’에서 ‘신고·분쟁 대응을 위해 탈퇴 후 6개월 보관한 뒤 파기’로 변경합니다.\n프로젝트 기록: 삭제하지 않고 탈퇴한 게시글·일정·자료는 프로젝트 유지 기간 동안 보관하고, 프로젝트 삭제일부터 6개월 뒤 파기하는 기준을 추가했습니다.\n채팅 프로필: 탈퇴 시 작성자 이름·사진의 표시를 중단하고, 작성자 프로필 정보는 탈퇴일부터 6개월 뒤 파기하는 시점을 명시했습니다.\n이벤트 운영: 관계·반응·채팅·서비스 활동 기록의 이용 목적에 이벤트 운영을 추가했습니다. 채팅 메시지 본문은 제외하며, 참여자·수상자의 개인정보는 별도로 동의받아 처리합니다.\n이용 기록: 방문 일시·IP 등은 수집일부터 3년에서 1년으로 보유기간을 줄입니다. 기기 정보는 로그아웃·탈퇴 시 파기하도록 변경합니다.\n위탁·국외이전: AppsFlyer의 위탁·국외이전 내역과 Sentry의 위탁 내역을 추가했습니다. Airbridge의 딥링크 목적·회사 서버 전송·회원 식별자 항목을 보완했습니다."}, {"title": "개인정보 수집·이용 안내 및 동의", "before": "회원가입 정보는 탈퇴 시 즉시 파기한다고 안내했고, 프로젝트 게시판·일정·자료실의 수집 항목은 없었습니다.", "after": "회원가입 정보: 탈퇴 후 6개월 보관 기준과 탈퇴·ID 변경 후 14일간 같은 ID의 재사용을 제한하는 목적을 반영했습니다.\n프로젝트 운영: 게시판·일정·자료실의 수집 항목과 보유기간을 추가했습니다. 삭제하지 않고 탈퇴한 경우 프로젝트 유지 기간 동안 보관하고, 프로젝트 삭제일부터 6개월 뒤 파기합니다."}], "linksLead": "자세한 내용은 각 개정 문서의 전문을 확인해 주세요.", "links": "서비스 이용약관 | https://static.cre8orclub.com/policy/terms-of-service.html\n개인정보 처리방침 | https://static.cre8orclub.com/policy/privacy-policy-general.html\n개인정보 수집·이용 안내 및 동의 | https://static.cre8orclub.com/policy/privacy-policy.html", "effTitle": "시행일", "eff": "개인정보 처리방침과 개인정보 수집·이용 안내 및 동의는 **2026년 11월 10일(화)**부터 시행됩니다.\n서비스 이용약관은 **2026년 12월 11일(금)**부터 시행됩니다.", "reject": "개정 서비스 이용약관에 동의하지 않으시면 시행일 전날인 2026년 12월 10일까지 고객센터에 거부 의사를 알리거나 회원 탈퇴를 하실 수 있습니다. 이때까지 거부 의사를 표시하지 않고 시행일 이후에도 서비스를 계속 이용하시면 개정 서비스 이용약관에 동의한 것으로 봅니다.", "contact": "개정 내용에 관한 문의는 support@cre8orclub.com으로 보내 주세요.", "closing": "감사합니다.\nCre8orClub 드림", "notice": "※ 이 메일은 약관 및 개인정보 처리방침 개정 안내로, 광고성 정보 수신 동의 여부와 관계없이 발송됩니다.", "bizno": ""};
+const STORE='c8-terms-notice-mail-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const inl=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const FIELDS=['subject','preheader','headline','greeting','intro','lead','linksLead','links','effTitle','eff','reject','contact','closing','notice','bizno'];
+let state=load();
+let rawMode=false, rawText='';
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function load(){try{const s=localStorage.getItem(STORE);if(s){const v=JSON.parse(s);if(v&&Array.isArray(v.docs))return v}}catch(e){}return clone(DEFAULTS)}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch(e){}}
+function lines(s){return String(s||'').split('\n').map(x=>x.trim()).filter(Boolean)}
+function docBox(d,i){
+  const items=lines(d.after).map(l=>{const m=l.match(/^([^:：]{1,30})[:：]\s*(.+)$/);const body=m?'<strong>'+esc(m[1])+':</strong> '+inl(m[2]):inl(l);
+    return '<tr><td valign="top" style="padding:0 8px 10px 0; font-size:15px; line-height:1.7;">•</td><td style="padding:0 0 10px; font-size:15px; line-height:1.7;">'+body+'</td></tr>'}).join('');
+  return `
+        <tr>
+          <td style="padding:16px 32px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f7f7; border-radius:10px;">
+              <tr>
+                <td style="padding:20px 22px; font-size:15px; line-height:1.8;">
+                  <div style="font-size:16px; font-weight:700; margin-bottom:12px;">${i+1}. ${esc(d.title)}</div>`+(String(d.before||'').trim()?`
+                  <div style="font-size:13px; font-weight:700; color:#777777; margin-bottom:2px;">개정 전</div>
+                  <div style="font-size:14px; line-height:1.7; color:#444444; margin-bottom:14px;">${inl(d.before).replace(/\n/g,'<br>')}</div>
+                  <div style="font-size:13px; font-weight:700; color:#777777; margin:0 0 6px; padding-top:12px; border-top:1px solid #e2e2e2;">개정 후</div>`:'')+`
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${items}</table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>`;
+}
+function build(v,logo){
+  const links=lines(v.links).map(l=>{const p=l.split('|');const name=(p[0]||'').trim();const url=(p.slice(1).join('|')||'').trim();
+    return url?'<a href="'+esc(url)+'" target="_blank" style="font-weight:700; color:#111111; text-decoration:underline;">'+esc(name)+' 전문 →</a>':'<span style="color:#777777;">'+esc(name)+'</span>'}).join('<br>');
+  const cl=lines(v.closing);const closing=cl.map((l,i)=>i===cl.length-1?'<strong>'+esc(l)+'</strong>':esc(l)).join('<br>\n            ');
+  const biz=String(v.bizno||'').trim()?' | 사업자등록번호 '+esc(v.bizno.trim()):'';
+  return `<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>${esc(v.subject)}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+</head>
+<body style="margin:0; padding:0; background-color:#f2f2f2;">
+<div style="display:none; max-height:0; overflow:hidden; mso-hide:all;">${esc(v.preheader)}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f2f2f2;">
+  <tr>
+    <td align="center" style="padding:24px 12px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background-color:#ffffff; border-radius:12px; overflow:hidden; word-break:keep-all; font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',sans-serif; color:#111111;">
+        <tr>
+          <td style="background-color:#111111; padding:24px 32px 28px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="middle" style="vertical-align:middle; line-height:0; font-size:0;"><img src="${logo}" width="18" height="30" alt="Cre8orClub" style="display:block; width:18px; height:30px; border:0;"></td>
+                <td valign="middle" style="vertical-align:middle; padding-left:10px; font-size:24px; line-height:30px; font-weight:700; color:#ffffff; padding-top:4px;">Cre8orClub</td>
+              </tr>
+            </table>
+            <div style="margin-top:22px; font-size:25px; line-height:1.45; font-weight:700; color:#ffffff;">${esc(v.headline).replace(/\n/g,'<br>')}</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 32px 8px; font-size:15px; line-height:1.7;">
+            ${esc(v.greeting)}<br><br>
+            ${inl(v.intro).replace(/\n/g,'<br>')}`+(String(v.lead||'').trim()?`<br><br>${inl(v.lead)}`:'')+`
+          </td>
+        </tr>
+`+v.docs.map(docBox).join('')+`
+        <tr>
+          <td style="padding:16px 32px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-left:3px solid #07ED21;">
+              <tr>
+                <td style="padding:2px 0 2px 14px; font-size:14px; line-height:1.7; color:#444444;">
+                  ${inl(v.linksLead)}<br>
+                  ${links}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 32px 0;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:2px solid #07ED21; border-radius:10px;">
+              <tr>
+                <td style="padding:20px 22px; font-size:15px; line-height:1.8;">
+                  <div style="font-size:16px; font-weight:700; margin-bottom:8px;">${esc(v.effTitle)}</div>
+                  ${lines(v.eff).map(inl).join('<br>')}
+                  <div style="margin-top:12px; font-size:14px; line-height:1.7; color:#444444;">${inl(v.reject).replace(/\n/g,'<br>')}</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 32px 32px; font-size:15px; line-height:1.7;">
+            ${inl(v.contact).replace(/\n/g,'<br>')}<br><br>
+            ${closing}
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 32px;"><div style="border-top:1px solid #e5e5e5; font-size:0; line-height:0;">&nbsp;</div></td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:36px 32px 12px; font-size:20px; line-height:1.55; font-weight:700; color:#111111;">
+            크리에이터와 기업 · 브랜드가 만나<br>새로운 기회를 만들어가는 플랫폼, 크리에이터클럽
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:8px 32px 40px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center" style="background-color:#07ED21; border-radius:28px;">
+                  <a href="https://cre8orclub.com" target="_blank" style="display:inline-block; padding:14px 56px; font-size:16px; font-weight:700; color:#111111; text-decoration:none;">바로 가기</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#f3f3f3; padding:20px 32px 22px; font-size:11px; line-height:1.6; color:#777777;">
+            <p style="margin:0 0 6px;">${inl(v.notice)}</p>
+            <p style="margin:0 0 6px;">㈜라텔앤드파트너즈 | 대표 최남희${biz} | 서울특별시 중구 필동로 16 참그루빌딩 2층 | <a href="mailto:support@cre8orclub.com" style="color:#777777; text-decoration:underline;">support@cre8orclub.com</a></p>
+            <p style="margin:0;"><a href="https://static.cre8orclub.com/policy/privacy-policy-general.html" target="_blank" style="color:#444444; font-weight:700; text-decoration:none;">개인정보처리방침</a> · <a href="https://static.cre8orclub.com/policy/terms-of-service.html" target="_blank" style="color:#777777; text-decoration:none;">이용약관</a> · © Ratel And Partners Co., Ltd.</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>`;
+}
+function output(){return rawMode?rawText:build(state,LOGO)}
+function render(){
+  const html=rawMode?rawText.split(LOGO).join(LOGO_PREVIEW):build(state,LOGO_PREVIEW);
+  $('frame').srcdoc=html;
+}
+function renderDocs(){
+  const box=$('docs');box.innerHTML='';
+  state.docs.forEach((d,i)=>{
+    const el=document.createElement('div');el.className='doc';
+    el.innerHTML=`<div class="dochead"><strong>${i+1}번 문서</strong><span class="actions"><button data-act="up" ${i?'':'disabled'} aria-label="위로">↑</button><button data-act="down" ${i<state.docs.length-1?'':'disabled'} aria-label="아래로">↓</button><button data-act="del" class="danger">빼기</button></span></div>
+      <label for="dt${i}">문서 이름</label><input id="dt${i}" data-k="title">
+      <label for="db${i}">개정 전 <span class="hint">비워 두면 개정 전·후 구분 없이 목록만 나와요</span></label><textarea id="db${i}" data-k="before" style="min-height:72px"></textarea>
+      <label for="da${i}">개정 후 <span class="hint">한 줄에 하나 · 「라벨: 내용」</span></label><textarea id="da${i}" data-k="after" style="min-height:160px"></textarea>`;
+    el.querySelectorAll('[data-k]').forEach(f=>{f.value=d[f.dataset.k]||'';f.addEventListener('input',()=>{d[f.dataset.k]=f.value;save();render()})});
+    el.querySelectorAll('[data-act]').forEach(b=>b.addEventListener('click',()=>{
+      const a=b.dataset.act;
+      if(a==='del'){if(b.dataset.armed){state.docs.splice(i,1);save();renderDocs();render()}else{b.dataset.armed='1';b.textContent='한 번 더 누르면 빠져요'}return}
+      const j=a==='up'?i-1:i+1;[state.docs[i],state.docs[j]]=[state.docs[j],state.docs[i]];save();renderDocs();render()}));
+    box.appendChild(el);
+  });
+}
+function fill(){FIELDS.forEach(k=>{$(k).value=state[k]??''});renderDocs();render()}
+FIELDS.forEach(k=>$(k).addEventListener('input',()=>{state[k]=$(k).value;save();render()}));
+$('addDoc').addEventListener('click',()=>{state.docs.push({title:'새 문서',before:'',after:''});save();renderDocs();render()});
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1800)}
+async function copyText(t,msg){try{await navigator.clipboard.writeText(t);toast(msg)}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();toast(ok?msg:'복사가 막혔어요. 「HTML 직접 고치기」에서 전체 선택해 복사해 주세요.')}}
+$('copyHtml').addEventListener('click',()=>copyText(output(),'HTML 소스를 복사했어요'));
+$('copySubject2').addEventListener('click',()=>copyText(rawMode?(state.subject):state.subject,'제목을 복사했어요'));
+$('copyRich').addEventListener('click',async()=>{const h=output();try{await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([h],{type:'text/html'}),'text/plain':new Blob([h.replace(/<[^>]+>/g,' ')],{type:'text/plain'})})]);toast('메일 본문으로 복사했어요. 메일 쓰기 창에 붙여 넣으세요')}catch(e){copyText(h,'본문 복사가 막혀 HTML 소스로 복사했어요')}});
+function bindReset(){const r=$('reset');r.onclick=()=>{const w=$('resetWrap');w.innerHTML='<span class="confirm">고친 내용이 모두 사라져요 <button id="resetYes" class="danger">처음으로</button><button id="resetNo">취소</button></span>';
+  $('resetYes').onclick=()=>{state=clone(DEFAULTS);save();rawMode=false;setTab(false);fill();w.innerHTML='<button class="ghost danger" id="reset">처음 양식으로</button>';bindReset();toast('처음 양식으로 돌렸어요')};
+  $('resetNo').onclick=()=>{w.innerHTML='<button class="ghost danger" id="reset">처음 양식으로</button>';bindReset()}}}
+function setTab(raw){rawMode=raw;$('tabForm').setAttribute('aria-selected',String(!raw));$('tabRaw').setAttribute('aria-selected',String(raw));$('paneForm').hidden=raw;$('paneRaw').hidden=!raw;if(raw){rawText=build(state,LOGO);$('raw').value=rawText}render()}
+$('tabForm').addEventListener('click',()=>setTab(false));$('tabRaw').addEventListener('click',()=>setTab(true));
+$('raw').addEventListener('input',()=>{rawText=$('raw').value;render()});
+$('wDesk').addEventListener('click',()=>{$('frame').classList.remove('mobile');$('wDesk').setAttribute('aria-pressed','true');$('wMobile').setAttribute('aria-pressed','false')});
+$('wMobile').addEventListener('click',()=>{$('frame').classList.add('mobile');$('wMobile').setAttribute('aria-pressed','true');$('wDesk').setAttribute('aria-pressed','false')});
+bindReset();fill();
+</script>
+
+</body>
+</html>
