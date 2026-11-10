@@ -1,0 +1,449 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#f4f6f8"><title>시나리오 실행 기록 · Cre8orClub</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:#f4f6f8;color:#202b38;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:15px;line-height:1.75}a{color:#087565;text-underline-offset:3px}button,input{font:inherit}button,a{touch-action:manipulation}button{cursor:pointer}header{position:sticky;top:0;z-index:5;background:#ffffffed;border-bottom:1px solid #e1e6ec;backdrop-filter:blur(12px)}.top{max-width:1440px;margin:auto;padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{text-decoration:none;font-weight:800;color:#253344;white-space:nowrap}.brand span{font-weight:500;font-size:12px;color:#627083;margin-left:12px}nav{display:flex;gap:6px}nav a{text-decoration:none;color:#647184;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:650}nav a.active{background:#e7f4ef;color:#086653}.wrap{max-width:1440px;margin:auto;padding:36px 26px 80px}.hero{margin-bottom:26px}.eyebrow{color:#0b7562;font-size:12px;font-weight:800;letter-spacing:1px}.hero h1{font-size:clamp(25px,3vw,38px);letter-spacing:-1.4px;line-height:1.3;margin:12px 0}.hero p{color:#647184;margin:0}.stats{display:flex;gap:9px;margin:18px 0;flex-wrap:wrap}.stat{background:#fff;border:1px solid #e1e6ec;border-radius:10px;padding:8px 14px;font-size:13px}.stat strong{font-size:18px;color:#166c5d;margin-right:5px}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid #d9e0e6;border-radius:9px;background:white;color:#2c3c4f;padding:8px 13px;font-size:13px;min-height:42px;text-decoration:none}.btn:hover{background:#eaf1ef}.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:25px;align-items:start}.sidebar{position:sticky;top:88px;border:1px solid #e0e6eb;background:#fff;border-radius:14px;padding:15px 10px;max-height:calc(100vh - 110px);overflow:auto}.sidebar h2{font-size:12px;color:#8793a2;margin:0 8px 8px;font-weight:650}.sidebar a{display:flex;gap:8px;padding:7px 8px;font-size:12px;text-decoration:none;color:#576476;border-radius:7px;line-height:1.55}.sidebar a:hover{background:#eaf5ef;color:#126352}.sidebar b{font-size:11px;color:#16836b;padding-top:1px}.toolbar{display:flex;gap:8px;position:sticky;top:71px;z-index:3;padding:12px 0;background:#f4f6f8f5;backdrop-filter:blur(10px);flex-wrap:wrap}.toolbar input{flex:1;min-width:170px;padding:10px 13px;border:1px solid #d9e0e6;border-radius:10px;background:#fff;outline:none;font-size:14px}.toolbar input:focus{border-color:#2b9a82;box-shadow:0 0 0 3px #ddf2eb}.found{font-size:12px;color:#748092;align-self:center;white-space:nowrap}.document,.guide,.scenario{background:#fff;border:1px solid #dfe5eb;border-radius:14px;margin-bottom:12px}.guide>summary{font-weight:700;padding:17px 21px;cursor:pointer}.guide .body{padding:0 22px 20px}.document{padding:24px 28px;min-width:0}.document h1{font-size:26px}.document h2,.guide h2{font-size:19px;margin-top:30px}.document h3,.guide h3{font-size:16px}.document p,.guide p{color:#4b596a}.scenario{scroll-margin-top:145px;overflow:hidden}.scenario>summary{display:flex;list-style:none;gap:12px;align-items:center;padding:17px 20px;cursor:pointer;font-size:16px;font-weight:700}.scenario>summary::-webkit-details-marker{display:none}.num{font-size:12px;color:#157b65;background:#ebf6f0;border-radius:7px;min-width:34px;text-align:center;padding:4px 6px}.arrow{margin-left:auto;color:#91a0ad;font-weight:400;transition:transform .2s}.scenario[open] .arrow{transform:rotate(90deg)}.scenario[open]>summary{border-bottom:1px solid #eaf0f3;background:#fcfefd}.body{padding:4px 20px 17px;min-width:0}.body p{font-size:13px;color:#607081;margin:12px 0}.body p strong{color:#35475a}.table-scroll{overflow-x:auto;max-width:100%;margin:16px 0}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.8;text-align:left}th{background:#f4f7f9;color:#526173;font-weight:700}th,td{padding:11px 12px;border-bottom:1px solid #e5eaef;vertical-align:top}td:first-child{white-space:nowrap}.scenario th:first-child,.scenario td:first-child{width:70px;color:#18816b;font-weight:700}.scenario th:nth-child(2){width:45%}.scenario td:nth-child(3){color:#526474}code{background:#f0f3f7;padding:2px 5px;border-radius:5px;font-size:12px}.body ul,.guide ul{padding-left:22px}footer{text-align:center;color:#8792a1;font-size:12px;margin-top:35px}.empty{padding:35px;border:1px dashed #c9d5df;border-radius:14px;text-align:center;color:#647184}.document .table-scroll table{min-width:700px}[hidden]{display:none!important}@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.wrap{padding:24px 16px 60px}.top{padding:12px 16px}.brand span{display:none}.toolbar{top:66px}}@media(max-width:600px){body{font-size:14px}.top{gap:8px}.brand{font-size:12px}nav a{padding:6px 8px;font-size:12px}.hero h1{letter-spacing:-.8px}.scenario>summary{font-size:14px;padding:14px 13px;gap:9px}.body{padding:2px 14px 14px}.scenario .table-scroll{overflow:visible}.scenario table,.scenario tbody,.scenario tr,.scenario td{display:block;width:100%!important}.scenario thead{display:none}.scenario tr{border-bottom:1px solid #e2e9ef;padding:9px 0}.scenario td{border:0;padding:4px 0}.scenario td:first-child{font-size:11px;color:#11826b}.scenario td:nth-child(2)::before{content:'하는 일';display:block;color:#83909e;font-size:11px;font-weight:650}.scenario td:nth-child(3)::before{content:'기대 결과';display:block;color:#83909e;font-size:11px;font-weight:650}.document{padding:18px 16px}.toolbar .btn{padding:7px 9px;font-size:11px}.toolbar input{min-width:100%;flex-basis:100%}}@media print{header,.toolbar,.sidebar,.actions{display:none}.wrap{padding:0}.layout{display:block}.scenario,.guide,.document{border:0;border-radius:0;break-inside:avoid}.scenario>summary{font-size:16px}.hero h1{font-size:25px}.table-scroll{overflow:visible}.scenario{margin-bottom:25px}body{background:white}.guide:not([open]){display:none}}</style></head><body><header><div class="top"><a class="brand" href="index.html">Cre8orClub <span>26.46.0 출시 QA</span></a><nav aria-label="문서"><a href="index.html" class="">시나리오</a><a href="record.html" class="active">실행 기록</a><a href="audit.html" class="">대조표</a></nav></div></header><div class="wrap"><section class="hero"><span class="eyebrow">RELEASE QA · 26.46.0</span><h1>시나리오 실행 기록</h1><div class="actions"><a class="btn" href="record.md" download>원문 내려받기</a><a class="btn" href="index.html">마스터 시나리오로 돌아가기</a></div></section><main class="document"><p>회차:　 / 서버:　 / iOS 기기·빌드:　 / Android 기기·빌드:　 / 실행자:　</p>
+<p>기존 E 계정:　 / 업데이트 전 버전:　 / 신규 N 계정:　 / 신규 가입 시각:　</p>
+<p>마스터에 배치된 순서대로 실행합니다. 공통 기능은 신규·기존 계정의 역할과 양쪽 결과를 구분합니다. 각 시나리오에 적힌 단계를 모두 확인한 뒤 판정합니다. Muse·피드 모듈은 계정·서버 조건이 없으면 막힘, iOS 전용 기능은 Android 적용 제외로 남깁니다.</p>
+<table>
+<thead>
+<tr>
+<th>번호</th>
+<th>시나리오</th>
+<th>사용자 배정</th>
+<th>실제 계정과 역할</th>
+<th>iOS</th>
+<th>Android</th>
+<th>기존 사용자 결과</th>
+<th>신규 사용자 결과</th>
+<th>실패 단계·증거</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="index.html#s01">01</a></td>
+<td>기존 회원의 업데이트와 로그인</td>
+<td>기존 전용</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>적용 제외</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s02">02</a></td>
+<td>신규 가입과 프로필 완성</td>
+<td>신규 전용</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>적용 제외</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s03">03</a></td>
+<td>내 프로필 수정과 공유</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s39">39</a></td>
+<td>기본 정보와 항목별 공개 범위</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s04">04</a></td>
+<td>영감과 포트폴리오 등록</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s37">37</a></td>
+<td>포트폴리오 첨부 형식과 미리보기</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s31">31</a></td>
+<td>소개·커리어·대표작과 AI 추천사</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s05">05</a></td>
+<td>피드 탐색과 반응</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s36">36</a></td>
+<td>피드 추천·참여 모듈과 위클리 베스트</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s27">27</a></td>
+<td>검색 시작 화면과 검색 기록</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s28">28</a></td>
+<td>크리에이터 검색과 전용 필터</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s29">29</a></td>
+<td>포트폴리오 검색과 해시태그 검색</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s06">06</a></td>
+<td>통합 검색 결과와 최근 본</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s07">07</a></td>
+<td>검색 필터와 정렬</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s30">30</a></td>
+<td>Shuffle! 키워드로 발견하기</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s32">32</a></td>
+<td>일촌·인맥 관리와 다이얼</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s08">08</a></td>
+<td>노크와 기본 대화</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s33">33</a></td>
+<td>Club 탐색과 오픈채팅 만들기</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s09">09</a></td>
+<td>프로젝트 등록과 모집 공고 공유</td>
+<td>신규·기존 공동</td>
+<td>E: 리더 / N: 지원자</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s10">10</a></td>
+<td>프로젝트 지원과 심사</td>
+<td>신규·기존 공동</td>
+<td>E: 리더 / N: 지원자</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s11">11</a></td>
+<td>게시판 관리와 글 작성</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s12">12</a></td>
+<td>게시판 공지와 채팅 공유</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s13">13</a></td>
+<td>공개 범위와 접근 권한</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s14">14</a></td>
+<td>일정 등록과 참여</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s15">15</a></td>
+<td>자료실 업로드와 폴더 관리</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s16">16</a></td>
+<td>채팅 노트 작성과 반응</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s17">17</a></td>
+<td>채팅방 공지 등록과 해제</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s18">18</a></td>
+<td>채팅 첨부와 보관함 연계</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s19">19</a></td>
+<td>팀 생성과 소개·공유</td>
+<td>신규·기존 공동</td>
+<td>N: 관리자 / E: 지원자</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s20">20</a></td>
+<td>팀 지원과 초대</td>
+<td>신규·기존 공동</td>
+<td>N: 관리자 / E: 지원자</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s21">21</a></td>
+<td>팀 의뢰와 기타 연락</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s22">22</a></td>
+<td>팀 포트폴리오 등록</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s23">23</a></td>
+<td>알림 수신과 이동</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s24">24</a></td>
+<td>알림 설정과 수신 범위</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s34">34</a></td>
+<td>북마크·내 활동과 신고</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s35">35</a></td>
+<td>계정 보안·동의·고객지원</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s38">38</a></td>
+<td>앱 밖에서 빠르게 올리기</td>
+<td>iOS 전용</td>
+<td></td>
+<td>미실행</td>
+<td>적용 제외</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s25">25</a></td>
+<td>나가기·내보내기·차단 후 접근</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="index.html#s26">26</a></td>
+<td>프로젝트 종료·팀 해체·계정 탈퇴</td>
+<td>신규·기존 공동</td>
+<td></td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td>미실행</td>
+<td></td>
+</tr>
+</tbody>
+</table></main><footer>Cre8orClub · 26.46.0 사용자 시나리오</footer></div><script>document.querySelectorAll('table').forEach(t=>{const w=document.createElement('div');w.className='table-scroll';t.replaceWith(w);w.append(t)});</script></body></html>
