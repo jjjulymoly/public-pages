@@ -54,9 +54,10 @@ function caseHtml(it){return `<div class="case" id="c-${it.id}"><button class="r
 function listHtml(){const its=DATA.items.filter(pass);if(!its.length)return '<div class="list"><p class="empty">조건에 맞는 테스트 케이스가 없어요.</p></div>';
  let h='';TKS.forEach(tk=>{const a=its.filter(x=>x.tk===tk);if(!a.length)return;h+=`<h2 class="tk">${tk.startsWith('CCO')?tk+' · ':''}${esc(DATA.tkn[tk])}<small>${a.length}케이스 · ${a.reduce((n,x)=>n+x.steps.length,0)}단계</small></h2>`;
   const areas=[];a.forEach(x=>{if(!areas.includes(x.area))areas.push(x.area)});areas.forEach(ar=>{h+=`<div class="area">${esc(ar)}</div><div class="list">${a.filter(x=>x.area===ar).map(caseHtml).join('')}</div>`})});return h}
+function pendHtml(){return `<div class="card"><h2>담당 기획 확인이 필요한 것 · ${DATA.pending.length}개</h2><p class="sub">기대 결과가 정해지지 않은 항목이에요. 담당 기획이 확인한 뒤 리스트에 추가해요.</p><ul>${DATA.pending.map(p=>`<li><b>${p.rid}</b> ${esc(p.t)} (${esc(p.tk)})${p.q?` — ${esc(p.q)}`:''}</li>`).join('')}</ul></div>`}
 function rulesHtml(){const by={};DATA.dropped.forEach(d=>(by[d.why]=by[d.why]||[]).push(d));
  return `<div class="card"><h2>이 리스트에서 뺀 것</h2><p class="sub">아래 항목은 별도로 확인하거나 세부 점검 범위에서 제외했어요. 다시 찾을 수 있도록 원래 항목 번호를 남겼어요.</p>${DATA.rules.map(r=>`<details><summary>${esc(r.name)} · ${r.n}개</summary><p class="sub">${esc(r.why)}</p><ul>${(by[r.name]||[]).map(d=>`<li>${d.rid} ${esc(d.t)} (${esc(d.tk)})</li>`).join('')}</ul></details>`).join('')}</div>
- ${DATA.pending.length?`<div class="card"><h2>담당 기획 확인이 필요한 것 · ${DATA.pending.length}개</h2><p class="sub">기대 결과가 정해지지 않은 항목이에요. 담당 기획이 확인한 뒤 리스트에 추가해요.</p><ul>${DATA.pending.map(p=>\`<li><b>${p.rid}</b> ${esc(p.t)} (${esc(p.tk)})${p.q?\` — ${esc(p.q)}\`:''}</li>\`).join('')}</ul></div>`:''}
+ ${DATA.pending.length?pendHtml():''}
  <div class="card"><h2>QA 항목이 없는 46버전 티켓</h2><ul>${DATA.noqa.map(n=>`<li><b>${esc(n.tk)}</b> ${esc(n.t)} · ${esc(n.st)} — ${esc(n.note)}</li>`).join('')}</ul></div>`}
 function csv(){const L=[['케이스','티켓','기능 영역','케이스 제목','우선순위','OS','출처','사람이 꼭 볼 것','단계','항목','단계 OS','역할','전제','동작','기대 결과','QC 결과','QC로 확인 불가','메모']];
  DATA.items.filter(pass).forEach(it=>it.steps.forEach((s,i)=>L.push([it.id,it.tk==='전체 흐름'?'전체 흐름':it.tk,it.area,it.title,it.pri,it.os,it.src.join(' · '),it.hu.join(' · '),i+1,s.rid,s.os,s.who,s.pre,s.act,s.exp.join('\n'),'','',''])));
